@@ -1,50 +1,42 @@
 import { useState } from "react";
-import { useProduct } from "../../MainConrext/MainContext";
 import scss from "./Login.module.scss";
+import { useProduct } from "../../MainContext/MainContext";
 
 const Login = () => {
-  const { addTask } = useProduct();
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
-
-  const hundlSave = () => {
-    const obj = {
-      Email: Email,
-      Password: Password,
-      id: Date.now(),
-    };
-    addTask(obj);
-    setPassword("");
-    setEmail("");
-  };
+  const { handleReducer } = useProduct();
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <div>
       <div id={scss.login}>
-        <div className="conatier">
-          <div className={scss.login}>
-            <div className={scss.logImg}>
-              <img src="../src/assets/images/Side Image.svg" alt="" />
-            </div>
-            <div className={scss.loginText}>
-              <h1>Log in to Exclusive</h1>
-              <h3>Enter your details below</h3>
-              <input
-                value={Email}
-                onChange={(o) => setEmail(o.target.value)}
-                type=""
-                placeholder="Email or Phone Number"
-              />
-              <br />
-              <input
-                value={Password}
-                onChange={(o) => setPassword(o.target.value)}
-                type=""
-                placeholder="Password"
-              />
-              <br />
-              <button onClick={hundlSave}>Log In</button>
-              <a href="/">Forget Password?</a>
+        <div className={scss.snow}>
+          <div className="container">
+            <div className={scss.login}>
+              <div className={scss.hihi}>
+                <h1>Добро пожаловать</h1>
+                <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  type="text"
+                  placeholder="Name"
+                />
+                <br />
+                <input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                  placeholder="Password"
+                />
+                <br />
+                <button
+                  type="button"
+                  onClick={() => handleReducer()}
+                  id={scss.ok}
+                >
+                  войти
+                </button>
+              </div>
             </div>
           </div>
         </div>

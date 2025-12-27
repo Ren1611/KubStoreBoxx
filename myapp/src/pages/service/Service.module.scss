@@ -1,0 +1,238 @@
+#service {
+  .service {
+    margin-top: -220px;
+    .nomer1 {
+      h1 {
+        color: rgb(0, 0, 0);
+        margin-bottom: 25px;
+      }
+      h2 {
+        color: rgb(0, 0, 0);
+        margin-bottom: 15px;
+        font-weight: 400;
+      }
+      p {
+        color: rgb(0, 0, 0);
+        margin-bottom: 35px;
+        font-weight: 300;
+        line-height: 1.6;
+      }
+      .serviceImg {
+        display: flex;
+        gap: 10px;
+        img {
+          width: 635px;
+          height: 500px;
+          object-fit: cover;
+        }
+      }
+    }
+    .nomer2 {
+      margin-top: 50px;
+      ul {
+        margin-top: 20px;
+        li {
+          color: rgb(0, 0, 0);
+          font-weight: 300;
+          line-height: 1.6;
+          margin-left: 18px;
+        }
+      }
+      .rux {
+        width: 190px;
+        height: 50px;
+        border-radius: 8px;
+        padding-top: 12px;
+        padding-left: 17px;
+
+        border: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        h1 {
+          font-size: 24px;
+          color: rgb(0, 0, 0);
+        }
+      }
+    }
+  }
+}
+#HomeSer {
+  .HomeSer {
+    margin-top: 80px;
+    margin-bottom: 170px;
+
+    .room {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      height: 60px;
+      align-items: center;
+      padding: 30px;
+
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      h2 {
+        font-size: 16px;
+      }
+      .Ho {
+        color: rgb(97, 97, 97);
+      }
+      .Oo {
+        color: rgb(97, 97, 97);
+        margin-left: 400px;
+      }
+      .Po {
+        margin-right: 130px;
+        color: rgb(97, 97, 97);
+      }
+    }
+    .line {
+      padding: 30px;
+      display: flex;
+      justify-content: space-between;
+      .blog {
+        h3 {
+          font-size: 20px;
+          font-weight: 500;
+          margin-top: -10px;
+          color: rgb(0, 0, 0);
+        }
+        .top {
+          font-size: 16px;
+          font-weight: 300;
+          color: rgb(77, 77, 77);
+          margin-top: 10px;
+        }
+        .botton {
+          font-size: 14px;
+          font-weight: 300;
+          color: rgb(77, 77, 77);
+          margin-top: 20px;
+        }
+      }
+      .Phon {
+        h4 {
+          font-size: 16px;
+          font-weight: 300;
+          color: rgb(77, 77, 77);
+          margin-bottom: 10px;
+          margin-left: 200px;
+        }
+      }
+      .pop {
+        h4 {
+          font-size: 16px;
+          font-weight: 300;
+          color: rgb(77, 77, 77);
+          margin-bottom: 10px;
+          margin-left: 248px;
+        }
+      }
+      .poop {
+        h4 {
+          font-size: 16px;
+          font-weight: 300;
+          color: rgb(77, 77, 77);
+          margin-bottom: 10px;
+          margin-left: 220px;
+        }
+      }
+      .lox {
+        h4 {
+          font-size: 16px;
+          font-weight: 300;
+          color: rgb(77, 77, 77);
+          margin-bottom: 10px;
+          margin-left: 290px;
+        }
+      }
+
+      .email {
+        a {
+          font-size: 16px;
+          font-weight: 300;
+          color: rgb(162, 0, 255);
+          margin-right: 70px;
+        }
+        a:hover {
+          cursor: pointer;
+          text-decoration: none;
+        }
+      }
+    }
+    .line2 {
+      padding: 30px;
+      display: flex;
+      justify-content: space-between;
+      background-color: rgb(245, 245, 245);
+
+      .blog {
+        h3 {
+          font-size: 20px;
+          font-weight: 500;
+          margin-top: -10px;
+          color: rgb(0, 0, 0);
+        }
+        .top {
+          font-size: 16px;
+          font-weight: 300;
+          color: rgb(77, 77, 77);
+          margin-top: 10px;
+        }
+        .botton {
+          font-size: 14px;
+          font-weight: 300;
+          color: rgb(77, 77, 77);
+          margin-top: 20px;
+        }
+      }
+      .Phon {
+        h4 {
+          font-size: 16px;
+          font-weight: 300;
+          color: rgb(77, 77, 77);
+          margin-bottom: 10px;
+          margin-left: 200px;
+        }
+      }
+      .pop {
+        h4 {
+          font-size: 16px;
+          font-weight: 300;
+          color: rgb(77, 77, 77);
+          margin-bottom: 10px;
+          margin-left: 248px;
+        }
+      }
+      .poop {
+        h4 {
+          font-size: 16px;
+          font-weight: 300;
+          color: rgb(77, 77, 77);
+          margin-bottom: 10px;
+          margin-left: 220px;
+        }
+      }
+      .lox {
+        h4 {
+          font-size: 16px;
+          font-weight: 300;
+          color: rgb(77, 77, 77);
+          margin-bottom: 10px;
+          margin-left: 290px;
+        }
+      }
+
+      .email {
+        a {
+          font-size: 16px;
+          font-weight: 300;
+          color: rgb(162, 0, 255);
+          margin-right: 70px;
+        }
+        a:hover {
+          cursor: pointer;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

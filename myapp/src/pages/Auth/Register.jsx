@@ -1,31 +1,55 @@
 import { useState } from "react";
-import { useProduct } from "../../MainConrext/MainContext";
 import scss from "./Register.module.scss";
+import { useProduct } from "../../MainContext/MainContext";
 
 const Register = () => {
-  const { addTask, reducer2, signUpWithGoogle } = useProduct();
+  const { reducer2, signUpWithGoogle } = useProduct();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const hundlSave = () => {
-    const obj = {
-      name: name,
-      Email: Email,
-      Password: Password,
-      id: Date.now(),
-    };
-    addTask(obj);
-    setPassword("");
-    setName("");
-    setEmail("");
-  };
+  async function handleReducer() {
+    setError("");
 
-  async function handlReducer() {
+    const emailTrim = (email || "").trim();
+    const nameTrim = (name || "").trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailTrim)) {
+      setError("Введите корректный email");
+      return;
+    }
+    if (!password || password.length < 6) {
+      setError("Пароль должен быть не менее 6 символов");
+      return;
+    }
+
+    setLoading(true);
     try {
-      await reducer2(email);
-    } catch (error) {
-      console.log(error.massege);
+      await reducer2(emailTrim, password, nameTrim);
+      setEmail("");
+      setPassword("");
+      setName("");
+      console.log("User created");
+    } catch (err) {
+      console.log("error" + err.message);
+      setError(err.message || "Ошибка регистрации");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleGoogle() {
+    setError("");
+    setLoading(true);
+    try {
+      await signUpWithGoogle();
+      console.log("Google sign-in success");
+    } catch (err) {
+      console.log("Google sign-in error", err.message);
+      setError(err.message || "Ошибка Google входа");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -34,51 +58,62 @@ const Register = () => {
       <div id={scss.register}>
         <div className="container">
           <div className={scss.register}>
-            <div className={scss.resImg}>
-              <img src="../src/assets/images/Side Image.svg" alt="" />
-            </div>
-            <div className={scss.inpRes}>
-              <h1>Create an account</h1>
-              <h3>Enter your details below</h3>
+            <div className={scss.registerBox}>
+              <div className={scss.resImg}>
+                <img src="../src/assets/images/" alt="" />
+              </div>
+              <div className={scss.inpRes}>
+                <h1>Create an account</h1>
+                <h3>Enter your details below</h3>
 
-              <input
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                type="text"
-                placeholder="Name"
-              />
-              <br />
-
-              <input
-                onChange={(d) => setEmail(d.target.value)}
-                value={Email}
-                type="text"
-                placeholder="Email or Phone Number"
-              />
-              <br />
-
-              <input
-                onChange={(o) => setPassword(o.target.value)}
-                value={Password}
-                type="text"
-                placeholder="Password"
-              />
-              <br />
-              <button id={scss.ok} onClick={hundlSave}>
-                Create Account
-              </button>
-              <br />
-              <button id={scss.google}>
-                <img
-                  onClick={() => signUpWithGoogle()}
-                  src="../src/assets/images/Icon-Google.svg"
-                  alt=""
+                <input
+                  onChange={(e) => setName(e.target.value)}
+                  type="text"
+                  placeholder="Name"
+                  value={name}
                 />
-                Sign up with Google
-              </button>
-              <div className={scss.perehod}>
-                <h2>Already have account?</h2>
-                <a href="/login">Log in</a>
+                <br />
+
+                <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  type="text"
+                  placeholder="Email"
+                />
+                <br />
+
+                <input
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                />
+                <br />
+                {error && (
+                  <p style={{ color: "#c00", marginTop: 6 }}>{error}</p>
+                )}
+                <button
+                  type="button"
+                  onClick={handleReducer}
+                  id={scss.ok}
+                  disabled={loading}
+                >
+                  {loading ? "Подождите..." : "Create Account"}
+                </button>
+                <br />
+                <button
+                  type="button"
+                  onClick={handleGoogle}
+                  id={scss.google}
+                  disabled={loading}
+                >
+                  <img src="../src/assets/icons/Icon-Google (1).svg" alt="" />
+                  Sign up with Google
+                </button>
+                <div className={scss.perehod}>
+                  <h2>Already have account?</h2>
+                  <a href="/products">Log in</a>
+                </div>
               </div>
             </div>
           </div>
@@ -89,12 +124,3 @@ const Register = () => {
 };
 
 export default Register;
-
-{
-  /* <div className={scss.ImgRes}>
-  <img src="../src/assets/images/Side Image.svg" alt="" />
-</div>
-<div className="RegisInp">
-  <input type="text" name="" id="" />
-</div> */
-}

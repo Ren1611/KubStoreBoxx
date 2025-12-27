@@ -1,50 +1,73 @@
 #login {
   .login {
-    margin-top: 60px;
-    margin-bottom: 140px;
-    display: flex;
-    justify-content: center;
-    .logImg {
-      img {
-        object-fit: cover;
-      }
+    position: relative;
+    z-index: 2;
+
+    .snow {
+      z-index: 1;
     }
-    .loginText {
-      margin-top: 230px;
-      margin-left: 130px;
-      h1 {
-        font-size: 36px;
-        font-weight: 500;
-        margin-bottom: 24px;
+    .hihi {
+      text-align: center;
+      width: 600px;
+      height: 650px;
+      background-color: aqua;
+      margin: 0 auto;
+      border-radius: 15px;
+      //   min-height: 100vh;
+      background: linear-gradient(270deg, #7b2ff7, #9a2ff7, #c02ff7, #7b2ff7);
+      background-size: 600% 600%;
+      animation: gradientBG 11s ease infinite;
+      font-family: Arial, Helvetica, sans-serif;
+      margin-bottom: 130px;
+      margin-top: -150px;
+
+      @keyframes gradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
-      h3 {
-        font-size: 16px;
-        font-weight: 400;
-        margin-bottom: 24px;
+      h1 {
+        padding-top: 120px;
+        padding-bottom: 70px;
+        color: white;
+        font-size: 32px;
+        font-weight: 600;
       }
       input {
         width: 370px;
         height: 32px;
-        margin-bottom: 40px;
+        margin-bottom: 80px;
         border: none;
         background: none;
-        border-bottom: 2px solid rgb(180, 180, 180);
+        border-bottom: 2px solid rgb(255, 255, 255);
+        color: white;
+        padding-left: 10px;
+        outline: none;
+        font-size: 14px;
+        &::placeholder {
+          color: rgb(255, 255, 255);
+        }
       }
-      button {
-        width: 143px;
+      input:focus {
+        transition: all 0.5s ease-in-out;
+        border-bottom: 2px solid rgb(182, 182, 182);
+      }
+      #ok {
+        width: 371px;
         height: 56px;
-        background-color: red;
+        background-color: rgb(98, 0, 255);
         color: white;
         border: none;
         border-radius: 5px;
         font-size: 16px;
-        font-weight: 400;
-      }
-      a {
-        color: red;
-        font-size: 16px;
-        font-weight: 400;
-        margin-left: 87px;
+        font-weight: 500;
+        transition: all 0.3s ease-in-out;
       }
     }
   }

@@ -7,49 +7,81 @@ const Header = () => {
       <div id={scss.header}>
         <div className={scss.headerHeader}>
           <div className={scss.apple}>
+            <h2 id={scss.Diler}>Для дилеров</h2>
             <h2>
-              Summer Sale For All Swim Suits And Free Express Delivery - OFF
-              50%!
+              <span>мотосалон в городе</span> Бишкек
+              <span> +996708502907</span>
             </h2>
-            <a href="https://www.apple.com/store">ShopNow</a>
-          </div>
-          <h2>English</h2>
-          <input type="checkBox" />
-        </div>
-        <div className="container">
-          <div className={scss.header}>
-            <div className={scss.HeaderLogo}>
-              <a href="/">Exclusive</a>
-            </div>
-            <div className={scss.HeaderMenu}>
-              <NavLink to="/">
-                <p>Home</p>
-              </NavLink>
-              <NavLink to="/contact">
-                <p>Contact</p>
-              </NavLink>
-              <NavLink to="/about">
-                <p>About</p>
-              </NavLink>
-              <NavLink to="/register">
-                <p>Sign Up</p>
-              </NavLink>
-            </div>
-            <div className={scss.HeaderPoisk}>
-              <input type="text" placeholder="What are you looking for?" />
-              <img src="../src/assets/images/Component 2.svg" alt="" />
-            </div>
-            <div className={scss.HeaderImg}>
-              <a href="/favorites">
-                <img src="../src/assets/images/Wishlist.svg" alt="" />
-              </a>
-              <a href="/card">
-                <img src="../src/assets/images/Cart1 with buy.svg" alt="" />
-              </a>
-            </div>
+            <h2>
+              Интернет-магазин: <span> 8 800 333-66-53</span>
+            </h2>
           </div>
         </div>
         <hr />
+        <div className={scss.HeaderLogo}>
+          <div className={scss.d}>
+            <a href="/">
+              <img id={scss.logo} src="./src/assets/icons/GOOD.png" alt="" />
+            </a>
+            <input
+              type="text"
+              placeholder="
+Наименование, артикул или бренд
+"
+            />
+            <button>
+              <img src="./src/assets/icons/Component 2 (1).svg" alt="" />
+            </button>
+            <div className={scss.HeaderImg}>
+              <a href="/favorites">
+                <img src="../src/assets/icons/Wishlist (1).svg" alt="" />
+              </a>
+              <a href="/card">
+                <img src="../src/assets/icons/Cart1 with buy (1).svg" alt="" />
+              </a>
+              <a href="/register">
+                <img src="/src/assets/icons/User (1).svg" alt="" />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className={scss.HeaderMenu}>
+          <NavLink to="/catalog">
+            <p>
+              <img src="./src/assets/icons/Fon.jpg" alt="" /> КАТАЛОГ
+            </p>
+          </NavLink>
+          <NavLink to="/mototechnics">
+            <p>МОТОТЕХНИКА</p>
+          </NavLink>
+          <NavLink to="/motorcycle_helmets">
+            <p>МОТОШЛЕМЫ</p>
+          </NavLink>
+          <NavLink to="/motorcycle_equipment">
+            <p>МОТОЭКИПИРОВКА</p>
+          </NavLink>
+          <NavLink to="/tuning">
+            <p>ТЮНИНГ</p>
+          </NavLink>
+          <NavLink to="/spare_parts">
+            <p>ЗАПЧАСТИ</p>
+          </NavLink>
+          <NavLink to="/motorcycle_tires">
+            <p>МОТОРЕЗИНА</p>
+          </NavLink>
+          <NavLink to="/motochemistry">
+            <p>МОТОХИМИЯ</p>
+          </NavLink>
+          <NavLink to="/stock">
+            <p>АКЦИЯ</p>
+          </NavLink>
+          <NavLink to="/service">
+            <p>СЕРВИС</p>
+          </NavLink>
+        </div>
+        <div className="container">
+          <div className={scss.header}></div>
+        </div>
       </div>
     </div>
   );
