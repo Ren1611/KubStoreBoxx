@@ -8,7 +8,8 @@ import {
 const ProductContext = createContext();
 export const useProduct = () => useContext(ProductContext);
 
-const API = "https://api-crud.elcho.dev/api/v1/90c7e-fe326-a4f13/kuba";
+const API =
+  "https://api-crud.elcho.dev/api/v1/90c7e-fe326-a4f13/kuba?limit=100";
 
 const initialState = {
   products: [],
@@ -33,6 +34,7 @@ const MainContext = ({ children }) => {
   const [product, setProduct] = useState([]);
   const [order, setOrder] = useState([]);
   const [card, setCard] = useState([]);
+  const [favorit, setFavorit] = useState([]);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -182,6 +184,24 @@ const MainContext = ({ children }) => {
     localStorage.setItem("card", JSON.stringify(data));
     readCard();
   };
+  const addFavorit = (newTask) => {
+    let data = JSON.parse(localStorage.getItem("favorit")) || [];
+    data.push(newTask);
+    localStorage.setItem("favorit", JSON.stringify(data));
+    readFavorit();
+  };
+
+  const readFavorit = () => {
+    let data = JSON.parse(localStorage.getItem("favorit")) || [];
+    setFavorit(data);
+  };
+
+  const deleteFavorit = (id) => {
+    let data = JSON.parse(localStorage.getItem("favorit")) || [];
+    data = data.filter((item) => item.id !== id);
+    localStorage.setItem("favorit", JSON.stringify(data));
+    readFavorit();
+  };
 
   const valus = {
     product,
@@ -202,10 +222,14 @@ const MainContext = ({ children }) => {
     readOrder,
     deleteOrder,
     addOrder,
-    deleteCard,
-    readCard,
-    addCard,
     card,
+    readCard,
+    deleteCard,
+    addCard,
+    favorit,
+    deleteFavorit,
+    readFavorit,
+    addFavorit,
   };
   return (
     <ProductContext.Provider value={valus}>{children}</ProductContext.Provider>

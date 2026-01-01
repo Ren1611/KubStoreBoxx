@@ -46,36 +46,86 @@ const Header = () => {
           </div>
         </div>
         <div className={scss.HeaderMenu}>
-          <NavLink to="/catalog">
+          <NavLink
+            className={({ isActive }) =>
+              `${scss.navLink} ${isActive ? scss.active : ""}`
+            }
+            to="/catalog"
+          >
             <p>
               <img src="./src/assets/icons/Fon.jpg" alt="" /> КАТАЛОГ
             </p>
           </NavLink>
-          <NavLink to="/mototechnics">
+          <NavLink
+            className={({ isActive }) =>
+              `${scss.navLink} ${isActive ? scss.active : ""}`
+            }
+            to="/mototechnics"
+          >
             <p>МОТОТЕХНИКА</p>
           </NavLink>
-          <NavLink to="/motorcycle_helmets">
+          <NavLink
+            className={({ isActive }) =>
+              `${scss.navLink} ${isActive ? scss.active : ""}`
+            }
+            to="/motorcycle_helmets"
+          >
             <p>МОТОШЛЕМЫ</p>
           </NavLink>
-          <NavLink to="/motorcycle_equipment">
+          <NavLink
+            className={({ isActive }) =>
+              `${scss.navLink} ${isActive ? scss.active : ""}`
+            }
+            to="/motorcycle_equipment"
+          >
             <p>МОТОЭКИПИРОВКА</p>
           </NavLink>
-          <NavLink to="/tuning">
+          <NavLink
+            className={({ isActive }) =>
+              `${scss.navLink} ${isActive ? scss.active : ""}`
+            }
+            to="/tuning"
+          >
             <p>ТЮНИНГ</p>
           </NavLink>
-          <NavLink to="/spare_parts">
+          <NavLink
+            className={({ isActive }) =>
+              `${scss.navLink} ${isActive ? scss.active : ""}`
+            }
+            to="/spare_parts"
+          >
             <p>ЗАПЧАСТИ</p>
           </NavLink>
-          <NavLink to="/motorcycle_tires">
+          <NavLink
+            className={({ isActive }) =>
+              `${scss.navLink} ${isActive ? scss.active : ""}`
+            }
+            to="/motorcycle_tires"
+          >
             <p>МОТОРЕЗИНА</p>
           </NavLink>
-          <NavLink to="/motochemistry">
+          <NavLink
+            className={({ isActive }) =>
+              `${scss.navLink} ${isActive ? scss.active : ""}`
+            }
+            to="/motochemistry"
+          >
             <p>МОТОХИМИЯ</p>
           </NavLink>
-          <NavLink to="/stock">
+          <NavLink
+            className={({ isActive }) =>
+              `${scss.navLink} ${isActive ? scss.active : ""}`
+            }
+            to="/stock"
+          >
             <p>АКЦИЯ</p>
           </NavLink>
-          <NavLink to="/service">
+          <NavLink
+            className={({ isActive }) =>
+              `${scss.navLink} ${isActive ? scss.active : ""}`
+            }
+            to="/service"
+          >
             <p>СЕРВИС</p>
           </NavLink>
         </div>

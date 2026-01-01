@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import scss from "./Catalog.module.scss";
 import { useProduct } from "../../MainContext/MainContext";
+import { Link } from "react-router-dom";
 
 const Catalog = () => {
   const { getProduts, products, loading, addCard, addOrder } = useProduct();
@@ -205,19 +206,22 @@ const Catalog = () => {
                     <div className={scss.info}>
                       <h4 className={scss.name}>{p.title}</h4>
                       <div className={scss.priceRow}>
-                        <div className={scss.price}>{p.price} $</div>
+                        <div className={scss.price}>{p.price} сом</div>
                       </div>
                     </div>
                     <div className={scss.actions}>
                       <button
                         onClick={() => {
-                          addOrder({ ...item });
+                          addOrder({ ...p });
                         }}
                         className={scss.add}
                       >
                         В корзину
                       </button>
-                      <button className={scss.view}>Подробнее</button>
+
+                      <Link to={`/cardProduct/${index}`}>
+                        <button className={scss.view}>Подробнее</button>
+                      </Link>
                     </div>
                   </article>
                 ))

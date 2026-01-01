@@ -1,10 +1,8 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home/Home";
 import Register from "../pages/Auth/Register";
 import Login from "../pages/Auth/Login";
 import Favorites from "../pages/Favorites/Favorites";
-import Cart from "../pages/Cart/Cart";
 import Mototechnics from "../pages/Auth/mototechnics";
 import Motorcycle_helmets from "../pages/Auth/Motorcycle_helmets";
 import Motorcycle_equipment from "../pages/Auth/Motorcycle_equipment";
@@ -16,6 +14,8 @@ import Stock from "../pages/stock/Stock";
 import Service from "../pages/service/Service";
 import Catalog from "../pages/catalog/Catalog";
 import Products from "../pages/Products/Products";
+import Card from "../pages/Cart/Card";
+import CardProduct from "../pages/CardProduct/CardProduct";
 
 const Mainroutes = () => {
   const routes = [
@@ -53,9 +53,8 @@ const Mainroutes = () => {
     },
     {
       link: "/card",
-      element: <Cart />,
+      element: <Card />,
     },
-
     {
       link: "/tuning",
       element: <Tuning />,
@@ -84,11 +83,16 @@ const Mainroutes = () => {
       link: "/products",
       element: <Products />,
     },
+    {
+      link: "/cardProduct",
+      element: <CardProduct />,
+    },
   ];
+
   return (
     <Routes>
-      {routes.map((item) => (
-        <Route path={item.link} element={item.element} />
+      {routes.map((item, index) => (
+        <Route key={index} path={item.link} element={item.element} />
       ))}
     </Routes>
   );

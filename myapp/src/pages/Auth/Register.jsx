@@ -89,9 +89,7 @@ const Register = () => {
                   value={password}
                 />
                 <br />
-                {error && (
-                  <p style={{ color: "#c00", marginTop: 6 }}>{error}</p>
-                )}
+                {error && <p id={scss.errorBot}>{error}</p>}
                 <button
                   type="button"
                   onClick={handleReducer}

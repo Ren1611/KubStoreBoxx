@@ -101,15 +101,17 @@
       .HeaderImg {
         display: flex;
         gap: -10px;
+
         a {
           img {
             width: 70px;
             height: 32px;
             filter: invert(1);
+            transition: all 0.3s;
           }
           img:hover {
-            transform: scale(1.1);
-            transition: 0.3s;
+            transform: scale(1.06);
+            transition: all 0.3s;
           }
         }
       }
@@ -141,8 +143,25 @@
         margin-right: 3px;
       }
     }
+  }
+  .navLink {
+    p {
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: -30px;
+      color: white;
+      transition: 0.3s;
+    }
 
-    p:hover {
+    &:hover p {
+      color: rgb(162, 0, 255);
+      border-bottom: 1px solid rgb(162, 0, 255);
+    }
+  }
+
+  .active {
+    p {
       color: rgb(162, 0, 255);
       border-bottom: 1px solid rgb(162, 0, 255);
     }
