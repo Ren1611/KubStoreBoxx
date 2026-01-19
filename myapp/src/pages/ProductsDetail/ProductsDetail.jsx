@@ -19,7 +19,6 @@ import {
   FaUndo,
 } from "react-icons/fa";
 
-// Компонент уведомления
 const Notification = React.memo(({ message, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -180,7 +179,6 @@ const ProductsDetail = () => {
 
   return (
     <div className={styles.productDetail}>
-      {/* Уведомление */}
       {showNotification && (
         <Notification
           message={showNotification}
@@ -188,7 +186,6 @@ const ProductsDetail = () => {
         />
       )}
 
-      {/* Хлебные крошки */}
       <div className={styles.breadcrumbs}>
         <div className="container">
           <Link to="/">{t("common_breadcrumbs_home")}</Link>
@@ -204,9 +201,7 @@ const ProductsDetail = () => {
       </div>
 
       <div className="container">
-        {/* Основная информация */}
         <div className={styles.productMain}>
-          {/* Галерея */}
           <div className={styles.gallerySection}>
             <div className={styles.mainImageWrapper}>
               <div className={styles.imageContainer}>
@@ -265,7 +260,6 @@ const ProductsDetail = () => {
             )}
           </div>
 
-          {/* Информация о товаре */}
           <div className={styles.infoSection}>
             <div className={styles.productHeader}>
               <span className={styles.brandTag}>{oneProduct.brand}</span>
@@ -293,7 +287,6 @@ const ProductsDetail = () => {
               </div>
             </div>
 
-            {/* Цена и наличие */}
             <div className={styles.priceSection}>
               <div className={styles.priceContainer}>
                 {hasDiscount ? (
@@ -330,7 +323,6 @@ const ProductsDetail = () => {
               </div>
             </div>
 
-            {/* Количество и кнопки */}
             <div className={styles.actionSection}>
               <div className={styles.quantitySelector}>
                 <label>{t("product_detail_quantity")}:</label>
@@ -382,7 +374,6 @@ const ProductsDetail = () => {
               </div>
             </div>
 
-            {/* Преимущества */}
             <div className={styles.benefits}>
               <div className={styles.benefitItem}>
                 <FaTruck className={styles.benefitIcon} />
@@ -411,7 +402,6 @@ const ProductsDetail = () => {
               </div>
             </div>
 
-            {/* Основные характеристики */}
             <div className={styles.specsPreview}>
               <h3>{t("product_detail_specifications_title")}</h3>
               <div className={styles.specsGrid}>

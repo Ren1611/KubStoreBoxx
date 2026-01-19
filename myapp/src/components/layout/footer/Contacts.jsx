@@ -16,7 +16,6 @@ const Contacts = () => {
   const [submitted, setSubmitted] = useState(false);
   const [activeTab, setActiveTab] = useState("store");
 
-  // Контактная информация
   const contactInfo = {
     store: {
       title: t("contacts_store_title"),
@@ -101,7 +100,6 @@ const Contacts = () => {
     },
   };
 
-  // Тематики сообщений
   const subjects = [
     t("contacts_form_subject1"),
     t("contacts_form_subject2"),
@@ -113,7 +111,6 @@ const Contacts = () => {
     t("contacts_form_subject8"),
   ];
 
-  // Обработка изменения формы
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -122,7 +119,6 @@ const Contacts = () => {
     }));
   };
 
-  // Отправка формы
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
@@ -140,7 +136,6 @@ const Contacts = () => {
     }, 3000);
   };
 
-  // Контактные телефоны
   const phoneNumbers = [
     {
       label: t("contacts_phone1_label"),
@@ -164,7 +159,6 @@ const Contacts = () => {
     },
   ];
 
-  // Социальные сети
   const socialLinks = [
     {
       name: t("contacts_social_whatsapp"),
@@ -192,22 +186,18 @@ const Contacts = () => {
   return (
     <div className={scss.contactsPage}>
       <div className="container">
-        {/* Хлебные крошки */}
         <div className={scss.breadcrumbs}>
           <Link to="/">{t("header_home")}</Link>
           <span> / </span>
           <span className={scss.current}>{t("contacts_page_title")}</span>
         </div>
 
-        {/* Заголовок страницы */}
         <div className={scss.pageHeader}>
           <h1>{t("contacts_page_title")}</h1>
           <p className={scss.subtitle}>{t("contacts_page_subtitle")}</p>
         </div>
 
-        {/* Основной контент */}
         <div className={scss.contactsContent}>
-          {/* Контактные телефоны */}
           <div className={scss.contactPhones}>
             <h2>{t("contacts_phones_title")}</h2>
             <div className={scss.phonesGrid}>
@@ -226,7 +216,6 @@ const Contacts = () => {
           </div>
 
           <div className={scss.mainLayout}>
-            {/* Левая колонка - Форма обратной связи */}
             <div className={scss.leftColumn}>
               <div className={scss.contactFormSection}>
                 <h2>{t("contacts_form_title")}</h2>
@@ -350,7 +339,6 @@ const Contacts = () => {
                 )}
               </div>
 
-              {/* Социальные сети */}
               <div className={scss.socialSection}>
                 <h2>{t("contacts_social_title")}</h2>
                 <p>{t("contacts_social_description")}</p>
@@ -371,9 +359,7 @@ const Contacts = () => {
               </div>
             </div>
 
-            {/* Правая колонка - Контактная информация */}
             <div className={scss.rightColumn}>
-              {/* Переключение локаций */}
               <div className={scss.locationsTabs}>
                 <div className={scss.tabsHeader}>
                   {Object.keys(contactInfo).map((key) => (
@@ -551,7 +537,6 @@ const Contacts = () => {
             </div>
           </div>
 
-          {/* Карта */}
           <div className={scss.mapSection}>
             <h2>{t("contacts_map_title")}</h2>
             <div className={scss.mapContainer}>
@@ -585,7 +570,6 @@ const Contacts = () => {
             </div>
           </div>
 
-          {/* Часто задаваемые вопросы */}
           <div className={scss.faqPreview}>
             <div className={scss.faqContent}>
               <h2>{t("contacts_faq_title")}</h2>

@@ -2,17 +2,16 @@ import React, { Suspense, lazy, useMemo } from "react";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 
-// Ленивая загрузка всех страниц
 const Home = lazy(() => import("../pages/Home/Home"));
 const Register = lazy(() => import("../pages/Auth/Register"));
 const Login = lazy(() => import("../pages/Auth/Login"));
 const Favorites = lazy(() => import("../pages/Favorites/Favorites"));
-const Mototechnics = lazy(() => import("../pages/Auth/mototechnics"));
-const Motorcycle_helmets = lazy(() =>
-  import("../pages/Auth/Motorcycle_helmets")
+const Mototechnics = lazy(() => import("../pages/Auth/Mototechnics"));
+const Motorcycle_helmets = lazy(
+  () => import("../pages/Auth/Motorcycle_helmets"),
 );
-const Motorcycle_equipment = lazy(() =>
-  import("../pages/Auth/Motorcycle_equipment")
+const Motorcycle_equipment = lazy(
+  () => import("../pages/Auth/Motorcycle_equipment"),
 );
 const Tuning = lazy(() => import("../pages/Auth/Tuning"));
 const Spare_parts = lazy(() => import("../pages/Auth/Spare_parts"));
@@ -23,8 +22,8 @@ const Service = lazy(() => import("../pages/service/Service"));
 const Catalog = lazy(() => import("../pages/catalog/Catalog"));
 const Products = lazy(() => import("../pages/Products/Products"));
 const Card = lazy(() => import("../pages/Cart/Card"));
-const ProductDetail = lazy(() =>
-  import("../pages/ProductsDetail/ProductsDetail")
+const ProductDetail = lazy(
+  () => import("../pages/ProductsDetail/ProductsDetail"),
 );
 const Checkout = lazy(() => import("../pages/checkout/Checkout"));
 const Faq = lazy(() => import("../components/layout/footer/Faq"));
@@ -32,7 +31,6 @@ const Contacts = lazy(() => import("../components/layout/footer/Contacts"));
 const AdminLogin = lazy(() => import("../pages/Admin/AdminLogin"));
 const Profile = lazy(() => import("../pages/Profile/Profile"));
 
-// Компонент для отображения загрузки
 const PageLoader = () => (
   <div
     style={{
@@ -64,13 +62,11 @@ const PageLoader = () => (
   </div>
 );
 
-// Вспомогательный компонент для обертки
 const LazyRoute = ({ children }) => (
   <Suspense fallback={<PageLoader />}>{children}</Suspense>
 );
 
 const Mainroutes = () => {
-  // Мемоизируем routes чтобы предотвратить лишние ререндеры
   const routes = useMemo(
     () => [
       {
@@ -239,7 +235,7 @@ const Mainroutes = () => {
         ),
       },
     ],
-    []
+    [],
   );
 
   return (

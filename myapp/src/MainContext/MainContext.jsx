@@ -14,7 +14,6 @@ import { formatPrice } from "../utils/priceFormatter";
 const ProductContext = createContext();
 export const useProduct = () => useContext(ProductContext);
 
-// Используем только MockAPI
 const API_BASE_URL = "https://695c65b779f2f34749d414ce.mockapi.io/Kub";
 
 const initialState = {
@@ -24,12 +23,12 @@ const initialState = {
   error: null,
   pagination: {
     current_page: 1,
-    per_page: 100, // Показываем все товары на одной странице
+    per_page: 100,
     total_pages: 1,
     total_items: 0,
   },
   loading: false,
-  allProductsLoaded: false, // Флаг, что все товары загружены
+  allProductsLoaded: false,
 };
 
 function reducer(state, action) {
@@ -87,16 +86,13 @@ const MainContext = ({ children }) => {
   const [card, setCard] = useState([]);
   const [currentLanguage, setCurrentLanguage] = useState("ru");
 
-  // Используем ref для предотвращения множественных запросов
   const abortControllerRef = useRef(null);
   const isMountedRef = useRef(true);
-  const productsLoadedRef = useRef(false); // Флаг, что товары уже загружены
+  const productsLoadedRef = useRef(false);
 
-  // Функция для очистки данных продукта
   const cleanProductData = useCallback((productData) => {
     if (!productData) return null;
 
-    // Приводим данные к единому формату
     return {
       id: productData.id || Date.now().toString(),
       name: productData.name || productData.title || "Без названия",
@@ -133,20 +129,17 @@ const MainContext = ({ children }) => {
     };
   }, []);
 
-  // Функция для отмены предыдущего запроса
   const cancelPreviousRequest = useCallback(() => {
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
-      console.log("🛑 Отменен предыдущий запрос");
+      console.log(" Отменен предыдущий запрос");
     }
     abortControllerRef.current = new AbortController();
   }, []);
 
-  // Получение ВСЕХ продуктов из MockAPI
   const getAllProducts = useCallback(async () => {
-    // Если товары уже загружены, не делаем повторный запрос
     if (productsLoadedRef.current && state.products.length > 0) {
-      console.log("📦 Товары уже загружены, используем кэш");
+      console.log(" Товары уже загружены, используем кэш");
       return {
         products: state.products,
         pagination: state.pagination,
@@ -154,15 +147,13 @@ const MainContext = ({ children }) => {
       };
     }
 
-    // Отменяем предыдущий запрос
     cancelPreviousRequest();
 
     dispatch({ type: "GET_PRODUCTS_START" });
 
     try {
-      console.log("📡 Загружаем ВСЕ товары из MockAPI...");
+      console.log(" Загружаем ВСЕ товары из MockAPI...");
 
-      // 1. Сначала получаем общее количество товаров
       const countResponse = await axios.get(API_BASE_URL, {
         params: {
           page: 1,
@@ -172,24 +163,22 @@ const MainContext = ({ children }) => {
         timeout: 5000,
       });
 
-      // MockAPI возвращает общее количество в заголовке x-total-count
       const totalItems =
         parseInt(countResponse.headers["x-total-count"]) || 100;
-      console.log(`📊 Всего товаров в базе: ${totalItems}`);
+      console.log(` Всего товаров в базе: ${totalItems}`);
 
-      // 2. Загружаем ВСЕ товары за один запрос
       const response = await axios.get(API_BASE_URL, {
         params: {
           page: 1,
-          limit: totalItems, // Запрашиваем ВСЕ товары
+          limit: totalItems,
           sortBy: "createdAt",
           order: "desc",
         },
         signal: abortControllerRef.current?.signal,
-        timeout: 15000, // Увеличиваем таймаут для большого запроса
+        timeout: 15000,
       });
 
-      console.log(`✅ Загружено ${response.data.length} товаров`);
+      console.log(` Загружено ${response.data.length} товаров`);
 
       const cleanedData = response.data.map((product) =>
         cleanProductData(product),
@@ -209,7 +198,6 @@ const MainContext = ({ children }) => {
         },
       });
 
-      // Устанавливаем флаг, что товары загружены
       productsLoadedRef.current = true;
 
       return {
@@ -224,14 +212,13 @@ const MainContext = ({ children }) => {
       };
     } catch (error) {
       if (axios.isCancel(error)) {
-        console.log("🛑 Запрос отменен");
+        console.log(" Запрос отменен");
         return;
       }
 
-      console.error("❌ Ошибка загрузки всех товаров:", error.message);
+      console.error(" Ошибка загрузки всех товаров:", error.message);
 
-      // Если не удалось загрузить все сразу, пробуем загрузить порциями
-      console.log("🔄 Пробуем загрузить товары порциями...");
+      console.log(" Пробуем загрузить товары порциями...");
       return loadProductsInChunks();
     }
   }, [
@@ -241,9 +228,8 @@ const MainContext = ({ children }) => {
     state.pagination,
   ]);
 
-  // Загрузка товаров порциями (fallback метод)
   const loadProductsInChunks = useCallback(async () => {
-    const CHUNK_SIZE = 20; // загружаем по 20 товаров за раз
+    const CHUNK_SIZE = 20;
     let allProducts = [];
     let page = 1;
     let hasMore = true;
@@ -267,17 +253,14 @@ const MainContext = ({ children }) => {
         const chunkData = response.data.map(cleanProductData);
         allProducts = [...allProducts, ...chunkData];
 
-        // Получаем общее количество из заголовка
         if (page === 1) {
           totalItems = parseInt(response.headers["x-total-count"]) || 100;
         }
 
-        // Проверяем, есть ли еще товары
         hasMore =
           chunkData.length === CHUNK_SIZE && allProducts.length < totalItems;
         page++;
 
-        // Обновляем состояние после каждой порции
         dispatch({
           type: "GET_PRODUCTS_SUCCESS",
           payload: {
@@ -292,13 +275,12 @@ const MainContext = ({ children }) => {
           },
         });
 
-        // Небольшая пауза между запросами
         if (hasMore) {
           await new Promise((resolve) => setTimeout(resolve, 300));
         }
       }
 
-      console.log(`✅ Итого загружено ${allProducts.length} товаров`);
+      console.log(` Итого загружено ${allProducts.length} товаров`);
       productsLoadedRef.current = true;
 
       return {
@@ -313,13 +295,12 @@ const MainContext = ({ children }) => {
       };
     } catch (error) {
       if (axios.isCancel(error)) {
-        console.log("🛑 Запрос отменен");
+        console.log(" Запрос отменен");
         return;
       }
 
       console.error("loadProductsInChunks error:", error.message);
 
-      // Возвращаем то, что успели загрузить
       return {
         products: allProducts,
         pagination: {
@@ -333,22 +314,21 @@ const MainContext = ({ children }) => {
     }
   }, [cleanProductData]);
 
-  // Получение одного продукта по ID
   const getOneProduct = useCallback(
     async (id) => {
       if (!id) {
-        console.error("❌ ID продукта не указан");
+        console.error(" ID продукта не указан");
         return null;
       }
 
       try {
-        console.log(`📡 Запрашиваем продукт ${id}...`);
+        console.log(` Запрашиваем продукт ${id}...`);
 
         const response = await axios.get(`${API_BASE_URL}/${id}`, {
           timeout: 5000,
         });
 
-        console.log(`✅ Продукт получен`);
+        console.log(` Продукт получен`);
 
         const cleanedData = cleanProductData(response.data);
         dispatch({
@@ -359,11 +339,10 @@ const MainContext = ({ children }) => {
       } catch (error) {
         console.error("getOneProduct error:", error.message);
 
-        // Ищем в локальных данных
         const localProduct = state.products.find((p) => p.id === id);
 
         if (localProduct) {
-          console.log("✅ Найден товар в локальных данных");
+          console.log(" Найден товар в локальных данных");
           dispatch({
             type: "GET_ONE_PRODUCT",
             payload: localProduct,
@@ -381,18 +360,16 @@ const MainContext = ({ children }) => {
     [cleanProductData, state.products],
   );
 
-  // Создание нового продукта
   const createProduct = useCallback(
     async (newProduct) => {
       try {
-        // Подготовка данных для отправки
         const productToSend = {
           ...newProduct,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
         };
 
-        console.log(`📤 Создаем новый товар...`);
+        console.log(` Создаем новый товар...`);
 
         const response = await axios.post(API_BASE_URL, productToSend, {
           timeout: 5000,
@@ -401,7 +378,7 @@ const MainContext = ({ children }) => {
           },
         });
 
-        console.log(`✅ Товар создан`);
+        console.log(` Товар создан`);
 
         const cleanedData = cleanProductData(response.data);
 
@@ -410,7 +387,6 @@ const MainContext = ({ children }) => {
           payload: cleanedData,
         });
 
-        // Сбрасываем флаг загрузки, так как добавился новый товар
         productsLoadedRef.current = false;
 
         return cleanedData;
@@ -426,21 +402,20 @@ const MainContext = ({ children }) => {
     [cleanProductData],
   );
 
-  // Удаление продукта
   const deleteProduct = useCallback(async (id) => {
     if (!id) {
-      console.error("❌ ID продукта не указан");
+      console.error(" ID продукта не указан");
       return;
     }
 
     try {
-      console.log(`🗑️ Удаляем товар ${id}...`);
+      console.log(` Удаляем товар ${id}...`);
 
       await axios.delete(`${API_BASE_URL}/${id}`, {
         timeout: 5000,
       });
 
-      console.log(`✅ Товар удален`);
+      console.log(` Товар удален`);
 
       dispatch({
         type: "DELETE_PRODUCT",
@@ -455,24 +430,23 @@ const MainContext = ({ children }) => {
     }
   }, []);
 
-  // Обновление продукта
   const updateProduct = useCallback(
     async (id, updatedData) => {
       if (!id) {
-        console.error("❌ ID продукта не указан");
+        console.error(" ID продукта не указан");
         return;
       }
 
       try {
         const cleanedData = cleanProductData(updatedData);
 
-        console.log(`✏️ Обновляем товар ${id}...`);
+        console.log(` Обновляем товар ${id}...`);
 
         const response = await axios.put(`${API_BASE_URL}/${id}`, cleanedData, {
           timeout: 5000,
         });
 
-        console.log(`✅ Товар обновлен`);
+        console.log(`Товар обновлен`);
 
         const updatedProduct = cleanProductData(response.data);
 
@@ -498,7 +472,6 @@ const MainContext = ({ children }) => {
     [cleanProductData],
   );
 
-  // Функции редактирования
   const setEditingProduct = useCallback(
     (product) => {
       const cleanedProduct = cleanProductData(product);
@@ -516,14 +489,12 @@ const MainContext = ({ children }) => {
     });
   }, []);
 
-  // Перезагрузка всех товаров
   const refreshProducts = useCallback(() => {
-    console.log("🔄 Перезагружаем товары...");
+    console.log(" Перезагружаем товары...");
     productsLoadedRef.current = false;
     getAllProducts();
   }, [getAllProducts]);
 
-  // Функции для работы с корзиной
   const addOrder = useCallback((newProduct) => {
     try {
       let data = JSON.parse(localStorage.getItem("orders")) || [];
@@ -615,7 +586,6 @@ const MainContext = ({ children }) => {
     }, 0);
   }, [readOrder, calculateItemTotal]);
 
-  // Функции для избранного
   const addFavorit = useCallback((product) => {
     try {
       let data = JSON.parse(localStorage.getItem("favorit")) || [];
@@ -672,7 +642,6 @@ const MainContext = ({ children }) => {
     [readFavorit],
   );
 
-  // Функции для временной корзины
   const addCard = useCallback((product) => {
     try {
       let data = JSON.parse(localStorage.getItem("card")) || [];
@@ -727,59 +696,49 @@ const MainContext = ({ children }) => {
     [readCard],
   );
 
-  // Языковые функции
   const changeLanguage = useCallback((lng) => {
     setCurrentLanguage(lng);
     localStorage.setItem("preferredLanguage", lng);
   }, []);
 
-  // Инициализация приложения
   useEffect(() => {
     isMountedRef.current = true;
 
     const savedLanguage = localStorage.getItem("preferredLanguage") || "ru";
     setCurrentLanguage(savedLanguage);
 
-    // Загружаем локальные данные
     readOrder();
     readFavorit();
     readCard();
 
-    // Загружаем все продукты только один раз при монтировании
     if (isMountedRef.current && !productsLoadedRef.current) {
       console.log("🚀 Начальная загрузка всех товаров...");
       getAllProducts();
     }
 
-    // Очистка при размонтировании
     return () => {
       isMountedRef.current = false;
       if (abortControllerRef.current) {
         abortControllerRef.current.abort();
       }
     };
-  }, []); // Пустой массив зависимостей
+  }, []);
 
-  // Мемоизированные значения для контекста
   const values = useMemo(
     () => ({
-      // Язык
       currentLanguage,
       changeLanguage,
 
-      // API функции
-      getProducts: getAllProducts, // Переименовываем для обратной совместимости
+      getProducts: getAllProducts,
       getOneProduct,
       createProduct,
       deleteProduct,
       updateProduct,
       refreshProducts,
 
-      // Функции редактирования
       setEditingProduct,
       clearEditingProduct,
 
-      // Состояния
       products: state.products,
       oneProduct: state.product,
       editingProduct: state.editingProduct,
@@ -788,7 +747,6 @@ const MainContext = ({ children }) => {
       error: state.error,
       allProductsLoaded: state.allProductsLoaded,
 
-      // Корзина
       order,
       addOrder,
       readOrder,
@@ -796,19 +754,16 @@ const MainContext = ({ children }) => {
       calculateItemTotal,
       calculateCartTotal,
 
-      // Избранное
       favorit,
       addFavorit,
       readFavorit,
       deleteFavorit,
 
-      // Временная корзина
       card,
       addCard,
       readCard,
       deleteCard,
 
-      // Очистка ошибки
       clearError: () => {
         dispatch({ type: "CLEAR_ERROR" });
       },

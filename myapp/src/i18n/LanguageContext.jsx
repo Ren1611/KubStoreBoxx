@@ -1,4 +1,3 @@
-// src/i18n/LanguageContext.jsx
 import React, {
   createContext,
   useContext,
@@ -23,18 +22,14 @@ export const LanguageProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  // Инициализация
   useEffect(() => {
     const init = async () => {
       setIsLoading(true);
       try {
-        // Загружаем переводы
         await loadTranslations();
 
-        // Устанавливаем текущий язык из i18n после инициализации
         setCurrentLanguage(i18n.language);
 
-        // Восстанавливаем сохраненный язык
         const savedLang = localStorage.getItem("i18nextLng");
         if (savedLang && ["en", "ru", "ky"].includes(savedLang)) {
           await i18n.changeLanguage(savedLang);
@@ -52,7 +47,6 @@ export const LanguageProvider = ({ children }) => {
     init();
   }, []);
 
-  // Слушаем изменения языка
   useEffect(() => {
     const handleLanguageChanged = (lng) => {
       setCurrentLanguage(lng);
@@ -67,7 +61,6 @@ export const LanguageProvider = ({ children }) => {
     };
   }, []);
 
-  // Функция смены языка
   const switchLanguage = useCallback(
     async (lng) => {
       if (!["en", "ru", "ky"].includes(lng) || lng === currentLanguage) return;
@@ -87,19 +80,17 @@ export const LanguageProvider = ({ children }) => {
     [currentLanguage],
   );
 
-  // Доступные языки
   const availableLanguages = [
     { code: "en", name: "English", nativeName: "English", flag: "🇺🇸" },
     { code: "ru", name: "Russian", nativeName: "Русский", flag: "🇷🇺" },
     { code: "ky", name: "Kyrgyz", nativeName: "Кыргызча", flag: "🇰🇬" },
   ];
 
-  // Получить текущий язык с информацией
   const getCurrentLanguage = () => {
     return (
       availableLanguages.find((lang) => lang.code === currentLanguage) ||
       availableLanguages[1]
-    ); // ru по умолчанию
+    );
   };
 
   const value = {
@@ -110,10 +101,9 @@ export const LanguageProvider = ({ children }) => {
     isLoading,
     isInitialized,
     t: i18n.t.bind(i18n),
-    i18n, // Экспортируем сам i18n для прямого доступа если нужно
+    i18n,
   };
 
-  // Показываем загрузку если переводы еще не загружены
   if (!isInitialized) {
     return <div>Loading translations...</div>;
   }

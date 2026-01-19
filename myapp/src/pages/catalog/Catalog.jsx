@@ -27,7 +27,6 @@ import {
   FaInfoCircle,
 } from "react-icons/fa";
 
-// Дебаунс хук для поиска
 const useDebounce = (value, delay) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
@@ -44,7 +43,6 @@ const useDebounce = (value, delay) => {
   return debouncedValue;
 };
 
-// Компонент уведомления
 const Notification = React.memo(({ message, type, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -78,7 +76,6 @@ const Notification = React.memo(({ message, type, onClose }) => {
 
 Notification.displayName = "Notification";
 
-// Мемоизированный компонент для звезд рейтинга
 const RatingStars = React.memo(({ rating }) => {
   return (
     <div className={styles.ratingStars}>
@@ -95,7 +92,6 @@ const RatingStars = React.memo(({ rating }) => {
 
 RatingStars.displayName = "RatingStars";
 
-// Компонент товара
 const ProductCard = React.memo(
   ({
     product,
@@ -250,7 +246,6 @@ const ProductCard = React.memo(
 
 ProductCard.displayName = "ProductCard";
 
-// Пагинация компонент
 const Pagination = React.memo(({ currentPage, totalPages, onPageChange }) => {
   const { t } = useTranslation();
 
@@ -500,7 +495,6 @@ const FilterPanel = React.memo(
 
 FilterPanel.displayName = "FilterPanel";
 
-// Активные фильтры
 const ActiveFilters = React.memo(
   ({ filters, maxProductPrice, onFilterChange }) => {
     const { t } = useTranslation();
@@ -566,7 +560,6 @@ const ActiveFilters = React.memo(
 
 ActiveFilters.displayName = "ActiveFilters";
 
-// Основной компонент Catalog
 const Catalog = () => {
   const {
     products,
@@ -600,10 +593,8 @@ const Catalog = () => {
     discount: false,
   });
 
-  // Используем дебаунс для поиска (300ms задержка)
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
-  // Получение уникальных значений для фильтров (мемоизировано)
   const [categories, brands] = useMemo(() => {
     if (!products.length) return [[], []];
 
@@ -618,7 +609,6 @@ const Catalog = () => {
     return [Array.from(categoriesSet), Array.from(brandsSet)];
   }, [products]);
 
-  // Находим максимальную цену для слайдера
   const maxProductPrice = useMemo(() => {
     if (products.length === 0) return 5000;
 
@@ -629,7 +619,6 @@ const Catalog = () => {
     return max;
   }, [products]);
 
-  // Загрузка данных при монтировании
   useEffect(() => {
     const loadInitialData = async () => {
       if (products.length === 0 && !loading) {
@@ -642,28 +631,24 @@ const Catalog = () => {
     loadInitialData();
   }, []);
 
-  // Обработка query параметров из URL при загрузке компонента или изменении URL
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
 
     const newFilters = { ...filters };
     let newSortOption = sortOption;
 
-    // Обработка категории
     const categoryParam = queryParams.get("category");
     if (categoryParam) {
       const decodedCategory = decodeURIComponent(categoryParam);
       newFilters.category = decodedCategory;
     }
 
-    // Обработка бренда
     const brandParam = queryParams.get("brand");
     if (brandParam) {
       const decodedBrand = decodeURIComponent(brandParam);
       newFilters.brand = decodedBrand;
     }
 
-    // Обработка сортировки
     const sortParam = queryParams.get("sort");
     if (sortParam) {
       if (sortParam === "popular") {
@@ -675,23 +660,19 @@ const Catalog = () => {
       }
     }
 
-    // Обработка скидок
     const discountParam = queryParams.get("discount");
     if (discountParam === "true") {
       newFilters.discount = true;
     }
 
-    // Обработка наличия товара
     const inStockParam = queryParams.get("inStock");
     if (inStockParam === "true") {
       newFilters.inStock = true;
     }
 
-    // Обновляем состояние фильтров и сортировки
     setFilters(newFilters);
     setSortOption(newSortOption);
 
-    // Показываем панель фильтров, если есть активные фильтры из URL
     if (
       categoryParam ||
       brandParam ||
@@ -703,14 +684,12 @@ const Catalog = () => {
     }
   }, [location.search]);
 
-  // Обновляем maxPrice при загрузке продуктов
   useEffect(() => {
     if (maxProductPrice > 0 && filters.maxPrice === 5000) {
       setFilters((prev) => ({ ...prev, maxPrice: maxProductPrice }));
     }
   }, [maxProductPrice]);
 
-  // Обновление URL при изменении фильтров
   useEffect(() => {
     const params = new URLSearchParams();
 
@@ -738,7 +717,6 @@ const Catalog = () => {
       params.set("sort", sortOption);
     }
 
-    // Обновляем URL без перезагрузки страницы
     const newUrl = params.toString()
       ? `/catalog?${params.toString()}`
       : "/catalog";
@@ -752,13 +730,11 @@ const Catalog = () => {
     navigate,
   ]);
 
-  // Мемоизированная фильтрация и сортировка
   const filteredProducts = useMemo(() => {
     if (!products.length) return [];
 
     let result = [...products];
 
-    // Быстрый поиск по дебаунс термину
     if (debouncedSearchTerm) {
       const term = debouncedSearchTerm.toLowerCase();
       result = result.filter((product) =>
@@ -766,7 +742,6 @@ const Catalog = () => {
       );
     }
 
-    // Применяем фильтры
     if (filters.category) {
       result = result.filter(
         (product) => product.category === filters.category,
@@ -777,7 +752,6 @@ const Catalog = () => {
       result = result.filter((product) => product.brand === filters.brand);
     }
 
-    // Фильтрация по цене
     result = result.filter(
       (product) =>
         product.price >= filters.minPrice && product.price <= filters.maxPrice,
@@ -791,7 +765,6 @@ const Catalog = () => {
       result = result.filter((product) => product.discount > 0);
     }
 
-    // Сортировка
     return [...result].sort((a, b) => {
       switch (sortOption) {
         case "price-asc":
@@ -807,13 +780,11 @@ const Catalog = () => {
         case "discount-desc":
           return (b.discount || 0) - (a.discount || 0);
         default:
-          // По умолчанию сортируем по дате добавления (новинки сначала)
           return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
       }
     });
   }, [products, debouncedSearchTerm, filters, sortOption]);
 
-  // Проверка активных фильтров
   const hasActiveFilters = useMemo(
     () =>
       filters.category ||
@@ -824,13 +795,10 @@ const Catalog = () => {
     [filters, maxProductPrice],
   );
 
-  // Проверка, находится ли товар в избранном (мемоизировано)
   const isInFavorit = useCallback(
     (productId) => favorit.some((item) => item.id === productId),
     [favorit],
   );
-
-  // Обработчики уведомлений
   const showNotification = useCallback((message, type = "success") => {
     const id = Date.now();
     setNotifications((prev) => [...prev, { id, message, type }]);
@@ -842,7 +810,6 @@ const Catalog = () => {
     );
   }, []);
 
-  // Обработчики действий
   const handleAddToCart = useCallback(
     (product) => {
       const productToAdd = {
@@ -857,13 +824,11 @@ const Catalog = () => {
   const handleAddToFavorit = useCallback(
     (product) => {
       if (isInFavorit(product.id)) {
-        // Если товар уже в избранном, удаляем его
         const favorites = JSON.parse(localStorage.getItem("favorit")) || [];
         const updatedFavorites = favorites.filter(
           (item) => item.id !== product.id,
         );
         localStorage.setItem("favorit", JSON.stringify(updatedFavorites));
-        // Обновляем контекст
         readFavorit();
       } else {
         addFavorit(product);
@@ -872,7 +837,6 @@ const Catalog = () => {
     [addFavorit, isInFavorit, readFavorit],
   );
 
-  // Обработчики фильтров
   const handleFilterChange = useCallback((updates) => {
     setFilters((prev) => ({ ...prev, ...updates }));
     setCurrentPage(1);
@@ -894,7 +858,6 @@ const Catalog = () => {
     navigate("/catalog", { replace: true });
   }, [maxProductPrice, showNotification, navigate, t]);
 
-  // Пагинация
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredProducts.slice(
@@ -908,12 +871,10 @@ const Catalog = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  // Эффект для сброса страницы при изменении фильтров
   useEffect(() => {
     setCurrentPage(1);
   }, [filteredProducts.length]);
 
-  // Loading state
   if (initialLoad || loading) {
     return (
       <div className={styles.loadingContainer}>
@@ -927,7 +888,6 @@ const Catalog = () => {
     );
   }
 
-  // Error state
   if (error) {
     return (
       <div className={styles.errorContainer}>
@@ -946,7 +906,6 @@ const Catalog = () => {
 
   return (
     <div className={styles.catalogPage}>
-      {/* Уведомления */}
       <div className={styles.notificationsContainer}>
         {notifications.map((notification) => (
           <Notification
@@ -959,7 +918,6 @@ const Catalog = () => {
       </div>
 
       <div className="container">
-        {/* Хлебные крошки */}
         <div className={styles.breadcrumbs}>
           <Link to="/">{t("header_home")}</Link>
           <span className={styles.divider}>/</span>
@@ -968,7 +926,6 @@ const Catalog = () => {
 
         <h1 className={styles.pageTitle}>{t("products_title")}</h1>
 
-        {/* Поиск и сортировка */}
         <div className={styles.topControls}>
           <div className={styles.searchBox}>
             <FaSearch />
@@ -1035,8 +992,6 @@ const Catalog = () => {
             </button>
           </div>
         </div>
-
-        {/* Панель фильтров */}
         <FilterPanel
           show={showFilterPanel}
           filters={filters}
@@ -1049,7 +1004,6 @@ const Catalog = () => {
           hasActiveFilters={hasActiveFilters}
         />
 
-        {/* Информация о результатах */}
         <div className={styles.resultsInfo}>
           <div className={styles.resultsCount}>
             <p>
@@ -1090,7 +1044,6 @@ const Catalog = () => {
           )}
         </div>
 
-        {/* Основной контент */}
         <div className={styles.mainContent}>
           {currentItems.length === 0 ? (
             <div className={styles.noResults}>
@@ -1105,7 +1058,6 @@ const Catalog = () => {
             </div>
           ) : (
             <>
-              {/* Сетка товаров */}
               <div className={styles.productsGrid}>
                 {currentItems.map((product) => (
                   <ProductCard
@@ -1119,7 +1071,6 @@ const Catalog = () => {
                 ))}
               </div>
 
-              {/* Пагинация */}
               {totalPages > 1 && (
                 <Pagination
                   currentPage={currentPage}

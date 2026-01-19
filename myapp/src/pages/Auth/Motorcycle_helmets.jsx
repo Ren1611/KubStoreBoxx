@@ -75,12 +75,10 @@ const Motorcycle_helmets = () => {
   const { getProducts, products, loading, addOrder, addFavorit } = useProduct();
   const { t } = useTranslation();
 
-  // Основные фильтры
   const [query, setQuery] = useState("");
   const [inStock, setInStock] = useState(false);
   const [discountOnly, setDiscountOnly] = useState(false);
 
-  // Фильтры для шлемов
   const [selectedHelmetTypes, setSelectedHelmetTypes] = useState(new Set());
   const [selectedCertifications, setSelectedCertifications] = useState(
     new Set(),
@@ -89,14 +87,12 @@ const Motorcycle_helmets = () => {
   const [selectedSizes, setSelectedSizes] = useState(new Set());
   const [selectedMaterials, setSelectedMaterials] = useState(new Set());
 
-  // Ценовой диапазон
   const [priceRange, setPriceRange] = useState({ min: 0, max: 100000 });
   const [currentPriceRange, setCurrentPriceRange] = useState({
     min: 0,
     max: 100000,
   });
 
-  // Динамические данные из продуктов
   const [availableBrands, setAvailableBrands] = useState([]);
   const [availableTypes, setAvailableTypes] = useState([]);
   const [availableCertifications, setAvailableCertifications] = useState([]);
@@ -106,39 +102,31 @@ const Motorcycle_helmets = () => {
 
   const [selectedBrands, setSelectedBrands] = useState(new Set());
 
-  // Фильтрованные продукты
   const [filtered, setFiltered] = useState([]);
 
-  // Пагинация
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
 
-  // Сортировка
   const [sortBy, setSortBy] = useState("default");
 
-  // Уведомления
   const [notification, setNotification] = useState({
     show: false,
     message: "",
-    type: "", // 'cart' или 'favorite'
+    type: "",
   });
 
-  // Получение продуктов
   useEffect(() => {
     getProducts();
   }, []);
 
-  // Извлечение данных из продуктов для фильтров
   useEffect(() => {
     if (!products) return;
 
-    // Находим товары категории "Мотошлемы"
     const helmetProducts = products.filter((p) => p.category === "Мотошлемы");
 
     console.log("Всего шлемов:", helmetProducts.length);
 
     if (helmetProducts.length > 0) {
-      // Находим цены только для шлемов
       const prices = helmetProducts
         .map((p) => parseFloat(p.price) || 0)
         .filter((p) => p > 0);
@@ -150,7 +138,6 @@ const Motorcycle_helmets = () => {
         setCurrentPriceRange({ min: minPrice, max: maxPrice });
       }
 
-      // Извлекаем уникальные значения для фильтров
       const uniqueBrands = new Set();
       const uniqueTypes = new Set();
       const uniqueCertifications = new Set();
@@ -159,27 +146,21 @@ const Motorcycle_helmets = () => {
       const uniqueMaterials = new Set();
 
       helmetProducts.forEach((product) => {
-        // Бренды
         if (product.brand) uniqueBrands.add(product.brand);
 
-        // Типы шлемов
         if (product.helmetType) {
           uniqueTypes.add(product.helmetType);
         } else if (product.type) {
           uniqueTypes.add(product.type);
         }
 
-        // Сертификации
         if (product.certification)
           uniqueCertifications.add(product.certification);
 
-        // Типы визоров
         if (product.visorType) uniqueVisorTypes.add(product.visorType);
 
-        // Размеры
         if (product.size) uniqueSizes.add(product.size);
 
-        // Материалы
         if (product.material) uniqueMaterials.add(product.material);
       });
 
@@ -187,7 +168,6 @@ const Motorcycle_helmets = () => {
       console.log("Найденные типы шлемов:", Array.from(uniqueTypes));
       console.log("Найденные размеры:", Array.from(uniqueSizes));
 
-      // Сортируем и устанавливаем значения
       setAvailableBrands(Array.from(uniqueBrands).sort());
       setAvailableTypes(Array.from(uniqueTypes).sort());
       setAvailableCertifications(Array.from(uniqueCertifications).sort());
@@ -197,7 +177,6 @@ const Motorcycle_helmets = () => {
     }
   }, [products]);
 
-  // Функции для переключения фильтров
   const toggleHelmetType = (type) => {
     const copy = new Set(selectedHelmetTypes);
     if (copy.has(type)) copy.delete(type);
@@ -240,7 +219,6 @@ const Motorcycle_helmets = () => {
     setSelectedBrands(copy);
   };
 
-  // Очистка всех фильтров
   const clearAllFilters = () => {
     setQuery("");
     setInStock(false);
@@ -255,7 +233,6 @@ const Motorcycle_helmets = () => {
     setCurrentPage(1);
   };
 
-  // Очистка конкретного фильтра
   const clearFilter = (filterName) => {
     switch (filterName) {
       case "helmetTypes":
@@ -282,7 +259,6 @@ const Motorcycle_helmets = () => {
     setCurrentPage(1);
   };
 
-  // Показать уведомление
   const showNotification = (message, type) => {
     setNotification({
       show: true,
@@ -290,7 +266,6 @@ const Motorcycle_helmets = () => {
       type,
     });
 
-    // Автоматически скрыть через 3 секунды
     setTimeout(() => {
       setNotification({
         show: false,
@@ -299,8 +274,6 @@ const Motorcycle_helmets = () => {
       });
     }, 3000);
   };
-
-  // Обработчики для действий
   const handleAddToCart = (product) => {
     const productToAdd = {
       ...product,
@@ -336,18 +309,14 @@ const Motorcycle_helmets = () => {
       showNotification(t("motorcycle_helmets_add_favorites_error"), "error");
     }
   };
-
-  // Применение фильтрации
   useEffect(() => {
     if (!products) return;
 
     let filteredProducts = products.filter((product) => {
-      // Проверяем, относится ли продукт к шлемам ПО КАТЕГОРИИ
       const isHelmet = product.category === "Мотошлемы";
 
       if (!isHelmet) return false;
 
-      // Фильтр по поиску
       const searchQuery = query.trim().toLowerCase();
       if (searchQuery) {
         const title = (product.name || product.title || "").toLowerCase();
@@ -365,20 +334,15 @@ const Motorcycle_helmets = () => {
         }
       }
 
-      // Фильтр по наличию
       if (inStock && !product.inStock) return false;
 
-      // Фильтр по скидке
       if (discountOnly && (!product.discount || product.discount <= 0))
         return false;
 
-      // Фильтр по цене
       const price = parseFloat(product.price) || 0;
       if (price < currentPriceRange.min || price > currentPriceRange.max) {
         return false;
       }
-
-      // Фильтр по типам шлемов
       if (selectedHelmetTypes.size > 0) {
         const helmetType = product.helmetType || "";
         if (helmetType === "" || !selectedHelmetTypes.has(helmetType)) {
@@ -386,7 +350,6 @@ const Motorcycle_helmets = () => {
         }
       }
 
-      // Фильтр по брендам
       if (selectedBrands.size > 0) {
         const brand = product.brand || "";
         if (brand === "" || !selectedBrands.has(brand)) {
@@ -394,7 +357,6 @@ const Motorcycle_helmets = () => {
         }
       }
 
-      // Фильтр по сертификациям
       if (selectedCertifications.size > 0) {
         const certification = product.certification || "";
         if (
@@ -405,7 +367,6 @@ const Motorcycle_helmets = () => {
         }
       }
 
-      // Фильтр по типам визоров
       if (selectedVisorTypes.size > 0) {
         const visorType = product.visorType || "";
         if (visorType === "" || !selectedVisorTypes.has(visorType)) {
@@ -413,7 +374,6 @@ const Motorcycle_helmets = () => {
         }
       }
 
-      // Фильтр по размерам
       if (selectedSizes.size > 0) {
         const size = product.size || "";
         if (size === "" || !selectedSizes.has(size)) {
@@ -421,7 +381,6 @@ const Motorcycle_helmets = () => {
         }
       }
 
-      // Фильтр по материалам
       if (selectedMaterials.size > 0) {
         const material = product.material || "";
         if (material === "" || !selectedMaterials.has(material)) {
@@ -436,7 +395,6 @@ const Motorcycle_helmets = () => {
     console.log("Выбранные бренды:", Array.from(selectedBrands));
     console.log("Выбранные типы:", Array.from(selectedHelmetTypes));
 
-    // Сортировка
     filteredProducts.sort((a, b) => {
       switch (sortBy) {
         case "price-asc":
@@ -469,13 +427,11 @@ const Motorcycle_helmets = () => {
     sortBy,
   ]);
 
-  // Пагинация
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filtered.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
 
-  // Генерация номеров страниц (показываем только 5 страниц)
   const generatePageNumbers = () => {
     const pageNumbers = [];
     const maxVisiblePages = 5;
@@ -504,7 +460,6 @@ const Motorcycle_helmets = () => {
     return pageNumbers;
   };
 
-  // Рендер активных фильтров
   const renderActiveFilters = () => {
     const activeFilters = [];
 
@@ -585,7 +540,6 @@ const Motorcycle_helmets = () => {
 
   return (
     <div className={`${scss.categoryPage} ${scss.helmetsPage}`}>
-      {/* Компонент уведомления */}
       {notification.show && (
         <div className={`${scss.notification} ${scss[notification.type]}`}>
           <div className={scss.notificationContent}>
@@ -654,7 +608,6 @@ const Motorcycle_helmets = () => {
                 </button>
               </div>
 
-              {/* Поиск */}
               <div className={scss.filterSection}>
                 <label className={scss.filterLabel}>
                   <span>{t("motorcycle_helmets_search_name")}</span>
@@ -667,7 +620,6 @@ const Motorcycle_helmets = () => {
                 </label>
               </div>
 
-              {/* Базовые фильтры */}
               <div className={scss.filterSection}>
                 <h4>{t("motorcycle_helmets_basic_filters")}</h4>
                 <div className={scss.checkboxGroup}>
@@ -690,7 +642,6 @@ const Motorcycle_helmets = () => {
                 </div>
               </div>
 
-              {/* Ценовой диапазон */}
               <div className={scss.filterSection}>
                 <h4>
                   {t("motorcycle_helmets_price_range")}:{" "}
@@ -740,7 +691,6 @@ const Motorcycle_helmets = () => {
                 </div>
               </div>
 
-              {/* Типы шлемов */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("motorcycle_helmets_helmet_types")}</h4>
@@ -778,7 +728,6 @@ const Motorcycle_helmets = () => {
                 </div>
               </div>
 
-              {/* Бренды */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("motorcycle_helmets_brands")}</h4>
@@ -816,7 +765,6 @@ const Motorcycle_helmets = () => {
                 </div>
               </div>
 
-              {/* Размеры */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("motorcycle_helmets_sizes")}</h4>
@@ -854,7 +802,6 @@ const Motorcycle_helmets = () => {
                 </div>
               </div>
 
-              {/* Сертификации */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("motorcycle_helmets_certifications")}</h4>
@@ -892,7 +839,6 @@ const Motorcycle_helmets = () => {
                 </div>
               </div>
 
-              {/* Материалы */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("motorcycle_helmets_materials")}</h4>
@@ -1104,7 +1050,6 @@ const Motorcycle_helmets = () => {
               )}
             </div>
 
-            {/* Пагинация */}
             {totalPages > 1 && (
               <div className={scss.pagination}>
                 <button

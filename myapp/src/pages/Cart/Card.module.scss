@@ -10,7 +10,6 @@
   padding-top: 70px;
 }
 
-// Хлебные крошки
 .breadcrumbs {
   margin-bottom: 30px;
   font-size: 14px;
@@ -48,7 +47,6 @@
   }
 }
 
-// Основной layout
 .cartLayout {
   display: grid;
   grid-template-columns: 1fr 400px;
@@ -60,7 +58,6 @@
   }
 }
 
-// Пустая корзина
 .emptyCart {
   min-height: 70vh;
   display: flex;
@@ -109,7 +106,6 @@
   }
 }
 
-// Список товаров
 .cartItems {
   background: white;
   border-radius: 16px;
@@ -372,7 +368,6 @@
   }
 }
 
-// Итоговая информация
 .cartSummary {
   .summaryCard {
     background: white;
@@ -490,7 +485,6 @@
   }
 }
 
-// Промокод
 .promoSection {
   background: white;
   border-radius: 16px;

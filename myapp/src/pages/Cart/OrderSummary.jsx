@@ -5,7 +5,6 @@ const OrderSummary = ({ items = [], onOrderSubmit }) => {
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [deliveryAddress, setDeliveryAddress] = useState("");
 
-  // Рассчитываем общую стоимость товаров
   const itemsTotal = useMemo(() => {
     return items.reduce((total, item) => {
       const price = item.price || 0;
@@ -14,7 +13,6 @@ const OrderSummary = ({ items = [], onOrderSubmit }) => {
     }, 0);
   }, [items]);
 
-  // Рассчитываем итоговую сумму (пока без доставки)
   const orderTotal = itemsTotal;
 
   const handleSubmit = () => {

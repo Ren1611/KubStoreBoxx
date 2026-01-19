@@ -1,5 +1,3 @@
-/* Checkout.module.scss - Улучшенная версия */
-
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
 .checkoutPage {
   min-height: 100vh;
@@ -28,7 +26,6 @@
   z-index: 1;
 }
 
-/* Хлебные крошки */
 .breadcrumbs {
   margin-bottom: 30px;
   display: flex;
@@ -79,7 +76,6 @@
   }
 }
 
-/* Индикатор шагов - улучшенный */
 .stepIndicator {
   display: flex;
   justify-content: center;
@@ -184,7 +180,6 @@
   }
 }
 
-/* Основной layout */
 .checkoutLayout {
   display: grid;
   grid-template-columns: 1fr 400px;
@@ -201,7 +196,6 @@
   }
 }
 
-/* Форма оформления - карточка */
 .checkoutForm {
   background: white;
   border-radius: 24px;
@@ -269,7 +263,6 @@
   }
 }
 
-/* Улучшенные поля ввода */
 .formGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -369,7 +362,6 @@
   gap: 5px;
 }
 
-/* Стили для выбора доставки и оплаты */
 .deliveryMethods,
 .paymentMethods {
   display: grid;
@@ -486,7 +478,6 @@
   }
 }
 
-/* Стили для информации о самовывозе */
 .pickupAddress {
   font-size: 14px;
   color: #111827;
@@ -668,7 +659,6 @@
   }
 }
 
-/* Информация о доставке */
 .shippingInfo {
   display: flex;
   align-items: center;
@@ -738,7 +728,6 @@
   }
 }
 
-/* Форма оплаты картой */
 .cardForm {
   margin-top: 30px;
   padding: 30px;
@@ -768,7 +757,6 @@
   }
 }
 
-/* Раздел подтверждения заказа */
 .reviewSection {
   .reviewBlock {
     background: white;
@@ -855,7 +843,6 @@
   }
 }
 
-/* Термины и условия */
 .termsSection {
   margin-top: 30px;
   padding: 25px;
@@ -920,7 +907,6 @@
   }
 }
 
-/* Кнопки навигации */
 .navigationButtons {
   display: flex;
   justify-content: space-between;
@@ -994,7 +980,6 @@
   }
 }
 
-/* Боковая панель с заказом */
 .orderSummary {
   position: sticky;
   top: 30px;
@@ -1106,7 +1091,9 @@
       border-radius: 12px;
       padding: 2px;
       background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
       mask-composite: exclude;
       opacity: 0;
       transition: opacity 0.3s ease;
@@ -1198,7 +1185,6 @@
   }
 }
 
-/* Информация о гарантии */
 .securityInfo {
   margin-top: 30px;
   padding: 20px;
@@ -1246,7 +1232,6 @@
   }
 }
 
-/* Секция помощи */
 .helpSection {
   background: white;
   border-radius: 20px;
@@ -1317,7 +1302,6 @@
   }
 }
 
-/* Стили для пустой корзины */
 .emptyCheckout {
   min-height: 70vh;
   display: flex;
@@ -1381,7 +1365,6 @@
   }
 }
 
-/* Страница успешного заказа */
 .successPage {
   min-height: 80vh;
   display: flex;
@@ -1564,7 +1547,6 @@
   }
 }
 
-/* Адаптивность */
 @media (max-width: 576px) {
   .checkoutPage {
     padding: 20px 0 60px;
@@ -1597,7 +1579,6 @@
   }
 }
 
-/* Анимации для плавного перехода между шагами */
 .formSection {
   animation: fadeIn 0.5s ease;
 }
@@ -1613,7 +1594,6 @@
   }
 }
 
-/* Дополнительные декоративные элементы */
 .orderSummary .summaryCard {
   position: relative;
 
@@ -1631,7 +1611,6 @@
   }
 }
 
-/* Стили для состояний загрузки */
 @keyframes shimmer {
   0% {
     background-position: -1000px 0;
@@ -1663,7 +1642,6 @@
   }
 }
 
-/* Кастомный чекбокс для согласия */
 .checkboxLabel {
   input[type="checkbox"] {
     appearance: none;
@@ -1705,7 +1683,6 @@
   }
 }
 
-/* Градиентные границы для важных элементов */
 .important {
   position: relative;
   padding: 2px;
@@ -1719,7 +1696,6 @@
   }
 }
 
-/* Стили для иконок в состоянии hover */
 .optionIcon {
   transition: all 0.3s ease;
   position: relative;
@@ -1740,7 +1716,6 @@
   }
 }
 
-/* Стили для аккордеона на мобильных устройствах */
 @media (max-width: 768px) {
   .orderSummary {
     order: -1;
@@ -1751,7 +1726,6 @@
     flex-direction: column;
   }
 }
-/* Стили для кнопки подтверждения заказа в боковой панели */
 .checkoutBtn {
   display: flex;
   align-items: center;
@@ -1790,7 +1764,6 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
 
-  /* Эффект блеска при наведении */
   &::before {
     content: "";
     position: absolute;
@@ -1811,7 +1784,6 @@
     left: 100%;
   }
 
-  /* Иконка в кнопке */
   svg {
     font-size: 20px;
     transition: transform 0.3s ease;
@@ -1821,7 +1793,6 @@
     transform: translateX(3px);
   }
 
-  /* Анимация пульсации для шага 4 */
   &.active:not(:disabled) {
     animation: pulse-green 2s infinite;
   }
@@ -1838,7 +1809,6 @@
     }
   }
 
-  /* Эффект загрузки */
   &:disabled:not(.active) {
     position: relative;
     overflow: hidden;
@@ -1870,12 +1840,10 @@
   }
 }
 
-/* Дополнительные стили для контейнера кнопки */
 .summaryCard .checkoutBtn {
   margin-bottom: 25px;
 }
 
-/* Стили для сообщения о безопасности */
 .securityInfo {
   text-align: center;
   padding: 20px;
@@ -1909,7 +1877,6 @@
   }
 }
 
-/* Медиа-запросы для адаптивности */
 @media (max-width: 768px) {
   .checkoutBtn {
     padding: 18px;
@@ -1922,7 +1889,6 @@
   }
 }
 
-/* Стили для состояния когда кнопка активна (шаг 4) */
 .checkoutBtn.highlight {
   position: relative;
   z-index: 1;
@@ -1951,7 +1917,6 @@
   }
 }
 
-/* Стили для иконки внутри кнопки */
 .checkoutBtn .icon-wrapper {
   display: flex;
   align-items: center;
@@ -1963,7 +1928,6 @@
   padding: 4px;
 }
 
-/* Стили для информации о бесплатной доставке в боковой панели */
 .pickupInfoNote {
   display: flex;
   align-items: center;
@@ -1982,7 +1946,6 @@
   }
 }
 
-/* Информация о бесплатной доставке активна в боковой панели */
 .freeShippingActive {
   display: flex;
   align-items: center;
@@ -2002,7 +1965,6 @@
   }
 }
 
-/* Стили для иконок в боковой панели с заказом */
 .summaryDetails {
   .freeShippingInfo {
     display: flex;
@@ -2023,7 +1985,6 @@
   }
 }
 
-/* Стили для секции с итогами в боковой панели */
 .summaryCard {
   .summaryDetails {
     .summaryRow {
@@ -2034,7 +1995,6 @@
   }
 }
 
-/* Улучшенные стили для кнопки навигации submitBtn */
 .navigationButtons {
   .submitBtn {
     display: flex;
@@ -2071,7 +2031,6 @@
   }
 }
 
-/* Исправление конфликта стилей для индикатора бесплатной доставки */
 .pickupInfoNote,
 .freeShippingActive,
 .freeShippingInfo {
@@ -2089,7 +2048,6 @@
   }
 }
 
-/* Специфичные стили для каждого типа уведомления */
 .pickupInfoNote {
   background: linear-gradient(135deg, #dbeafe, #bfdbfe);
   color: #1e40af;

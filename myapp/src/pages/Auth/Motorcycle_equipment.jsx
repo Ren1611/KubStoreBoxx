@@ -32,9 +32,7 @@ import {
   FaTimes,
   FaHeart as SolidHeart,
 } from "react-icons/fa";
-// import { TbDiscount2 } from "react-icons/tb";
 
-// Компонент уведомления
 const Notification = React.memo(({ message, type, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -81,12 +79,10 @@ const Motorcycle_equipment = () => {
   const { t } = useTranslation();
   const initialized = useRef(false);
 
-  // Основные фильтры
   const [query, setQuery] = useState("");
   const [inStock, setInStock] = useState(false);
   const [discountOnly, setDiscountOnly] = useState(false);
 
-  // Фильтры для экипировки
   const [selectedCategories, setSelectedCategories] = useState(new Set());
   const [selectedTypes, setSelectedTypes] = useState(new Set());
   const [selectedBrands, setSelectedBrands] = useState(new Set());
@@ -95,7 +91,6 @@ const Motorcycle_equipment = () => {
   const [selectedProtection, setSelectedProtection] = useState(new Set());
   const [selectedSeasons, setSelectedSeasons] = useState(new Set());
 
-  // UI состояния
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [expandedFilters, setExpandedFilters] = useState({
     categories: false,
@@ -106,32 +101,26 @@ const Motorcycle_equipment = () => {
     seasons: false,
   });
 
-  // Ценовой диапазон
   const [priceRange, setPriceRange] = useState({ min: 0, max: 100000 });
   const [currentPriceRange, setCurrentPriceRange] = useState({
     min: 0,
     max: 100000,
   });
 
-  // Динамические данные из продуктов
   const [availableBrands, setAvailableBrands] = useState([]);
   const [availableCategories, setAvailableCategories] = useState([]);
   const [availableTypes, setAvailableTypes] = useState([]);
   const [availableMaterials, setAvailableMaterials] = useState([]);
   const [availableSizes, setAvailableSizes] = useState([]);
 
-  // Пагинация
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
 
-  // Сортировка
   const [sortBy, setSortBy] = useState("default");
 
-  // Уведомления
   const [notifications, setNotifications] = useState([]);
   const [favorites, setFavorites] = useState(new Set());
 
-  // Константы для фильтров (без переводов, используем оригинальные значения)
   const EquipmentCategories = useMemo(
     () => [
       "Куртки",
@@ -233,7 +222,6 @@ const Motorcycle_equipment = () => {
     [t],
   );
 
-  // Получение продуктов
   useEffect(() => {
     if (!initialized.current) {
       getProducts();
@@ -242,24 +230,20 @@ const Motorcycle_equipment = () => {
     }
   }, []);
 
-  // Загрузка избранного из localStorage
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem("favorit")) || [];
     const favoriteSet = new Set(storedFavorites.map((item) => item.id));
     setFavorites(favoriteSet);
   }, [favorit]);
 
-  // Извлечение данных из продуктов для фильтров
   useEffect(() => {
     if (!products) return;
 
-    // Находим товары категории "Мотоэкипировка"
     const equipmentProducts = products.filter(
       (p) => p.category === "Мотоэкипировка",
     );
 
     if (equipmentProducts.length > 0) {
-      // Находим цены только для экипировки
       const prices = equipmentProducts
         .map((p) => parseFloat(p.price) || 0)
         .filter((p) => p > 0);
@@ -271,7 +255,6 @@ const Motorcycle_equipment = () => {
         setCurrentPriceRange({ min: minPrice, max: maxPrice });
       }
 
-      // Извлекаем уникальные значения для фильтров
       const uniqueBrands = new Set();
       const uniqueCategories = new Set();
       const uniqueTypes = new Set();
@@ -280,34 +263,26 @@ const Motorcycle_equipment = () => {
       const uniqueSeasons = new Set();
 
       equipmentProducts.forEach((product) => {
-        // Бренды
         if (product.brand) uniqueBrands.add(product.brand);
 
-        // Категории экипировки (используем equipmentCategory)
         if (product.equipmentCategory) {
           uniqueCategories.add(product.equipmentCategory);
         } else if (
           product.category === "Мотоэкипировка" &&
           product.subcategory
         ) {
-          // Используем subcategory как категорию
           uniqueCategories.add(product.subcategory);
         }
 
-        // Типы экипировки
         if (product.type) uniqueTypes.add(product.type);
 
-        // Материалы
         if (product.material) uniqueMaterials.add(product.material);
 
-        // Размеры
         if (product.size) uniqueSizes.add(product.size);
 
-        // Сезоны
         if (product.season) uniqueSeasons.add(product.season);
       });
 
-      // Сортируем и устанавливаем значения
       setAvailableBrands(Array.from(uniqueBrands).sort());
       setAvailableCategories(Array.from(uniqueCategories).sort());
       setAvailableTypes(Array.from(uniqueTypes).sort());
@@ -316,7 +291,6 @@ const Motorcycle_equipment = () => {
     }
   }, [products]);
 
-  // Обработчики уведомлений
   const showNotification = useCallback((message, type = "success") => {
     const id = Date.now();
     setNotifications((prev) => [...prev, { id, message, type }]);
@@ -328,7 +302,6 @@ const Motorcycle_equipment = () => {
     );
   }, []);
 
-  // Проверка, находится ли товар в избранном
   const isInFavorites = useCallback(
     (productId) => {
       return favorites.has(productId);
@@ -336,7 +309,6 @@ const Motorcycle_equipment = () => {
     [favorites],
   );
 
-  // Функции для переключения фильтров
   const toggleCategory = useCallback((category) => {
     setSelectedCategories((prev) => {
       const copy = new Set(prev);
@@ -398,7 +370,6 @@ const Motorcycle_equipment = () => {
     }));
   }, []);
 
-  // Очистка всех фильтров
   const clearAllFilters = useCallback(() => {
     setQuery("");
     setInStock(false);
@@ -415,7 +386,6 @@ const Motorcycle_equipment = () => {
     showNotification(t("equipment_notifications_filters_cleared"), "info");
   }, [priceRange, showNotification, t]);
 
-  // Очистка конкретного фильтра
   const clearFilter = useCallback((filterName) => {
     switch (filterName) {
       case "categories":
@@ -442,17 +412,13 @@ const Motorcycle_equipment = () => {
     setCurrentPage(1);
   }, []);
 
-  // Фильтрация и сортировка продуктов
   const filtered = useMemo(() => {
     if (!products) return [];
 
     let filteredProducts = products.filter((product) => {
-      // Проверяем, относится ли продукт к экипировке ПО КАТЕГОРИИ
       const isEquipment = product.category === "Мотоэкипировка";
 
       if (!isEquipment) return false;
-
-      // Фильтр по поиску
       const searchQuery = query.trim().toLowerCase();
       if (searchQuery) {
         const name = (product.name || product.title || "").toLowerCase();
@@ -468,50 +434,41 @@ const Motorcycle_equipment = () => {
         }
       }
 
-      // Фильтр по наличию
       if (inStock && !product.inStock) return false;
 
-      // Фильтр по скидке
       if (discountOnly && (!product.discount || product.discount <= 0))
         return false;
 
-      // Фильтр по цене
       const price = parseFloat(product.price) || 0;
       if (price < currentPriceRange.min || price > currentPriceRange.max) {
         return false;
       }
 
-      // Фильтр по категории экипировки (используем equipmentCategory)
       if (selectedCategories.size > 0) {
         const equipmentCategory = product.equipmentCategory || "";
         if (!selectedCategories.has(equipmentCategory)) return false;
       }
 
-      // Фильтр по типу
       if (selectedTypes.size > 0) {
         const type = product.type || "";
         if (!selectedTypes.has(type)) return false;
       }
 
-      // Фильтр по брендам
       if (selectedBrands.size > 0) {
         const brand = product.brand || "";
         if (!selectedBrands.has(brand)) return false;
       }
 
-      // Фильтр по материалам
       if (selectedMaterials.size > 0) {
         const material = product.material || "";
         if (!selectedMaterials.has(material)) return false;
       }
 
-      // Фильтр по размерам
       if (selectedSizes.size > 0) {
         const size = product.size || "";
         if (!selectedSizes.has(size)) return false;
       }
 
-      // Фильтр по сезонам
       if (selectedSeasons.size > 0) {
         const season = product.season || "";
         if (!selectedSeasons.has(season)) return false;
@@ -520,7 +477,6 @@ const Motorcycle_equipment = () => {
       return true;
     });
 
-    // Сортировка
     filteredProducts.sort((a, b) => {
       switch (sortBy) {
         case "price-asc":
@@ -556,13 +512,11 @@ const Motorcycle_equipment = () => {
     sortBy,
   ]);
 
-  // Пагинация
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filtered.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
 
-  // Обработчики для действий
   const handleAddToCart = useCallback(
     (product) => {
       const productToAdd = {
@@ -584,7 +538,6 @@ const Motorcycle_equipment = () => {
   const handleAddToFavorites = useCallback(
     (product) => {
       if (isInFavorites(product.id)) {
-        // Если товар уже в избранном, удаляем его
         const favorites = JSON.parse(localStorage.getItem("favorit")) || [];
         const updatedFavorites = favorites.filter(
           (item) => item.id !== product.id,
@@ -616,7 +569,6 @@ const Motorcycle_equipment = () => {
     [addFavorit, isInFavorites, readFavorit, showNotification, t],
   );
 
-  // Генерация номеров страниц
   const generatePageNumbers = useCallback(() => {
     const pageNumbers = [];
     const maxVisiblePages = 5;
@@ -645,7 +597,6 @@ const Motorcycle_equipment = () => {
     return pageNumbers;
   }, [currentPage, totalPages]);
 
-  // Рендер активных фильтров
   const renderActiveFilters = useCallback(() => {
     const activeFilters = [];
 
@@ -787,7 +738,6 @@ const Motorcycle_equipment = () => {
     t,
   ]);
 
-  // Рендер фильтра
   const renderFilterSection = useCallback(
     (title, items, selectedItems, toggleFn, expandedKey, showLimit = 5) => {
       const isExpanded = expandedFilters[expandedKey];
@@ -844,7 +794,6 @@ const Motorcycle_equipment = () => {
     [expandedFilters, toggleFilterSection, clearFilter, t],
   );
 
-  // Сброс страницы при изменении фильтров
   useEffect(() => {
     setCurrentPage(1);
   }, [
@@ -863,7 +812,6 @@ const Motorcycle_equipment = () => {
 
   return (
     <div className={`${scss.categoryPage} ${scss.equipmentPage}`}>
-      {/* Уведомления */}
       <div className={scss.notificationsContainer}>
         {notifications.map((notification) => (
           <Notification
@@ -882,7 +830,6 @@ const Motorcycle_equipment = () => {
         </div>
 
         <div className={scss.equipmentInner}>
-          {/* Мобильная кнопка фильтров */}
           <button
             className={scss.mobileFilterBtn}
             onClick={() => setShowMobileFilters(!showMobileFilters)}
@@ -916,7 +863,6 @@ const Motorcycle_equipment = () => {
                 </div>
               </div>
 
-              {/* Поиск */}
               <div className={scss.filterSection}>
                 <div className={scss.searchBox}>
                   <FiSearch className={scss.searchIcon} />
@@ -939,7 +885,6 @@ const Motorcycle_equipment = () => {
                 </div>
               </div>
 
-              {/* Базовые фильтры */}
               <div className={scss.filterSection}>
                 <h4>{t("equipment_basic_filters")}</h4>
                 <div className={scss.checkboxGroup}>
@@ -961,14 +906,12 @@ const Motorcycle_equipment = () => {
                       onChange={() => setDiscountOnly(!discountOnly)}
                     />
                     <span className={scss.checkboxText}>
-                      {/* <TbDiscount2 className={scss.discountIcon} /> */}
                       {t("equipment_discount_only")}
                     </span>
                   </label>
                 </div>
               </div>
 
-              {/* Ценовой диапазон */}
               <div className={scss.filterSection}>
                 <h4>
                   {t("equipment_price_range")}: {t("common_currency")}
@@ -1031,7 +974,6 @@ const Motorcycle_equipment = () => {
                 </div>
               </div>
 
-              {/* Категории */}
               {renderFilterSection(
                 t("equipment_categories_title"),
                 availableCategories.length > 0
@@ -1042,7 +984,6 @@ const Motorcycle_equipment = () => {
                 "categories",
               )}
 
-              {/* Типы экипировки */}
               {renderFilterSection(
                 t("equipment_types_title"),
                 availableTypes.length > 0 ? availableTypes : EquipmentTypes,
@@ -1051,7 +992,6 @@ const Motorcycle_equipment = () => {
                 "types",
               )}
 
-              {/* Бренды */}
               {renderFilterSection(
                 t("equipment_brands"),
                 availableBrands.length > 0 ? availableBrands : EquipmentBrands,
@@ -1060,7 +1000,6 @@ const Motorcycle_equipment = () => {
                 "brands",
               )}
 
-              {/* Материалы */}
               {renderFilterSection(
                 t("equipment_materials_title"),
                 availableMaterials.length > 0
@@ -1071,7 +1010,6 @@ const Motorcycle_equipment = () => {
                 "materials",
               )}
 
-              {/* Размеры */}
               {renderFilterSection(
                 t("equipment_sizes_title"),
                 availableSizes.length > 0 ? availableSizes : EquipmentSizes,
@@ -1292,7 +1230,6 @@ const Motorcycle_equipment = () => {
                   })}
                 </div>
 
-                {/* Пагинация */}
                 {totalPages > 1 && (
                   <div className={scss.pagination}>
                     <button

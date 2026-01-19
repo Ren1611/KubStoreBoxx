@@ -15,7 +15,6 @@ import {
   FaHeart,
 } from "react-icons/fa";
 
-// Компонент уведомления
 const Notification = React.memo(({ message, type, onClose, t }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -49,7 +48,6 @@ const Notification = React.memo(({ message, type, onClose, t }) => {
 
 Notification.displayName = "Notification";
 
-// Типы резины
 const TireTypes = [
   "Спортивная",
   "Туристическая",
@@ -81,7 +79,6 @@ const TireBrands = [
   "Mitas",
 ];
 
-// Сезонность резины
 const TireSeasons = [
   "Летняя",
   "Всесезонная",
@@ -90,7 +87,6 @@ const TireSeasons = [
   "Демисезонная",
 ];
 
-// Состав резины
 const TireCompositions = [
   "Мягкая (софт)",
   "Средняя (медиум)",
@@ -102,7 +98,6 @@ const TireCompositions = [
   "Камерная",
 ];
 
-// Протекторы
 const TireTreadPatterns = [
   "Спортивный",
   "Дождевой",
@@ -115,7 +110,6 @@ const TireTreadPatterns = [
   "Направленный",
 ];
 
-// Скоростные индексы
 const SpeedIndexes = [
   "J (100 км/ч)",
   "K (110 км/ч)",
@@ -134,7 +128,6 @@ const SpeedIndexes = [
   "Y (300 км/ч)",
 ];
 
-// Индексы нагрузки
 const LoadIndexes = [
   "35 (121 кг)",
   "42 (150 кг)",
@@ -150,7 +143,6 @@ const LoadIndexes = [
   "85 (515 кг)",
 ];
 
-// Популярные размеры шин
 const TireSizes = [
   "120/70-17",
   "180/55-17",
@@ -186,12 +178,10 @@ const Motorcycle_tires = () => {
 
   const { t } = useTranslation();
 
-  // Основные фильтры
   const [query, setQuery] = useState("");
   const [inStock, setInStock] = useState(false);
   const [discountOnly, setDiscountOnly] = useState(false);
 
-  // Фильтры для резины
   const [selectedTypes, setSelectedTypes] = useState(new Set());
   const [selectedBrands, setSelectedBrands] = useState(new Set());
   const [selectedSeasons, setSelectedSeasons] = useState(new Set());
@@ -201,14 +191,12 @@ const Motorcycle_tires = () => {
   const [selectedSpeedIndexes, setSelectedSpeedIndexes] = useState(new Set());
   const [selectedLoadIndexes, setSelectedLoadIndexes] = useState(new Set());
 
-  // Ценовой диапазон
   const [priceRange, setPriceRange] = useState({ min: 0, max: 200000 });
   const [currentPriceRange, setCurrentPriceRange] = useState({
     min: 0,
     max: 200000,
   });
 
-  // Динамические данные из продуктов
   const [availableBrands, setAvailableBrands] = useState([]);
   const [availableTypes, setAvailableTypes] = useState([]);
   const [availableSeasons, setAvailableSeasons] = useState([]);
@@ -218,44 +206,35 @@ const Motorcycle_tires = () => {
   const [availableSpeedIndexes, setAvailableSpeedIndexes] = useState([]);
   const [availableLoadIndexes, setAvailableLoadIndexes] = useState([]);
 
-  // Фильтрованные продукты
   const [filtered, setFiltered] = useState([]);
 
-  // Пагинация
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
 
-  // Сортировка
   const [sortBy, setSortBy] = useState("default");
 
-  // Уведомления
   const [notifications, setNotifications] = useState([]);
   const [favorites, setFavorites] = useState(new Set());
 
-  // Получение продуктов
   useEffect(() => {
     getProducts();
     readFavorit();
   }, []);
 
-  // Загрузка избранного из localStorage
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem("favorit")) || [];
     const favoriteSet = new Set(storedFavorites.map((item) => item.id));
     setFavorites(favoriteSet);
   }, [favorit]);
 
-  // Извлечение данных из продуктов для фильтров
   useEffect(() => {
     if (!products) return;
 
-    // Находим товары категории "Моторезина"
     const tireProducts = products.filter((p) => p.category === "Моторезина");
 
     console.log("Всего резины:", tireProducts.length);
 
     if (tireProducts.length > 0) {
-      // Находим цены только для резины
       const prices = tireProducts
         .map((p) => parseFloat(p.price) || 0)
         .filter((p) => p > 0);
@@ -267,7 +246,6 @@ const Motorcycle_tires = () => {
         setCurrentPriceRange({ min: minPrice, max: maxPrice });
       }
 
-      // Извлекаем уникальные значения для фильтров
       const uniqueBrands = new Set();
       const uniqueTypes = new Set();
       const uniqueSeasons = new Set();
@@ -278,28 +256,20 @@ const Motorcycle_tires = () => {
       const uniqueLoadIndexes = new Set();
 
       tireProducts.forEach((product) => {
-        // Бренды
         if (product.brand) uniqueBrands.add(product.brand);
 
-        // Типы резины
         if (product.tireType) uniqueTypes.add(product.tireType);
 
-        // Сезонность
         if (product.season) uniqueSeasons.add(product.season);
 
-        // Состав
         if (product.composition) uniqueCompositions.add(product.composition);
 
-        // Протектор
         if (product.treadPattern) uniqueTreadPatterns.add(product.treadPattern);
 
-        // Размеры
         if (product.tireSize) uniqueSizes.add(product.tireSize);
 
-        // Скоростной индекс
         if (product.speedIndex) uniqueSpeedIndexes.add(product.speedIndex);
 
-        // Индекс нагрузки
         if (product.loadIndex) uniqueLoadIndexes.add(product.loadIndex);
       });
 
@@ -307,7 +277,6 @@ const Motorcycle_tires = () => {
       console.log("Найденные типы:", Array.from(uniqueTypes));
       console.log("Найденные размеры:", Array.from(uniqueSizes));
 
-      // Сортируем и устанавливаем значения
       setAvailableBrands(Array.from(uniqueBrands).sort());
       setAvailableTypes(Array.from(uniqueTypes).sort());
       setAvailableSeasons(Array.from(uniqueSeasons).sort());
@@ -319,7 +288,6 @@ const Motorcycle_tires = () => {
     }
   }, [products]);
 
-  // Обработчики уведомлений
   const showNotification = (message, type = "success") => {
     const id = Date.now();
     setNotifications((prev) => [...prev, { id, message, type }]);
@@ -331,7 +299,6 @@ const Motorcycle_tires = () => {
     );
   };
 
-  // Функции для переключения фильтров
   const toggleType = (type) => {
     const copy = new Set(selectedTypes);
     if (copy.has(type)) copy.delete(type);
@@ -388,7 +355,6 @@ const Motorcycle_tires = () => {
     setSelectedLoadIndexes(copy);
   };
 
-  // Очистка всех фильтров
   const clearAllFilters = () => {
     setQuery("");
     setInStock(false);
@@ -406,7 +372,6 @@ const Motorcycle_tires = () => {
     showNotification(t("motorcycle_tires_filters_cleared"), "info");
   };
 
-  // Очистка конкретного фильтра
   const clearFilter = (filterName) => {
     switch (filterName) {
       case "types":
@@ -439,22 +404,18 @@ const Motorcycle_tires = () => {
     setCurrentPage(1);
   };
 
-  // Проверка, находится ли товар в избранном
   const isInFavorites = (productId) => {
     return favorites.has(productId);
   };
 
-  // Применение фильтрации
   useEffect(() => {
     if (!products) return;
 
     let filteredProducts = products.filter((product) => {
-      // Проверяем, относится ли продукт к резине
       const isTire = product.category === "Моторезина";
 
       if (!isTire) return false;
 
-      // Фильтр по поиску
       const searchQuery = query.trim().toLowerCase();
       if (searchQuery) {
         const title = (product.name || product.title || "").toLowerCase();
@@ -472,20 +433,16 @@ const Motorcycle_tires = () => {
         }
       }
 
-      // Фильтр по наличию
       if (inStock && !product.inStock) return false;
 
-      // Фильтр по скидке
       if (discountOnly && (!product.discount || product.discount <= 0))
         return false;
 
-      // Фильтр по цене
       const price = parseFloat(product.price) || 0;
       if (price < currentPriceRange.min || price > currentPriceRange.max) {
         return false;
       }
 
-      // Фильтр по типам
       if (selectedTypes.size > 0) {
         const tireType = product.tireType || "";
         if (tireType === "" || !selectedTypes.has(tireType)) {
@@ -493,7 +450,6 @@ const Motorcycle_tires = () => {
         }
       }
 
-      // Фильтр по брендам
       if (selectedBrands.size > 0) {
         const brand = product.brand || "";
         if (brand === "" || !selectedBrands.has(brand)) {
@@ -501,7 +457,6 @@ const Motorcycle_tires = () => {
         }
       }
 
-      // Фильтр по сезонности
       if (selectedSeasons.size > 0) {
         const season = product.season || "";
         if (season === "" || !selectedSeasons.has(season)) {
@@ -509,7 +464,6 @@ const Motorcycle_tires = () => {
         }
       }
 
-      // Фильтр по составу
       if (selectedCompositions.size > 0) {
         const composition = product.composition || "";
         if (composition === "" || !selectedCompositions.has(composition)) {
@@ -517,7 +471,6 @@ const Motorcycle_tires = () => {
         }
       }
 
-      // Фильтр по протектору
       if (selectedTreadPatterns.size > 0) {
         const treadPattern = product.treadPattern || "";
         if (treadPattern === "" || !selectedTreadPatterns.has(treadPattern)) {
@@ -525,7 +478,6 @@ const Motorcycle_tires = () => {
         }
       }
 
-      // Фильтр по размерам
       if (selectedSizes.size > 0) {
         const tireSize = product.tireSize || "";
         if (tireSize === "" || !selectedSizes.has(tireSize)) {
@@ -533,7 +485,6 @@ const Motorcycle_tires = () => {
         }
       }
 
-      // Фильтр по скоростному индексу
       if (selectedSpeedIndexes.size > 0) {
         const speedIndex = product.speedIndex || "";
         if (speedIndex === "" || !selectedSpeedIndexes.has(speedIndex)) {
@@ -541,7 +492,6 @@ const Motorcycle_tires = () => {
         }
       }
 
-      // Фильтр по индексу нагрузки
       if (selectedLoadIndexes.size > 0) {
         const loadIndex = product.loadIndex || "";
         if (loadIndex === "" || !selectedLoadIndexes.has(loadIndex)) {
@@ -554,7 +504,6 @@ const Motorcycle_tires = () => {
 
     console.log("Фильтрованная резина:", filteredProducts.length);
 
-    // Сортировка
     filteredProducts.sort((a, b) => {
       switch (sortBy) {
         case "price-asc":
@@ -591,13 +540,12 @@ const Motorcycle_tires = () => {
     sortBy,
   ]);
 
-  // Пагинация
+  //
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filtered.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
 
-  // Обработчики для действий
   const handleAddToCart = (product) => {
     const productToAdd = {
       ...product,
@@ -615,7 +563,6 @@ const Motorcycle_tires = () => {
 
   const handleAddToFavorites = (product) => {
     if (isInFavorites(product.id)) {
-      // Если товар уже в избранном, удаляем его
       const favorites = JSON.parse(localStorage.getItem("favorit")) || [];
       const updatedFavorites = favorites.filter(
         (item) => item.id !== product.id,
@@ -645,7 +592,6 @@ const Motorcycle_tires = () => {
     }
   };
 
-  // Генерация номеров страниц
   const generatePageNumbers = () => {
     const pageNumbers = [];
     const maxVisiblePages = 5;
@@ -674,7 +620,6 @@ const Motorcycle_tires = () => {
     return pageNumbers;
   };
 
-  // Рендер активных фильтров
   const renderActiveFilters = () => {
     const activeFilters = [];
 
@@ -763,7 +708,6 @@ const Motorcycle_tires = () => {
 
   return (
     <div className={`${scss.categoryPage} ${scss.tiresPage}`}>
-      {/* Уведомления */}
       <div className={scss.notificationsContainer}>
         {notifications.map((notification) => (
           <Notification
@@ -792,7 +736,6 @@ const Motorcycle_tires = () => {
                 </button>
               </div>
 
-              {/* Поиск */}
               <div className={scss.filterSection}>
                 <label className={scss.filterLabel}>
                   <span>{t("motorcycle_tires_search_name")}</span>
@@ -805,7 +748,6 @@ const Motorcycle_tires = () => {
                 </label>
               </div>
 
-              {/* Базовые фильтры */}
               <div className={scss.filterSection}>
                 <h4>{t("motorcycle_tires_basic_filters")}</h4>
                 <div className={scss.checkboxGroup}>
@@ -828,7 +770,6 @@ const Motorcycle_tires = () => {
                 </div>
               </div>
 
-              {/* Ценовой диапазон */}
               <div className={scss.filterSection}>
                 <h4>
                   {t("motorcycle_tires_price_range")}:{" "}
@@ -878,7 +819,6 @@ const Motorcycle_tires = () => {
                 </div>
               </div>
 
-              {/* Типы резины */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("motorcycle_tires_tire_types")}</h4>
@@ -916,7 +856,6 @@ const Motorcycle_tires = () => {
                 </div>
               </div>
 
-              {/* Бренды */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("motorcycle_tires_brands")}</h4>
@@ -954,7 +893,6 @@ const Motorcycle_tires = () => {
                 </div>
               </div>
 
-              {/* Размеры */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("motorcycle_tires_sizes")}</h4>
@@ -992,7 +930,6 @@ const Motorcycle_tires = () => {
                 </div>
               </div>
 
-              {/* Сезонность */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("motorcycle_tires_seasonality")}</h4>
@@ -1030,7 +967,6 @@ const Motorcycle_tires = () => {
                 </div>
               </div>
 
-              {/* Состав резины */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("motorcycle_tires_tire_composition")}</h4>
@@ -1068,7 +1004,6 @@ const Motorcycle_tires = () => {
                 </div>
               </div>
 
-              {/* Протектор */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("motorcycle_tires_tread_pattern")}</h4>
@@ -1106,7 +1041,6 @@ const Motorcycle_tires = () => {
                 </div>
               </div>
 
-              {/* Скоростной индекс */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("motorcycle_tires_speed_index")}</h4>
@@ -1144,7 +1078,6 @@ const Motorcycle_tires = () => {
                 </div>
               </div>
 
-              {/* Индекс нагрузки */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("motorcycle_tires_load_index")}</h4>
@@ -1375,7 +1308,6 @@ const Motorcycle_tires = () => {
               )}
             </div>
 
-            {/* Пагинация */}
             {totalPages > 1 && (
               <div className={scss.pagination}>
                 <button

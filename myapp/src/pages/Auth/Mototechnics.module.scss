@@ -1,5 +1,4 @@
 // // Mototechnics.module.scss
-// @import "../../styles/variables";
 
 .catalog {
   min-height: 100vh;
@@ -7,7 +6,6 @@
   // margin-top: -300px;
 }
 
-// Hero Section
 .heroSection {
   position: relative;
   padding: 120px 0 80px;
@@ -104,7 +102,6 @@
   margin-top: 8px;
 }
 
-// Categories Section
 .categoriesSection {
   margin: 64px 0;
 }
@@ -209,7 +206,6 @@
   }
 }
 
-// Main Content
 .mainContent {
   margin-top: 64px;
 }
@@ -354,7 +350,6 @@
   }
 }
 
-// Filters Panel
 .filtersPanel {
   background: white;
   border-radius: 20px;
@@ -478,7 +473,6 @@
   }
 }
 
-// Brand Filter
 .brandFilter {
   display: flex;
   flex-direction: column;
@@ -564,7 +558,6 @@
   }
 }
 
-// Price Filter
 .priceFilter {
   display: flex;
   flex-direction: column;
@@ -637,7 +630,6 @@
   }
 }
 
-// Condition Filter
 .conditionFilter {
   .conditionCards {
     display: grid;
@@ -706,7 +698,6 @@
   }
 }
 
-// Volume Filter
 .volumeFilter {
   display: flex;
   flex-direction: column;
@@ -762,7 +753,6 @@
   font-weight: 600;
 }
 
-// Year Filter
 .yearFilter {
   display: flex;
   flex-direction: column;
@@ -828,7 +818,6 @@
   }
 }
 
-// Type and Transmission Filters
 .typeFilter,
 .transmissionFilter {
   .typeOptions,
@@ -863,7 +852,6 @@
   }
 }
 
-// Additional Filter
 .additionalFilter {
   .additionalOptions {
     display: flex;
@@ -923,7 +911,6 @@
   color: #64748b;
 }
 
-// Active Filters
 .activeFilters {
   padding: 20px 32px;
   background: #f8fafc;
@@ -985,7 +972,6 @@
   }
 }
 
-// Filter Actions
 .filterActions {
   display: flex;
   gap: 16px;
@@ -1033,7 +1019,6 @@
   }
 }
 
-// No Results
 .noResults {
   padding: 80px 0;
   text-align: center;
@@ -1083,7 +1068,6 @@
   }
 }
 
-// Products Grid
 .productsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -1447,7 +1431,6 @@
   }
 }
 
-// Pagination
 .pagination {
   display: flex;
   justify-content: center;
@@ -1512,7 +1495,6 @@
   font-weight: 600;
 }
 
-// Benefits Section
 .benefitsSection {
   margin: 80px 0;
 }
@@ -1571,7 +1553,6 @@
   line-height: 1.6;
 }
 
-// CTA Section
 .ctaSection {
   margin: 80px 0;
   background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
@@ -1632,7 +1613,6 @@
   }
 }
 
-// Loading and Error States
 .loadingOverlay {
   min-height: 100vh;
   display: flex;
@@ -1712,7 +1692,6 @@
   }
 }
 
-// Обновленная categoriesSection
 .categoriesSection {
   margin: 64px 0;
   padding: 40px;
@@ -1745,7 +1724,6 @@
   line-height: 1.6;
 }
 
-// Новая структура с двумя рядами
 .categoriesGridTwoRows {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1849,7 +1827,6 @@
   display: inline-block;
 }
 
-// Для разделения рядов (опционально)
 .rowDivider {
   height: 1px;
   background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
@@ -1857,7 +1834,6 @@
   opacity: 0.5;
 }
 
-// Скрытие старой сетки (если нужно)
 .categoriesGrid {
   display: none;
 }
@@ -1948,7 +1924,6 @@
     grid-template-columns: 1fr;
   }
 }
-// Price Filter
 .priceFilter {
   display: flex;
   flex-direction: column;
@@ -2037,7 +2012,6 @@
   }
 }
 
-// Year Filter
 .yearFilter {
   display: flex;
   flex-direction: column;

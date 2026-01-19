@@ -6,7 +6,6 @@ import { useAuth } from "../MainContext/AuthContext";
 const ProtectedRoute = memo(({ children, requireAdmin = false }) => {
   const { currentUser, userData, isAdmin, loading } = useAuth();
 
-  // Если идет загрузка, показываем загрузку
   if (loading) {
     return (
       <div
@@ -37,12 +36,10 @@ const ProtectedRoute = memo(({ children, requireAdmin = false }) => {
     );
   }
 
-  // Если нет пользователя
   if (!currentUser) {
     return <Navigate to="/login" replace />;
   }
 
-  // Если требуется админ, но пользователь не админ
   if (requireAdmin && !isAdmin()) {
     return <Navigate to="/" replace />;
   }

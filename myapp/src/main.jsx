@@ -5,7 +5,7 @@ import { I18nextProvider } from "react-i18next";
 import "./index.scss";
 import App from "./App.jsx";
 import MainContext from "./MainContext/MainContext.jsx";
-import i18n from "./i18n/i18n.js"; // Импортируем i18n конфигурацию
+import i18n from "./i18n/i18n.js";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

@@ -20,7 +20,6 @@ const Products = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  // Проверка прав администратора
   useEffect(() => {
     if (!currentUser) {
       navigate("/admin-login");
@@ -29,13 +28,10 @@ const Products = () => {
     }
   }, [currentUser, isAdmin, navigate]);
 
-  // Состояние пагинации
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  // Полная форма со всеми полями
   const [form, setForm] = useState({
-    // Основные поля
     name: "",
     price: "",
     brand: "",
@@ -43,13 +39,11 @@ const Products = () => {
     description: "",
     image: "",
 
-    // Статус и рейтинг
     inStock: true,
     rating: 5,
     countInStock: 1,
     discount: 0,
 
-    // Характеристики
     color: "",
     size: "",
     weight: "",
@@ -80,7 +74,6 @@ const Products = () => {
     getProducts();
   }, []);
 
-  // Пагинация
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
@@ -116,7 +109,6 @@ const Products = () => {
     setFormError("");
 
     try {
-      // Валидация
       if (!form.name.trim()) {
         setFormError(t("products_admin_form_error_name"));
         return;
@@ -130,7 +122,6 @@ const Products = () => {
         return;
       }
 
-      // Преобразуем типы данных
       const productData = {
         ...form,
         name: form.name.trim(),
@@ -145,7 +136,6 @@ const Products = () => {
         createdBy: currentUser?.email || "admin",
       };
 
-      // Удаляем пустые поля
       Object.keys(productData).forEach((key) => {
         if (productData[key] === "" || productData[key] === undefined) {
           delete productData[key];
@@ -154,7 +144,6 @@ const Products = () => {
 
       await createProduct(productData);
 
-      // Сброс формы
       setForm({
         name: "",
         price: "",
@@ -345,7 +334,6 @@ const Products = () => {
     linkElement.click();
   };
 
-  // Категории
   const categories = [
     "Мотошлемы",
     "Мотоэкипировка",
@@ -395,7 +383,6 @@ const Products = () => {
 
   return (
     <div className={scss.container}>
-      {/* Admin Header */}
       <div className={scss.adminHeader}>
         <div className={scss.adminInfo}>
           <h2>{t("products_admin_panel")}</h2>
@@ -433,13 +420,11 @@ const Products = () => {
         </div>
       </div>
 
-      {/* Add Product Form */}
       <div className={scss.formContainer}>
         <h2>➕ {t("products_admin_add_new_product")}</h2>
         {formError && <div className={scss.formError}>{formError}</div>}
 
         <form onSubmit={handleSubmit} className={scss.form}>
-          {/* Basic Information */}
           <div className={scss.formSection}>
             <h3>{t("products_admin_basic_info")}</h3>
             <div className={scss.formGrid}>
@@ -708,7 +693,6 @@ const Products = () => {
         </form>
       </div>
 
-      {/* Products List */}
       <div className={scss.productsContainer}>
         <div className={scss.productsHeader}>
           <h2>
@@ -1102,7 +1086,6 @@ const Products = () => {
               ))}
             </div>
 
-            {/* Пагинация */}
             {totalPages > 1 && (
               <div className={scss.pagination}>
                 <button
@@ -1163,8 +1146,6 @@ const Products = () => {
           </>
         )}
       </div>
-
-      {/* Admin Footer */}
       <div className={scss.adminFooter}>
         <p>
           {t("products_admin_admin_panel")} •{" "}

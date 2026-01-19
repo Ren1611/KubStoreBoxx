@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore, enableIndexedDbPersistence } from "firebase/firestore";
 
-// Ваша конфигурация KubStore
 const firebaseConfig = {
   apiKey: "AIzaSyCyc8o5blCt0FJ9kzuRNPs4siBPQcPYuGQ",
   authDomain: "kubstore-fa5d8.firebaseapp.com",
@@ -15,7 +14,6 @@ const firebaseConfig = {
 
 console.log("🚀 Инициализация Firebase для проекта:", firebaseConfig.projectId);
 
-// Глобальная проверка для Vite
 if (typeof window !== "undefined") {
   window.firebaseConfig = firebaseConfig;
 }
@@ -25,7 +23,6 @@ let auth;
 let db;
 
 try {
-  // Инициализация Firebase
   app = initializeApp(firebaseConfig);
   auth = getAuth(app);
   db = getFirestore(app);
@@ -34,7 +31,6 @@ try {
   console.log("📱 App Name:", app.name);
   console.log("🔑 API Key:", firebaseConfig.apiKey.substring(0, 10) + "...");
 
-  // Включаем офлайн-поддержку Firestore
   enableIndexedDbPersistence(db)
     .then(() => {
       console.log("🗄️ Firestore: офлайн-поддержка включена");
@@ -42,7 +38,7 @@ try {
     .catch((err) => {
       if (err.code === "failed-precondition") {
         console.warn(
-          "⚠️ Firestore: несколько вкладок открыты, офлайн-режим только в одной"
+          "⚠️ Firestore: несколько вкладок открыты, офлайн-режим только в одной",
         );
       } else if (err.code === "unimplemented") {
         console.warn("⚠️ Firestore: браузер не поддерживает офлайн-режим");
@@ -55,7 +51,6 @@ try {
   console.error("Код ошибки:", error.code);
   console.error("Сообщение:", error.message);
 
-  // Создаем мок-объекты для продолжения разработки
   console.log("⚠️ Используем мок-режим для разработки");
 
   app = {
@@ -68,7 +63,6 @@ try {
     createUserWithEmailAndPassword: async (email, password) => {
       console.log("📝 Mock Auth - Signup attempt:", email);
 
-      // Базовая валидация
       if (!email || !password) {
         throw new Error("auth/invalid-email");
       }
@@ -91,7 +85,6 @@ try {
     signInWithEmailAndPassword: async (email, password) => {
       console.log("🔐 Mock Auth - Login attempt:", email);
 
-      // Принимаем тестовые учетные данные
       if (email === "admin@motoshop.com" && password === "Admin123!") {
         const mockUser = {
           uid: "mock_admin_" + Date.now(),
@@ -105,7 +98,6 @@ try {
         return { user: mockUser };
       }
 
-      // Для других пользователей
       const mockUser = {
         uid: "mock_user_" + Date.now(),
         email: email,
@@ -152,7 +144,7 @@ try {
       return {
         doc: (id) => ({
           get: async () => ({
-            exists: () => false, // Новые пользователи не существуют
+            exists: () => false,
             data: () => null,
           }),
           set: async (data) => {
@@ -165,6 +157,5 @@ try {
   };
 }
 
-// Экспорт
 export { app, auth, db };
 export default app;

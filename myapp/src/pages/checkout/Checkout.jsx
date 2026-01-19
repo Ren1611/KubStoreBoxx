@@ -43,7 +43,7 @@ const Checkout = () => {
     email: "",
     phone: "",
 
-    deliveryMethod: "courier", // courier, pickup
+    deliveryMethod: "courier",
     city: "",
     address: "",
     apartment: "",
@@ -51,7 +51,7 @@ const Checkout = () => {
     floor: "",
     comment: "",
 
-    paymentMethod: "card", // card, cash
+    paymentMethod: "card",
     cardNumber: "",
     cardExpiry: "",
     cardCvc: "",
@@ -87,16 +87,13 @@ const Checkout = () => {
     }, 0);
   };
 
-  // Исправленная функция расчета доставки
   const calculateShipping = () => {
     const subtotal = calculateSubtotal();
 
-    // Если выбран самовывоз - доставка всегда 0
     if (orderData.deliveryMethod === "pickup") {
       return 0;
     }
 
-    // Если выбран курьер - бесплатная доставка от 3000 сом
     return subtotal >= 3000 ? 0 : 300;
   };
 
@@ -338,7 +335,6 @@ const Checkout = () => {
   return (
     <div className={styles.checkoutPage}>
       <div className="container">
-        {/* Хлебные крошки */}
         <div className={styles.breadcrumbs}>
           <Link to="/">{t("checkout_breadcrumbs_home")}</Link>
           <span className={styles.divider}>/</span>
@@ -351,11 +347,9 @@ const Checkout = () => {
 
         <h1 className={styles.pageTitle}>{t("checkout_title")}</h1>
 
-        {/* Индикатор шагов */}
         {renderStepIndicator()}
 
         <div className={styles.checkoutLayout}>
-          {/* Основная форма */}
           <div className={styles.checkoutForm}>
             {step === 1 && (
               <div className={styles.formSection}>
@@ -603,7 +597,6 @@ const Checkout = () => {
                       />
                     </div>
 
-                    {/* Информация о бесплатной доставке */}
                     {subtotal < 3000 && (
                       <div className={styles.shippingInfo}>
                         <FaTruck />
@@ -997,7 +990,6 @@ const Checkout = () => {
                 </div>
               </div>
             )}
-            {/* Кнопки навигации */}
             <div className={styles.navigationButtons}>
               {step > 1 && (
                 <button onClick={handlePrevStep} className={styles.prevBtn}>
@@ -1023,7 +1015,6 @@ const Checkout = () => {
             </div>
           </div>
 
-          {/* Боковая панель с заказом */}
           <div className={styles.orderSummary}>
             <div className={styles.summaryCard}>
               <h3>{t("checkout_orderSummary_yourOrder")}</h3>
@@ -1098,7 +1089,6 @@ const Checkout = () => {
                   </strong>
                 </div>
 
-                {/* Информация о бесплатной доставке */}
                 {orderData.deliveryMethod === "courier" && subtotal < 3000 && (
                   <div className={styles.freeShippingInfo}>
                     <FaTruck />

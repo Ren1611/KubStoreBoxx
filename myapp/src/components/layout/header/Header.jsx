@@ -12,7 +12,6 @@ const Header = () => {
 
   const { t, i18n } = useTranslation();
 
-  // Переведенные категории каталога с плоскими ключами
   const catalogCategories = [
     {
       id: 1,
@@ -42,7 +41,6 @@ const Header = () => {
     },
   ];
 
-  // Переведенные категории мототехники с плоскими ключами
   const motorTechCategories = [
     {
       id: 1,
@@ -114,7 +112,6 @@ const Header = () => {
 
   return (
     <div className={scss.wrapper}>
-      {/* Верхняя контактная строка */}
       <div className={scss.topBar}>
         <div className={scss.topBarContent}>
           <div className={scss.contacts}>
@@ -134,10 +131,8 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Основной хедер */}
       <header className={scss.mainHeader}>
         <div className={scss.headerContent}>
-          {/* Логотип */}
           <div className={scss.logoSection}>
             <NavLink to="/" className={scss.logo}>
               <span className={scss.logoText}>
@@ -149,10 +144,8 @@ const Header = () => {
             </NavLink>
           </div>
 
-          {/* Основная навигация */}
           <nav className={scss.mainNav}>
             <div className={scss.navItems}>
-              {/* Каталог */}
               <div
                 className={scss.navItemWrapper}
                 onMouseEnter={() => setIsCatalogHovered(true)}
@@ -171,7 +164,6 @@ const Header = () => {
                   <span className={scss.arrow}>▼</span>
                 </NavLink>
 
-                {/* Выпадающее меню Каталога */}
                 {isCatalogHovered && (
                   <div className={scss.dropdownMenu}>
                     <div className={scss.dropdownContent}>
@@ -190,7 +182,6 @@ const Header = () => {
                 )}
               </div>
 
-              {/* Мототехника */}
               <div
                 className={scss.navItemWrapper}
                 onMouseEnter={() => setIsMotorTechHovered(true)}
@@ -235,7 +226,6 @@ const Header = () => {
             </div>
           </nav>
 
-          {/* Иконки пользователя */}
           <div className={scss.userSection}>
             <NavLink to="/favorites" className={scss.userIcon}>
               <div className={scss.iconContainer}>

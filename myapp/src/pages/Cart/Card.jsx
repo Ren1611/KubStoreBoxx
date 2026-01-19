@@ -27,23 +27,19 @@ const Card = () => {
   const [cartItems, setCartItems] = useState([]);
   const [buyNowItem, setBuyNowItem] = useState(null);
 
-  // Локальная функция для расчета суммы товара
   const calculateItemTotalLocal = (item) => {
     const price = Number(item.price) || 0;
     const discount = Number(item.discount) || 0;
     const quantity = Number(item.quantity) || 1;
 
-    // Если есть скидка
     if (discount > 0) {
       const discountedPrice = price * (1 - discount / 100);
       return discountedPrice * quantity;
     }
 
-    // Без скидки
     return price * quantity;
   };
 
-  // Функция для расчета цены за единицу с учетом скидки
   const calculateUnitPrice = (item) => {
     const price = Number(item.price) || 0;
     const discount = Number(item.discount) || 0;
@@ -59,7 +55,6 @@ const Card = () => {
     const items = readOrder();
     setCartItems(items);
 
-    // Проверяем, есть ли товар для быстрой покупки
     const storedBuyNow = localStorage.getItem("buyNowProduct");
     if (storedBuyNow) {
       try {
@@ -101,7 +96,6 @@ const Card = () => {
       return item;
     });
 
-    // Обновляем в localStorage
     const ordersData = updatedItems.map((item) => ({
       ...item,
       quantity: item.quantity || 1,
@@ -174,7 +168,6 @@ const Card = () => {
   return (
     <div className={styles.cardPage}>
       <div className="container">
-        {/* Хлебные крошки */}
         <div className={styles.breadcrumbs}>
           <Link to="/">{t("cart_breadcrumbs_home")}</Link>
           <span className={styles.divider}>/</span>
@@ -184,7 +177,6 @@ const Card = () => {
         <h1 className={styles.pageTitle}>{t("cart_title")}</h1>
 
         <div className={styles.cartLayout}>
-          {/* Список товаров */}
           <div className={styles.cartItems}>
             <div className={styles.cartHeader}>
               <h2>{t("cart_items_title", { count: cartItems.length })}</h2>
@@ -317,7 +309,6 @@ const Card = () => {
             </div>
           </div>
 
-          {/* Итоговая информация */}
           <div className={styles.cartSummary}>
             <div className={styles.summaryCard}>
               <h3 className={styles.summaryTitle}>{t("cart_summary_title")}</h3>

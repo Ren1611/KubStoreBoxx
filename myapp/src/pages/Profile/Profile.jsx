@@ -4,7 +4,6 @@ import { useAuth } from "../../MainContext/AuthContext";
 import styles from "./Profile.module.scss";
 import { useTranslation } from "react-i18next";
 import {
-  // Основные иконки
   FaUser,
   FaEnvelope,
   FaPhone,
@@ -28,7 +27,6 @@ import {
   FaKey,
   FaUserShield,
   FaReceipt,
-  // Админские иконки
   FaUsers,
   FaChartBar,
   FaCog,
@@ -52,7 +50,6 @@ const Profile = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  // Состояния
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("profile");
@@ -60,7 +57,6 @@ const Profile = () => {
   const [favorites, setFavorites] = useState([]);
   const [notifications, setNotifications] = useState([]);
 
-  // Админские состояния
   const [adminStats, setAdminStats] = useState({
     totalUsers: 157,
     totalOrders: 423,
@@ -73,7 +69,6 @@ const Profile = () => {
   const [adminSearch, setAdminSearch] = useState("");
   const [adminFilter, setAdminFilter] = useState("all");
 
-  // Форма редактирования
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -83,7 +78,6 @@ const Profile = () => {
     postalCode: "",
   });
 
-  // Инициализация данных при авторизации
   useEffect(() => {
     if (currentUser && userData) {
       setFormData({
@@ -95,12 +89,10 @@ const Profile = () => {
         postalCode: userData.postalCode || "",
       });
 
-      // Загрузка данных пользователя
       loadOrders();
       loadFavorites();
       loadNotifications();
 
-      // Если пользователь админ, загружаем админские данные
       if (isAdmin()) {
         loadAdminData();
       }
@@ -119,10 +111,10 @@ const Profile = () => {
           index % 4 === 0
             ? "delivered"
             : index % 3 === 0
-            ? "shipped"
-            : index % 2 === 0
-            ? "processing"
-            : "pending",
+              ? "shipped"
+              : index % 2 === 0
+                ? "processing"
+                : "pending",
         total: order.price ? Number(order.price) * (order.quantity || 1) : 0,
         items: [order],
       }));
@@ -178,7 +170,6 @@ const Profile = () => {
     setNotifications(demoNotifications);
   };
 
-  // Админские функции
   const loadAdminData = async () => {
     try {
       setRecentUsers([
@@ -396,12 +387,10 @@ const Profile = () => {
     );
   };
 
-  // Если пользователь не авторизован
   if (!currentUser) {
     return (
       <div className={styles.notLoggedInContainer}>
         <div className="container">
-          {/* Хлебные крошки */}
           <div className={styles.breadcrumbs}>
             <Link to="/">{t("profile.breadcrumbs.home")}</Link>
             <span className={styles.divider}>/</span>
@@ -489,7 +478,6 @@ const Profile = () => {
   return (
     <div className={styles.profilePage}>
       <div className="container">
-        {/* Хлебные крошки */}
         <div className={styles.breadcrumbs}>
           <Link to="/">{t("profile.breadcrumbs.home")}</Link>
           <span className={styles.divider}>/</span>
@@ -501,7 +489,6 @@ const Profile = () => {
         </div>
 
         <div className={styles.profileLayout}>
-          {/* Боковая панель */}
           <aside className={styles.sidebar}>
             <div className={styles.userCard}>
               <div className={styles.avatar}>
@@ -536,7 +523,6 @@ const Profile = () => {
             </div>
 
             <nav className={styles.navMenu}>
-              {/* Общие вкладки для всех пользователей */}
               <button
                 className={`${styles.navItem} ${
                   activeTab === "profile" ? styles.active : ""
@@ -585,7 +571,6 @@ const Profile = () => {
                 <FaLock /> {t("profile.tabs.security")}
               </button>
 
-              {/* Админские вкладки */}
               {userIsAdmin && (
                 <>
                   <div className={styles.navDivider}></div>
@@ -634,16 +619,13 @@ const Profile = () => {
             </nav>
           </aside>
 
-          {/* Основной контент */}
           <main className={styles.mainContent}>
-            {/* Заголовок с действиями */}
             <div className={styles.contentHeader}>
               <h1 className={styles.pageTitle}>
                 {activeTab === "profile" && t("profile.tabs.personalData")}
                 {activeTab === "orders" && t("profile.tabs.myOrders")}
                 {activeTab === "favorites" && t("profile.tabs.favorites")}
                 {activeTab === "security" && t("profile.tabs.security")}
-                {/* Админские заголовки */}
                 {activeTab === "admin-dashboard" &&
                   t("profile.admin.tabs.dashboard")}
                 {activeTab === "admin-orders" &&
@@ -746,9 +728,7 @@ const Profile = () => {
               )}
             </div>
 
-            {/* Контент вкладок */}
             <div className={styles.contentArea}>
-              {/* Личные данные (одинаково для всех) */}
               {activeTab === "profile" && (
                 <div className={styles.profileForm}>
                   <form onSubmit={handleSaveProfile}>
@@ -866,7 +846,7 @@ const Profile = () => {
                             onChange={handleInputChange}
                             className={styles.formInput}
                             placeholder={t(
-                              "profile.form.postalCodePlaceholder"
+                              "profile.form.postalCodePlaceholder",
                             )}
                           />
                         ) : (
@@ -894,7 +874,6 @@ const Profile = () => {
                     )}
                   </form>
 
-                  {/* Информация об аккаунте */}
                   <div className={styles.accountInfo}>
                     <h3>{t("profile.accountInfo.title")}</h3>
                     <div className={styles.infoGrid}>
@@ -938,7 +917,6 @@ const Profile = () => {
                   </div>
                 </div>
               )}
-              {/* Мои заказы (только для обычных пользователей) */}
               {activeTab === "orders" && !userIsAdmin && (
                 <div className={styles.ordersSection}>
                   {orders.length === 0 ? (
@@ -1037,7 +1015,6 @@ const Profile = () => {
                   )}
                 </div>
               )}
-              {/* Избранное (только для обычных пользователей) */}
               {activeTab === "favorites" && !userIsAdmin && (
                 <div className={styles.favoritesSection}>
                   {favorites.length === 0 ? (
@@ -1104,7 +1081,7 @@ const Profile = () => {
                           onClick={() => {
                             if (
                               window.confirm(
-                                t("profile.favorites.clearConfirm")
+                                t("profile.favorites.clearConfirm"),
                               )
                             ) {
                               setFavorites([]);
@@ -1119,7 +1096,6 @@ const Profile = () => {
                   )}
                 </div>
               )}
-              {/* Уведомления (одинаково для всех) */}
               {activeTab === "notifications" && (
                 <div className={styles.notificationsSection}>
                   <div className={styles.notificationsHeader}>
@@ -1188,7 +1164,6 @@ const Profile = () => {
                   </div>
                 </div>
               )}
-              {/* Безопасность (одинаково для всех) */}
               {activeTab === "security" && (
                 <div className={styles.securitySection}>
                   <div className={styles.securityCard}>
@@ -1202,7 +1177,7 @@ const Profile = () => {
                           type="password"
                           className={styles.formInput}
                           placeholder={t(
-                            "profile.security.currentPasswordPlaceholder"
+                            "profile.security.currentPasswordPlaceholder",
                           )}
                         />
                       </div>
@@ -1212,7 +1187,7 @@ const Profile = () => {
                           type="password"
                           className={styles.formInput}
                           placeholder={t(
-                            "profile.security.newPasswordPlaceholder"
+                            "profile.security.newPasswordPlaceholder",
                           )}
                           minLength="6"
                         />
@@ -1223,7 +1198,7 @@ const Profile = () => {
                           type="password"
                           className={styles.formInput}
                           placeholder={t(
-                            "profile.security.repeatPasswordPlaceholder"
+                            "profile.security.repeatPasswordPlaceholder",
                           )}
                           minLength="6"
                         />
@@ -1305,10 +1280,8 @@ const Profile = () => {
                 </div>
               )}
 
-              {/* Админские разделы */}
               {userIsAdmin && (
                 <>
-                  {/* Админ Дашборд */}
                   {activeTab === "admin-dashboard" && (
                     <div className={styles.adminDashboard}>
                       <div className={styles.statsGrid}>
@@ -1387,7 +1360,7 @@ const Profile = () => {
                               <tbody>
                                 {recentOrders.map((order) => {
                                   const statusInfo = getOrderStatusInfo(
-                                    order.status
+                                    order.status,
                                   );
                                   return (
                                     <tr key={order.id}>
@@ -1481,7 +1454,6 @@ const Profile = () => {
                     </div>
                   )}
 
-                  {/* Управление заказами */}
                   {activeTab === "admin-orders" && (
                     <div className={styles.adminOrders}>
                       <div className={styles.ordersFilters}>
@@ -1534,7 +1506,6 @@ const Profile = () => {
                         />
                       </div>
 
-                      {/* Таблица заказов */}
                       <div className={styles.tableContainer}>
                         <table className={styles.adminTable}>
                           <thead>
@@ -1554,7 +1525,7 @@ const Profile = () => {
                           <tbody>
                             {recentOrders.map((order) => {
                               const statusInfo = getOrderStatusInfo(
-                                order.status
+                                order.status,
                               );
                               return (
                                 <tr key={order.id}>
@@ -1630,7 +1601,6 @@ const Profile = () => {
                     </div>
                   )}
 
-                  {/* Управление товарами */}
                   {activeTab === "admin-products" && (
                     <div className={styles.adminProducts}>
                       <div className={styles.productsHeader}>
@@ -1678,7 +1648,6 @@ const Profile = () => {
                     </div>
                   )}
 
-                  {/* Управление пользователями */}
                   {activeTab === "admin-users" && (
                     <div className={styles.adminUsers}>
                       <div className={styles.usersFilters}>
@@ -1793,7 +1762,6 @@ const Profile = () => {
                     </div>
                   )}
 
-                  {/* Аналитика */}
                   {activeTab === "admin-analytics" && (
                     <div className={styles.adminAnalytics}>
                       <h3>{t("profile.admin.salesAnalytics")}</h3>
@@ -1814,7 +1782,6 @@ const Profile = () => {
                     </div>
                   )}
 
-                  {/* Настройки магазина */}
                   {activeTab === "admin-settings" && (
                     <div className={styles.adminSettings}>
                       <h3>{t("profile.admin.storeSettings")}</h3>

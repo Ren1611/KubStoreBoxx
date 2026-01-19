@@ -57,7 +57,6 @@
   }
 }
 
-// Сайдбар с фильтрами
 .sidebar {
   background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
   border-radius: 16px;
@@ -319,7 +318,6 @@
   }
 }
 
-// Основной контент
 .main {
   display: flex;
   flex-direction: column;
@@ -790,7 +788,6 @@
   }
 }
 
-// Пагинация
 .pagination {
   display: flex;
   justify-content: center;
@@ -880,7 +877,6 @@
   font-weight: bold;
 }
 
-// Адаптивность
 @media (max-width: 768px) {
   .tiresInner {
     grid-template-columns: 1fr;
@@ -905,9 +901,7 @@
     flex-direction: column;
   }
 }
-// Добавьте в конец файла Motorcycle_tires.module.scss
 
-// Уведомления
 .notificationsContainer {
   position: fixed;
   top: 20px;
@@ -930,7 +924,9 @@
   animation: slideIn 0.3s ease-out;
   border-left: 4px solid;
   gap: 12px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 @keyframes slideIn {
@@ -996,7 +992,6 @@
   }
 }
 
-// Обновленные стили для кнопок
 .favoriteBtn {
   position: absolute;
   top: 10px;
@@ -1048,7 +1043,6 @@
   justify-content: center;
 }
 
-// Адаптивность для уведомлений
 @media (max-width: 768px) {
   .notificationsContainer {
     left: 20px;

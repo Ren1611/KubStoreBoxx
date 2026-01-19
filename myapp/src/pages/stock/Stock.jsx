@@ -6,7 +6,6 @@ import styles from "./Stock.module.scss";
 import Slider from "./Slider";
 import { useTranslation } from "react-i18next";
 
-// Компонент уведомления
 const Notification = React.memo(({ message, type, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -53,10 +52,8 @@ const NewsPage = () => {
     readFavorit,
   } = useProduct();
 
-  // Уведомления
   const [notifications, setNotifications] = useState([]);
 
-  // Данные новостей и акций как на картинке
   const newsData = [
     {
       id: 1,
@@ -117,7 +114,6 @@ const NewsPage = () => {
     setFilteredProducts(discountedProducts);
   }, [products]);
 
-  // Обработчики уведомлений
   const showNotification = (message, type = "success") => {
     const id = Date.now();
     setNotifications((prev) => [...prev, { id, message, type }]);
@@ -357,7 +353,6 @@ const NewsPage = () => {
 
   return (
     <div className={styles.newsPage}>
-      {/* Уведомления */}
       <div className={styles.notificationsContainer}>
         {notifications.map((notification) => (
           <Notification
@@ -369,9 +364,6 @@ const NewsPage = () => {
         ))}
       </div>
 
-      {/* <Slider /> */}
-
-      {/* Заголовок страницы */}
       <div className={styles.pageHeader}>
         <div className="container">
           <h1 className={styles.pageTitle}>{t("news_title")}</h1>
@@ -381,12 +373,10 @@ const NewsPage = () => {
 
       <div className="container">
         <div className={styles.contentWrapper}>
-          {/* Левая колонка - Новости */}
           <div className={styles.newsColumn}>
             <div className={styles.newsHeader}>
               <h2 className={styles.sectionTitle}>{t("latest_news")}</h2>
 
-              {/* Фильтры категорий */}
               <div className={styles.categoryFilters}>
                 {categories.map((category) => (
                   <button
@@ -408,7 +398,6 @@ const NewsPage = () => {
               </div>
             </div>
 
-            {/* Сетка новостей */}
             <div className={styles.newsGrid}>
               {currentNews.map((news) => (
                 <div key={news.id} className={styles.newsItem}>
@@ -417,7 +406,6 @@ const NewsPage = () => {
               ))}
             </div>
 
-            {/* Пагинация */}
             {totalPages > 1 && (
               <div className={styles.pagination}>
                 <button
@@ -455,7 +443,6 @@ const NewsPage = () => {
             )}
           </div>
 
-          {/* Правая колонка - Акционные товары */}
           <div className={styles.productsColumn}>
             <div className={styles.productsSidebar}>
               <h3 className={styles.sidebarTitle}>
@@ -534,7 +521,6 @@ const NewsPage = () => {
                 </div>
               )}
 
-              {/* График работы */}
               <div className={styles.scheduleWidget}>
                 <h4 className={styles.widgetTitle}>{t("work_schedule")}</h4>
                 <div className={styles.scheduleItem}>

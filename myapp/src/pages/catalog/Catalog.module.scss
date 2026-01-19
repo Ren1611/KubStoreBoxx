@@ -991,9 +991,9 @@
   margin: 0 0 10px 0;
   font-size: 18px;
   line-height: 1.3;
-  min-height: 46px; // Фиксированная высота для названия
+  min-height: 46px;
   display: -webkit-box;
-  -webkit-line-clamp: 2; // Ограничить 2 строками
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1018,9 +1018,7 @@
   font-size: 18px;
   user-select: none;
 }
-// Добавьте в конец файла Catalog.module.scss
 
-// Уведомления
 .notificationsContainer {
   position: fixed;
   top: 20px;
@@ -1111,7 +1109,6 @@
   }
 }
 
-// Адаптивность для уведомлений
 @media (max-width: 768px) {
   .notificationsContainer {
     left: 20px;

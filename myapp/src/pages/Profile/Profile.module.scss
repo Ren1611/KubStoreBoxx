@@ -11,7 +11,6 @@
   padding: 0 20px;
 }
 
-// Хлебные крошки
 .breadcrumbs {
   display: flex;
   align-items: center;
@@ -39,7 +38,6 @@
   }
 }
 
-// Загрузка
 .loadingContainer {
   display: flex;
   flex-direction: column;
@@ -72,7 +70,6 @@
   }
 }
 
-// Страница для неавторизованных пользователей
 .notLoggedInContainer {
   min-height: 70vh;
   display: flex;
@@ -141,7 +138,9 @@
   border-radius: 8px;
   text-decoration: none;
   font-weight: 500;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   border: none;
   cursor: pointer;
   font-size: 16px;
@@ -246,7 +245,6 @@
   }
 }
 
-// Основной макет профиля
 .profileLayout {
   display: grid;
   grid-template-columns: 280px 1fr;
@@ -257,7 +255,6 @@
   }
 }
 
-// Боковая панель
 .sidebar {
   background: white;
   border-radius: 16px;
@@ -430,7 +427,6 @@ a {
   }
 }
 
-// Основной контент
 .mainContent {
   background: white;
   border-radius: 16px;
@@ -528,7 +524,6 @@ a {
   }
 }
 
-// Форма профиля
 .profileForm {
   .formGrid {
     display: grid;
@@ -640,7 +635,6 @@ a {
   color: #374151;
 }
 
-// Секция заказов
 .ordersSection,
 .favoritesSection,
 .notificationsSection,
@@ -684,7 +678,6 @@ a {
   }
 }
 
-// Заказы
 .ordersList {
   display: flex;
   flex-direction: column;
@@ -871,7 +864,6 @@ a {
   }
 }
 
-// Избранное
 .favoritesGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -883,7 +875,9 @@ a {
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 
   &:hover {
     transform: translateY(-4px);
@@ -1019,7 +1013,6 @@ a {
   }
 }
 
-// Уведомления
 .notificationsHeader {
   display: flex;
   justify-content: space-between;
@@ -1132,7 +1125,6 @@ a {
   }
 }
 
-// Безопасность
 .securitySection {
   display: flex;
   flex-direction: column;
@@ -1341,7 +1333,6 @@ a {
   }
 }
 
-// Админские стили
 .adminDashboard {
   .statsGrid {
     display: grid;
@@ -1658,7 +1649,6 @@ a {
   }
 }
 
-// Фильтры
 .ordersFilters,
 .usersFilters,
 .productsHeader {
@@ -1769,7 +1759,6 @@ a {
   }
 }
 
-// Пагинация
 .pagination {
   display: flex;
   align-items: center;
@@ -1807,7 +1796,6 @@ a {
   font-size: 14px;
 }
 
-// Аналитика
 .adminAnalytics {
   .analyticsGrid {
     display: grid;
@@ -1842,7 +1830,6 @@ a {
   }
 }
 
-// Настройки
 .adminSettings {
   .settingsGrid {
     display: grid;
@@ -1893,7 +1880,6 @@ a {
   }
 }
 
-// Адаптивность
 @media (max-width: 768px) {
   .profileLayout {
     grid-template-columns: 1fr;

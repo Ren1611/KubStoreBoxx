@@ -2,12 +2,11 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, sans-serif;
-  
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    sans-serif;
 }
 
-// Админ шапка
 .adminHeader {
   display: flex;
   justify-content: space-between;
@@ -138,7 +137,6 @@
   }
 }
 
-// Форма добавления
 .formContainer {
   background: white;
   padding: 30px;
@@ -304,7 +302,6 @@
   }
 }
 
-// Список товаров
 .productsContainer {
   background: white;
   padding: 30px;
@@ -584,7 +581,6 @@
   }
 }
 
-// Форма редактирования
 .editForm {
   padding: 20px;
 
@@ -627,7 +623,6 @@
   }
 }
 
-// Загрузка и ошибки
 .loading,
 .accessDenied,
 .errorContainer {
@@ -707,7 +702,6 @@
   }
 }
 
-// Админ футер
 .adminFooter {
   margin-top: 40px;
   padding: 20px;
@@ -721,7 +715,6 @@
   }
 }
 
-// Адаптивность
 @media (max-width: 768px) {
   .container {
     padding: 15px;
@@ -764,9 +757,7 @@
     flex-direction: column;
   }
 }
-// Добавьте эти стили в ваш Products.module.scss
 
-// Управление пагинацией
 .paginationControl {
   display: flex;
   align-items: center;
@@ -795,7 +786,6 @@
   }
 }
 
-// Информация о пагинации
 .paginationInfo {
   display: flex;
   justify-content: space-between;
@@ -814,7 +804,6 @@
   }
 }
 
-// Пагинация
 .pagination {
   display: flex;
   justify-content: center;
@@ -896,7 +885,6 @@
   margin: 0 5px;
 }
 
-// Адаптивные стили
 @media (max-width: 768px) {
   .paginationControl {
     margin-top: 10px;

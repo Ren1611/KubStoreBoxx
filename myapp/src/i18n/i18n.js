@@ -2,11 +2,9 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
-// Базовые переводы для каждого языка
 const baseTranslations = {
   en: {
     translation: {
-      // Основные переводы, которые всегда нужны
       home_new_collection: "New Collection",
       home_modern_equipment: "Modern Equipment",
       home_discounts_40: "Discounts up to 40%",
@@ -148,18 +146,12 @@ const baseTranslations = {
   },
 };
 
-// Функция для загрузки JSON переводов
 const loadJSONTranslations = async () => {
   try {
-    // В продакшене вы можете загружать эти файлы с сервера
-    // Для примера, мы будем использовать статические импорты
-
-    // Импортируем JSON файлы (это работает в Vite/Webpack)
     const enTranslations = await import("./locales/en/translation.json");
     const ruTranslations = await import("./locales/ru/translation.json");
     const kyTranslations = await import("./locales/ky/translation.json");
 
-    // Объединяем базовые переводы с JSON переводами
     const resources = {
       en: {
         translation: {
@@ -184,11 +176,10 @@ const loadJSONTranslations = async () => {
     return resources;
   } catch (error) {
     console.error("Error loading JSON translations:", error);
-    return baseTranslations; // Возвращаем базовые переводы в случае ошибки
+    return baseTranslations;
   }
 };
 
-// Асинхронная инициализация i18next
 const initializeI18n = async () => {
   const resources = await loadJSONTranslations();
 
@@ -198,15 +189,14 @@ const initializeI18n = async () => {
     .init({
       resources,
       fallbackLng: "ru",
-      lng: "ru", // язык по умолчанию
+      lng: "ru",
       debug: process.env.NODE_ENV === "development",
       interpolation: {
-        escapeValue: false, // React уже экранирует значения
+        escapeValue: false,
       },
       nsSeparator: false,
       keySeparator: ".",
 
-      // Настройки детектора языка
       detection: {
         order: ["localStorage", "cookie", "htmlTag", "navigator", "path"],
         caches: ["localStorage", "cookie"],
@@ -214,7 +204,6 @@ const initializeI18n = async () => {
         lookupCookie: "i18next",
       },
 
-      // Настройки React
       react: {
         useSuspense: false,
         bindI18n: "languageChanged loaded",
@@ -225,7 +214,6 @@ const initializeI18n = async () => {
   return i18n;
 };
 
-// Создаем экземпляр i18n и экспортируем его
 export const i18nInstance = initializeI18n();
 
 export default i18n;

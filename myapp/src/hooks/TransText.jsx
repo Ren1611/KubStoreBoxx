@@ -1,4 +1,3 @@
-// src/components/helpers/TransText.jsx
 import React from "react";
 import { useTranslation } from "../../hooks/useTranslation";
 
@@ -17,7 +16,6 @@ export const TransText = ({
   return <Component {...props}>{translatedText}</Component>;
 };
 
-// Вариант для заголовков
 export const TransH1 = (props) => <TransText component="h1" {...props} />;
 export const TransH2 = (props) => <TransText component="h2" {...props} />;
 export const TransH3 = (props) => <TransText component="h3" {...props} />;

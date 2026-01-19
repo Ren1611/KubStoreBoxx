@@ -39,7 +39,6 @@ const Slider = () => {
   useEffect(() => {
     timerRef.current = setInterval(nextSlide, AUTO_PLAY_INTERVAL);
     return () => clearInterval(timerRef.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function pause() {

@@ -39,7 +39,6 @@ const Home = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
-  // States
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [newArrivals, setNewArrivals] = useState([]);
   const [discountedProducts, setDiscountedProducts] = useState([]);
@@ -53,14 +52,12 @@ const Home = () => {
     console.log("Current language:", i18n.language);
     console.log("Is i18n initialized:", i18n.isInitialized);
 
-    // Получите все переводы для текущего языка
     const translations = i18n.getResourceBundle(i18n.language, "translation");
     console.log(
       "Total translations available:",
       Object.keys(translations || {}).length,
     );
 
-    // Проверьте конкретные ключи
     const keysToCheck = [
       "home_new_collection",
       "products_add_cart",
@@ -77,18 +74,15 @@ const Home = () => {
       }
     });
 
-    // Проверьте также плоские версии
     console.log("Testing flat keys:");
     console.log('t("home_new_collection"):', t("home_new_collection"));
     console.log('t("products_add_cart"):', t("products_add_cart"));
 
-    // Проверьте точки версии (на всякий случай)
     console.log("Testing dotted keys:");
     console.log('t("home.new_collection"):', t("home.new_collection"));
     console.log('t("products.add_to_cart"):', t("products.add_to_cart"));
   }, [i18n, t]);
 
-  // Data for sliders and sections
   const heroSlides = [
     {
       id: 1,
@@ -310,12 +304,10 @@ const Home = () => {
     },
   ];
 
-  // Initialization
   useEffect(() => {
     getProducts();
   }, []);
 
-  // Process products data
   useEffect(() => {
     if (products.length > 0) {
       const featured = [...products]

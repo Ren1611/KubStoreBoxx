@@ -2,35 +2,26 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-// Получаем __dirname для ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Конфигурация
 const SOURCE_DIR = path.join(__dirname, "..", "src");
 const LOCALES_DIR = path.join(__dirname, "..", "src", "i18n", "locales");
 const EXCLUDED_DIRS = ["node_modules", ".git", "dist", "build", "i18n"];
 const FILE_EXTENSIONS = [".jsx", ".js", ".tsx", ".ts"];
 
-// Паттерны для поиска текстов
 const PATTERNS = [
-  // 1. Текст в JSX: <div>Текст</div>, <span>Текст</span>
   /<[^>]+?>([^<>]{2,100}?)<\/[^>]+?>/g,
 
-  // 2. Атрибуты с текстом: placeholder="текст"
   /(placeholder|title|alt|aria-label|label|button|header|description)=["']([^"']{2,100}?)["']/g,
 
-  // 3. Функции перевода: t('текст'), translate("текст")
   /(?:t|translate|i18n\.t)\s*\(\s*["']([^"']{2,100}?)["']/g,
 
-  // 4. Компоненты TransText: <TransText>Текст</TransText>
   /<Trans[A-Za-z]*\s*(?:[^>]*)?>([^<]{2,100}?)<\/Trans[A-Za-z]*>/g,
 
-  // 5. Просто текст в кавычках (кроме переменных)
   /["']([а-яА-ЯёЁa-zA-Z][^"']{1,50})["']/g,
 ];
 
-// Функция для чтения существующих переводов
 function readExistingTranslations() {
   const translations = {
     ru: {},
@@ -71,7 +62,6 @@ function readExistingTranslations() {
   return translations;
 }
 
-// Рекурсивный поиск всех файлов
 function getAllFiles(dir) {
   const files = [];
 
@@ -94,9 +84,7 @@ function getAllFiles(dir) {
         } else if (FILE_EXTENSIONS.some((ext) => fullPath.endsWith(ext))) {
           files.push(fullPath);
         }
-      } catch (err) {
-        // Пропускаем ошибки доступа
-      }
+      } catch (err) {}
     });
   }
 
@@ -104,13 +92,11 @@ function getAllFiles(dir) {
   return files;
 }
 
-// Извлечение текстов из файла
 function extractTextsFromFile(filePath) {
   try {
     const content = fs.readFileSync(filePath, "utf8");
     const texts = new Set();
 
-    // Удаляем комментарии
     const cleanContent = content
       .replace(/\/\/.*$/gm, "")
       .replace(/\/\*[\s\S]*?\*\//g, "");
@@ -141,7 +127,6 @@ function extractTextsFromFile(filePath) {
   }
 }
 
-// Проверка валидности текста
 function isValidText(text) {
   if (!text || text.length < 2 || text.length > 100) return false;
 
@@ -165,7 +150,6 @@ function isValidText(text) {
   return !EXCLUDED.some((pattern) => pattern.test(text));
 }
 
-// Создание ключа из текста
 function createKey(text) {
   return text
     .toLowerCase()
@@ -182,7 +166,6 @@ function createKey(text) {
     .substring(0, 40);
 }
 
-// Найти тексты, которых нет в существующих переводах
 function findNewTexts(existingTranslations, newTexts) {
   const existingValues = new Set(Object.values(existingTranslations.ru));
   const newUniqueTexts = new Set();
@@ -196,22 +179,18 @@ function findNewTexts(existingTranslations, newTexts) {
   return Array.from(newUniqueTexts);
 }
 
-// Основная функция
 async function main() {
   console.log("🔄 Обновление файлов переводов...\n");
 
-  // 1. Читаем существующие переводы
   const existing = readExistingTranslations();
   console.log(`📊 Существующие переводы:`);
   console.log(`   Русский: ${Object.keys(existing.ru).length} ключей`);
   console.log(`   Английский: ${Object.keys(existing.en).length} ключей`);
   console.log(`   Кыргызский: ${Object.keys(existing.ky).length} ключей\n`);
 
-  // 2. Ищем все файлы проекта
   const files = getAllFiles(SOURCE_DIR);
   console.log(`🔍 Сканирую ${files.length} файлов...\n`);
 
-  // 3. Извлекаем все тексты
   const allTexts = new Set();
 
   files.forEach((file, index) => {
@@ -230,7 +209,6 @@ async function main() {
 
   console.log(`\n📝 Найдено уникальных текстов: ${allTexts.size}\n`);
 
-  // 4. Находим новые тексты
   const newTexts = findNewTexts(existing, Array.from(allTexts));
   console.log(`🎯 Новых текстов для перевода: ${newTexts.length}\n`);
 
@@ -239,7 +217,6 @@ async function main() {
     return;
   }
 
-  // 5. Добавляем новые тексты
   const updated = { ...existing };
   let addedCount = 0;
 
@@ -259,7 +236,6 @@ async function main() {
     addedCount++;
   });
 
-  // 6. Сортируем ключи по алфавиту
   const sortedRu = {};
   const sortedEn = {};
   const sortedKy = {};
@@ -272,9 +248,7 @@ async function main() {
       sortedKy[key] = updated.ky[key] || `[KY: ${updated.ru[key]}]`;
     });
 
-  // 7. Сохраняем обновленные файлы
   try {
-    // Создаем директории если их нет
     ["ru", "en", "ky"].forEach((lang) => {
       const langDir = path.join(LOCALES_DIR, lang);
       if (!fs.existsSync(langDir)) {
@@ -282,28 +256,24 @@ async function main() {
       }
     });
 
-    // Русский
     fs.writeFileSync(
       path.join(LOCALES_DIR, "ru", "translation.json"),
       JSON.stringify({ translation: sortedRu }, null, 2),
       "utf8",
     );
 
-    // Английский
     fs.writeFileSync(
       path.join(LOCALES_DIR, "en", "translation.json"),
       JSON.stringify({ translation: sortedEn }, null, 2),
       "utf8",
     );
 
-    // Кыргызский
     fs.writeFileSync(
       path.join(LOCALES_DIR, "ky", "translation.json"),
       JSON.stringify({ translation: sortedKy }, null, 2),
       "utf8",
     );
 
-    // Файл с только новыми текстами
     const newTranslations = {};
     newTexts.forEach((text) => {
       const key = createKey(text);
@@ -345,5 +315,4 @@ async function main() {
   }
 }
 
-// Запуск
 main().catch(console.error);

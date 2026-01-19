@@ -4,7 +4,6 @@
   margin-bottom: -100px;
 }
 
-// Хлебные крошки
 .breadcrumbs {
   margin-bottom: 30px;
   font-size: 14px;
@@ -32,7 +31,6 @@
   }
 }
 
-// Заголовок страницы
 .pageHeader {
   display: flex;
   justify-content: space-between;
@@ -85,7 +83,6 @@
   }
 }
 
-// Информация о товарах
 .favoritesInfo {
   display: flex;
   justify-content: space-between;
@@ -139,7 +136,6 @@
   }
 }
 
-// Карточка товара в избранном
 .favoriteItem {
   display: flex;
   background: #fff;
@@ -147,7 +143,9 @@
   overflow: hidden;
   margin-bottom: 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 
   &:hover {
     transform: translateY(-2px);
@@ -413,7 +411,6 @@
   }
 }
 
-// Пустое избранное
 .emptyFavorites {
   text-align: center;
   padding: 60px 20px;
@@ -468,7 +465,6 @@
   }
 }
 
-// Информационная секция
 .infoSection {
   margin-top: 60px;
   padding: 30px;
@@ -506,7 +502,6 @@
   }
 }
 
-// Состояние загрузки
 .loadingContainer {
   min-height: 70vh;
   display: flex;
@@ -542,7 +537,6 @@
     transform: rotate(360deg);
   }
 }
-// Уведомления
 .notificationsContainer {
   position: fixed;
   top: 20px;
@@ -619,7 +613,6 @@
   border-left: 4px solid #bd2130;
 }
 
-// Бейдж с количеством товаров
 .itemsCountBadge {
   display: inline-flex;
   align-items: center;
@@ -640,7 +633,6 @@
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
-// Хлебные крошки
 .breadcrumbs {
   margin-bottom: 30px;
   font-size: 14px;
@@ -668,7 +660,6 @@
   }
 }
 
-// Заголовок страницы
 .pageHeader {
   display: flex;
   justify-content: space-between;
@@ -723,7 +714,6 @@
   }
 }
 
-// Информация о товарах
 .favoritesInfo {
   display: flex;
   justify-content: space-between;
@@ -781,7 +771,6 @@
   }
 }
 
-// ОБНОВЛЕННАЯ КАРТОЧКА ТОВАРА
 .favoriteItem {
   display: flex;
   background: white;
@@ -1278,7 +1267,6 @@
   }
 }
 
-// Пустое избранное
 .emptyFavorites {
   text-align: center;
   padding: 80px 20px;
@@ -1340,7 +1328,6 @@
   }
 }
 
-// Информационная секция
 .infoSection {
   margin-top: 80px;
   padding: 40px;
@@ -1413,7 +1400,6 @@
   }
 }
 
-// Состояние загрузки
 .loadingContainer {
   min-height: 70vh;
   display: flex;
@@ -1456,7 +1442,6 @@
   }
 }
 
-// Уведомления
 .notificationsContainer {
   position: fixed;
   top: 20px;
@@ -1538,7 +1523,6 @@
   border-left: 4px solid #bd2130;
 }
 
-// Бейдж с количеством товаров
 .itemsCountBadge {
   display: inline-flex;
   align-items: center;
@@ -1555,7 +1539,6 @@
   box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
 }
 
-// Список избранного
 .favoritesList {
   display: flex;
   flex-direction: column;

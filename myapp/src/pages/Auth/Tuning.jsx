@@ -23,7 +23,6 @@ import {
   FaCheck,
 } from "react-icons/fa";
 
-// Компонент уведомления
 const Notification = React.memo(({ message, type, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -69,69 +68,56 @@ const Tuning = () => {
   } = useProduct();
   const { t } = useTranslation();
 
-  // Основные фильтры
   const [query, setQuery] = useState("");
   const [inStock, setInStock] = useState(false);
   const [discountOnly, setDiscountOnly] = useState(false);
 
-  // Фильтры для тюнинга и аксессуаров
   const [selectedCategories, setSelectedCategories] = useState(new Set());
   const [selectedCompatibility, setSelectedCompatibility] = useState(new Set());
   const [selectedMaterials, setSelectedMaterials] = useState(new Set());
   const [selectedColors, setSelectedColors] = useState(new Set());
   const [selectedBrands, setSelectedBrands] = useState(new Set());
 
-  // Ценовой диапазон
   const [priceRange, setPriceRange] = useState({ min: 0, max: 1000000 });
   const [currentPriceRange, setCurrentPriceRange] = useState({
     min: 0,
     max: 1000000,
   });
 
-  // Объединенные данные для фильтров
   const [allBrands, setAllBrands] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
   const [allMaterials, setAllMaterials] = useState([]);
   const [allColors, setAllColors] = useState([]);
   const [allCompatibility, setAllCompatibility] = useState([]);
 
-  // Фильтрованные продукты
   const [filtered, setFiltered] = useState([]);
 
-  // Пагинация
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
 
-  // Сортировка
   const [sortBy, setSortBy] = useState("default");
 
-  // Уведомления
   const [notifications, setNotifications] = useState([]);
   const [favorites, setFavorites] = useState(new Set());
 
-  // Получение продуктов
   useEffect(() => {
     getProducts();
     readFavorit();
   }, []);
 
-  // Загрузка избранного из localStorage
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem("favorit")) || [];
     const favoriteSet = new Set(storedFavorites.map((item) => item.id));
     setFavorites(favoriteSet);
   }, [favorit]);
 
-  // Извлечение данных из продуктов для фильтров
   useEffect(() => {
     if (!products) return;
 
-    // Фильтруем только товары категории "Тюнинг и Аксессуары"
     const tuningProducts = products.filter(
       (p) => p.category === "Тюнинг и Аксессуары",
     );
 
-    // Находим минимальную и максимальную цену
     if (tuningProducts.length > 0) {
       const prices = tuningProducts
         .map((p) => parseFloat(p.price) || 0)
@@ -145,7 +131,6 @@ const Tuning = () => {
       }
     }
 
-    // Извлекаем уникальные значения для фильтров из продуктов
     const uniqueBrands = new Set();
     const uniqueCategories = new Set();
     const uniqueMaterials = new Set();
@@ -155,7 +140,6 @@ const Tuning = () => {
     tuningProducts.forEach((product) => {
       if (product.brand) uniqueBrands.add(product.brand);
 
-      // Используем tuningCategory или subcategory для категорий
       if (product.tuningCategory) {
         uniqueCategories.add(product.tuningCategory);
       } else if (product.subcategory) {
@@ -166,8 +150,6 @@ const Tuning = () => {
       if (product.color) uniqueColors.add(product.color);
       if (product.compatibility) uniqueCompatibility.add(product.compatibility);
     });
-
-    // Сортируем и устанавливаем значения
     setAllBrands(Array.from(uniqueBrands).sort());
     setAllCategories(Array.from(uniqueCategories).sort());
     setAllMaterials(Array.from(uniqueMaterials).sort());
@@ -175,7 +157,6 @@ const Tuning = () => {
     setAllCompatibility(Array.from(uniqueCompatibility).sort());
   }, [products]);
 
-  // Обработчики уведомлений
   const showNotification = (message, type = "success") => {
     const id = Date.now();
     setNotifications((prev) => [...prev, { id, message, type }]);
@@ -187,12 +168,10 @@ const Tuning = () => {
     );
   };
 
-  // Проверка, находится ли товар в избранном
   const isInFavorites = (productId) => {
     return favorites.has(productId);
   };
 
-  // Функции для переключения фильтров
   const toggleCategory = (category) => {
     const copy = new Set(selectedCategories);
     if (copy.has(category)) copy.delete(category);
@@ -228,7 +207,6 @@ const Tuning = () => {
     setSelectedBrands(copy);
   };
 
-  // Очистка всех фильтров
   const clearAllFilters = () => {
     setQuery("");
     setInStock(false);
@@ -267,16 +245,13 @@ const Tuning = () => {
     setCurrentPage(1);
   };
 
-  // Применение фильтрации - ИСПРАВЛЕННАЯ ВЕРСИЯ
   useEffect(() => {
     if (!products) return;
 
     let filteredProducts = products.filter((product) => {
-      // Проверяем, относится ли продукт к тюнингу и аксессуарам
       const isTuningRelated = product.category === "Тюнинг и Аксессуары";
       if (!isTuningRelated) return false;
 
-      // Фильтр по поиску
       const searchQuery = query.trim().toLowerCase();
       if (searchQuery) {
         const title = (product.name || product.title || "").toLowerCase();
@@ -298,20 +273,16 @@ const Tuning = () => {
         }
       }
 
-      // Фильтр по наличию
       if (inStock && product.inStock === false) return false;
 
-      // Фильтр по скидке
       if (discountOnly && (!product.discount || product.discount <= 0))
         return false;
 
-      // Фильтр по цене
       const price = parseFloat(product.price) || 0;
       if (price < currentPriceRange.min || price > currentPriceRange.max) {
         return false;
       }
 
-      // Фильтр по категории - ИСПРАВЛЕНО
       if (selectedCategories.size > 0) {
         const productCategory =
           product.tuningCategory || product.subcategory || "";
@@ -321,7 +292,6 @@ const Tuning = () => {
         const productCategoryLower = productCategory.toLowerCase();
         let found = false;
 
-        // Проверяем, содержит ли категория продукта хотя бы одну из выбранных категорий
         for (let category of selectedCategories) {
           if (productCategoryLower.includes(category.toLowerCase())) {
             found = true;
@@ -332,7 +302,6 @@ const Tuning = () => {
         if (!found) return false;
       }
 
-      // Фильтр по совместимости - ИСПРАВЛЕНО
       if (selectedCompatibility.size > 0) {
         const compatibility = product.compatibility || "";
         if (!compatibility) return false;
@@ -350,7 +319,6 @@ const Tuning = () => {
         if (!found) return false;
       }
 
-      // Фильтр по материалам - ИСПРАВЛЕНО
       if (selectedMaterials.size > 0) {
         const material = product.material || "";
         if (!material) return false;
@@ -368,7 +336,6 @@ const Tuning = () => {
         if (!found) return false;
       }
 
-      // Фильтр по цветам - ИСПРАВЛЕНО
       if (selectedColors.size > 0) {
         const color = product.color || "";
         if (!color) return false;
@@ -386,7 +353,6 @@ const Tuning = () => {
         if (!found) return false;
       }
 
-      // Фильтр по брендам
       if (selectedBrands.size > 0) {
         const brand = product.brand || "";
         if (!brand) return false;
@@ -407,7 +373,6 @@ const Tuning = () => {
       return true;
     });
 
-    // Сортировка
     filteredProducts.sort((a, b) => {
       switch (sortBy) {
         case "price-asc":
@@ -441,13 +406,11 @@ const Tuning = () => {
     sortBy,
   ]);
 
-  // Пагинация
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filtered.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
 
-  // Обработчики для действий
   const handleAddToCart = (product) => {
     const productToAdd = {
       ...product,
@@ -465,7 +428,6 @@ const Tuning = () => {
 
   const handleAddToFavorites = (product) => {
     if (isInFavorites(product.id)) {
-      // Если товар уже в избранном, удаляем его
       const favorites = JSON.parse(localStorage.getItem("favorit")) || [];
       const updatedFavorites = favorites.filter(
         (item) => item.id !== product.id,
@@ -495,7 +457,6 @@ const Tuning = () => {
     }
   };
 
-  // Генерация номеров страниц
   const generatePageNumbers = () => {
     const pageNumbers = [];
     const maxVisiblePages = 5;
@@ -524,7 +485,6 @@ const Tuning = () => {
     return pageNumbers;
   };
 
-  // Рендер активных фильтров
   const renderActiveFilters = () => {
     const activeFilters = [];
 
@@ -617,7 +577,6 @@ const Tuning = () => {
 
   return (
     <div className={`${scss.categoryPage} ${scss.tuningPage}`}>
-      {/* Уведомления */}
       <div className={scss.notificationsContainer}>
         {notifications.map((notification) => (
           <Notification
@@ -645,7 +604,6 @@ const Tuning = () => {
                 </button>
               </div>
 
-              {/* Поиск */}
               <div className={scss.filterSection}>
                 <label className={scss.filterLabel}>
                   <span>{t("tuning_search_by_name")}</span>
@@ -658,7 +616,6 @@ const Tuning = () => {
                 </label>
               </div>
 
-              {/* Базовые фильтры */}
               <div className={scss.filterSection}>
                 <h4>{t("tuning_basic_filters")}</h4>
                 <div className={scss.checkboxGroup}>
@@ -681,7 +638,6 @@ const Tuning = () => {
                 </div>
               </div>
 
-              {/* Ценовой диапазон */}
               <div className={scss.filterSection}>
                 <h4>
                   {t("tuning_price_range")}: {t("common_currency")}
@@ -732,7 +688,6 @@ const Tuning = () => {
                 </div>
               </div>
 
-              {/* Категории */}
               <div className={scss.filterSection}>
                 <div className={scss.filterSectionHeader}>
                   <h4>{t("tuning_categories")}</h4>
@@ -759,7 +714,6 @@ const Tuning = () => {
                 </div>
               </div>
 
-              {/* Бренды */}
               <div className={scss.filterSection}>
                 <div className={scss.filterSectionHeader}>
                   <h4>{t("tuning_brands")}</h4>
@@ -786,7 +740,6 @@ const Tuning = () => {
                 </div>
               </div>
 
-              {/* Совместимость */}
               <div className={scss.filterSection}>
                 <div className={scss.filterSectionHeader}>
                   <h4>{t("tuning_compatibility")}</h4>
@@ -813,7 +766,6 @@ const Tuning = () => {
                 </div>
               </div>
 
-              {/* Материалы */}
               <div className={scss.filterSection}>
                 <div className={scss.filterSectionHeader}>
                   <h4>{t("tuning_materials")}</h4>
@@ -840,7 +792,6 @@ const Tuning = () => {
                 </div>
               </div>
 
-              {/* Цвета */}
               <div className={scss.filterSection}>
                 <div className={scss.filterSectionHeader}>
                   <h4>{t("tuning_colors")}</h4>
@@ -1092,7 +1043,6 @@ const Tuning = () => {
               )}
             </div>
 
-            {/* Пагинация */}
             {totalPages > 1 && (
               <div className={scss.pagination}>
                 <button

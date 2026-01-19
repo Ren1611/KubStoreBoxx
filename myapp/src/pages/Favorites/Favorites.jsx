@@ -20,7 +20,6 @@ import {
   FaShippingFast,
 } from "react-icons/fa";
 
-// Компонент уведомления - ОБНОВЛЕННЫЙ
 const Notification = React.memo(({ message, type, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -62,7 +61,6 @@ const Notification = React.memo(({ message, type, onClose }) => {
 
 Notification.displayName = "Notification";
 
-// Компонент карточки товара в избранном
 const FavoriteItem = React.memo(({ product, onRemove, onAddToCart, t }) => {
   const hasDiscount = product.discount > 0;
   const discountPrice = hasDiscount
@@ -75,7 +73,6 @@ const FavoriteItem = React.memo(({ product, onRemove, onAddToCart, t }) => {
 
   return (
     <div className={styles.favoriteItem}>
-      {/* Бейджы на изображении */}
       <div className={styles.itemImageContainer}>
         <Link to={`/product/${product.id}`} className={styles.imageLink}>
           <img
@@ -89,28 +86,24 @@ const FavoriteItem = React.memo(({ product, onRemove, onAddToCart, t }) => {
           />
         </Link>
 
-        {/* Бейдж "Новинка" */}
         {isNew && (
           <div className={`${styles.imageBadge} ${styles.newBadge}`}>
             <FaTag /> {t("favorites_badges_new")}
           </div>
         )}
 
-        {/* Бейдж "Хит продаж" */}
         {isHot && (
           <div className={`${styles.imageBadge} ${styles.hotBadge}`}>
             <FaFire /> {t("favorites_badges_hot")}
           </div>
         )}
 
-        {/* Бейдж скидки */}
         {hasDiscount && (
           <div className={`${styles.imageBadge} ${styles.discountBadge}`}>
             -{product.discount}%
           </div>
         )}
 
-        {/* Кнопка удаления на изображении */}
         <button
           className={styles.quickRemoveBtn}
           onClick={() => onRemove(product.id)}
@@ -121,7 +114,6 @@ const FavoriteItem = React.memo(({ product, onRemove, onAddToCart, t }) => {
       </div>
 
       <div className={styles.itemContent}>
-        {/* Заголовок и бренд */}
         <div className={styles.itemHeader}>
           <div className={styles.brandCategory}>
             <span className={styles.itemBrand}>{product.brand}</span>
@@ -132,7 +124,6 @@ const FavoriteItem = React.memo(({ product, onRemove, onAddToCart, t }) => {
           </h3>
         </div>
 
-        {/* Рейтинг и отзывы */}
         <div className={styles.ratingSection}>
           <div className={styles.ratingStars}>
             {[...Array(5)].map((_, i) => (
@@ -154,7 +145,6 @@ const FavoriteItem = React.memo(({ product, onRemove, onAddToCart, t }) => {
           </span>
         </div>
 
-        {/* Статус наличия и доставки */}
         <div className={styles.availabilitySection}>
           <div className={styles.availabilityInfo}>
             {product.inStock ? (
@@ -179,7 +169,6 @@ const FavoriteItem = React.memo(({ product, onRemove, onAddToCart, t }) => {
           </div>
         </div>
 
-        {/* Цена */}
         <div className={styles.priceSection}>
           <div className={styles.priceContainer}>
             {hasDiscount ? (
@@ -215,7 +204,6 @@ const FavoriteItem = React.memo(({ product, onRemove, onAddToCart, t }) => {
           </div>
         </div>
 
-        {/* Действия */}
         <div className={styles.actionsSection}>
           <button
             className={`${styles.actionButton} ${styles.addToCartButton} ${
@@ -247,7 +235,6 @@ const FavoriteItem = React.memo(({ product, onRemove, onAddToCart, t }) => {
           </div>
         </div>
 
-        {/* Дополнительная информация */}
         <div className={styles.additionalInfo}>
           {product.features && product.features.length > 0 && (
             <div className={styles.features}>
@@ -280,7 +267,6 @@ const FavoriteItem = React.memo(({ product, onRemove, onAddToCart, t }) => {
 
 FavoriteItem.displayName = "FavoriteItem";
 
-// Основной компонент страницы избранного
 const Favorits = () => {
   const { favorit, readFavorit, deleteFavorit, addOrder } = useProduct();
   const { t } = useTranslation();

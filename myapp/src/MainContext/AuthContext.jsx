@@ -11,10 +11,8 @@ const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
-// Флаг для отладки
 const IS_DEV = process.env.NODE_ENV === "development";
 
-// Оптимизированный компонент загрузки
 const LoadingSpinner = React.memo(() => (
   <div style={loadingContainerStyle}>
     <div style={loadingContentStyle}>
@@ -26,7 +24,6 @@ const LoadingSpinner = React.memo(() => (
 
 LoadingSpinner.displayName = "LoadingSpinner";
 
-// Оптимизированный AuthProvider
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -34,20 +31,17 @@ export const AuthProvider = ({ children }) => {
   const [initialized, setInitialized] = useState(false);
   const [firebaseInitialized, setFirebaseInitialized] = useState(false);
 
-  // Кэш для Firebase импортов
   const firebaseCache = useMemo(
     () => ({
       auth: null,
       db: null,
       imported: false,
     }),
-    []
+    [],
   );
 
-  // Быстрая проверка localStorage
   const quickSessionCheck = useCallback(() => {
     try {
-      // Проверяем admin сессию в первую очередь
       const adminSession = localStorage.getItem("kubstore_admin_session");
       if (adminSession) {
         return { type: "admin", data: adminSession };
@@ -68,7 +62,6 @@ export const AuthProvider = ({ children }) => {
     return null;
   }, []);
 
-  // Быстрое восстановление сессии из localStorage
   const quickRestoreSession = useCallback(() => {
     const session = quickSessionCheck();
     if (!session) return false;
@@ -84,13 +77,11 @@ export const AuthProvider = ({ children }) => {
 
       setUserData(data);
 
-      // Для обычных пользователей - откладываем Firebase инициализацию
       if (session.type === "user") {
         setTimeout(() => {
           initializeFirebaseLazy();
-        }, 2000); // Откладываем на 2 секунды
+        }, 2000);
       } else {
-        // Для админов Firebase не нужен
         setFirebaseInitialized(true);
       }
 
@@ -101,24 +92,20 @@ export const AuthProvider = ({ children }) => {
     }
   }, [quickSessionCheck]);
 
-  // Ленивая инициализация Firebase (только когда нужно)
   const initializeFirebaseLazy = useCallback(async () => {
     if (firebaseInitialized || firebaseCache.imported) return;
 
     IS_DEV && console.time("🔥 Ленивая инициализация Firebase");
 
     try {
-      // Импортируем только auth
       const { auth } = await import("../firebase/config");
       firebaseCache.auth = auth;
       firebaseCache.imported = true;
 
-      // Проверяем, не изменился ли пользователь
       const unsubscribe = auth.onAuthStateChanged(async (user) => {
         IS_DEV && console.log("🔄 Auth state changed:", user?.email);
 
         if (user && (!currentUser || user.uid !== currentUser.uid)) {
-          // Пользователь изменился - загружаем данные
           setCurrentUser(user);
           await loadUserDataOptimized(user);
         }
@@ -130,18 +117,16 @@ export const AuthProvider = ({ children }) => {
         if (unsubscribe) unsubscribe();
       };
     } catch (error) {
-      IS_DEV && console.error("❌ Ошибка инициализации Firebase:", error);
+      IS_DEV && console.error(" Ошибка инициализации Firebase:", error);
       setFirebaseInitialized(true);
     } finally {
-      IS_DEV && console.timeEnd("🔥 Ленивая инициализация Firebase");
+      IS_DEV && console.timeEnd(" Ленивая инициализация Firebase");
     }
   }, [firebaseInitialized, firebaseCache, currentUser]);
 
-  // Упрощенная загрузка данных пользователя
   const loadUserDataOptimized = useCallback(async (user) => {
-    IS_DEV && console.time("📥 Загрузка данных пользователя");
+    IS_DEV && console.time(" Загрузка данных пользователя");
 
-    // Если это mock пользователь
     if (user.uid && user.uid.startsWith("mock_")) {
       const isMockAdmin = user.uid.startsWith("mock_admin_");
       const mockData = {
@@ -157,16 +142,14 @@ export const AuthProvider = ({ children }) => {
       setUserData(mockData);
       localStorage.setItem(
         isMockAdmin ? "kubstore_admin_session" : "kubstore_user_session",
-        JSON.stringify(mockData)
+        JSON.stringify(mockData),
       );
 
-      IS_DEV && console.timeEnd("📥 Загрузка данных пользователя");
+      IS_DEV && console.timeEnd(" Загрузка данных пользователя");
       return;
     }
 
-    // Для реальных пользователей - минимальная проверка
     try {
-      // Пытаемся получить данные из Firestore, но не блокируем интерфейс
       setTimeout(async () => {
         try {
           const { db } = await import("../firebase/config");
@@ -189,15 +172,14 @@ export const AuthProvider = ({ children }) => {
               userDataWithRole.isAdmin
                 ? "kubstore_admin_session"
                 : "kubstore_user_session",
-              JSON.stringify(userDataWithRole)
+              JSON.stringify(userDataWithRole),
             );
           }
         } catch (firestoreError) {
-          // Игнорируем ошибки Firestore - у нас уже есть базовые данные
           IS_DEV &&
             console.warn("Firestore error (не критично):", firestoreError);
         }
-      }, 1000); // Откладываем на 1 секунду
+      }, 1000);
     } catch (error) {
       IS_DEV && console.warn("Ошибка загрузки данных:", error);
     } finally {
@@ -205,19 +187,16 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  // Регистрация
   const signup = useCallback(async (email, password, name) => {
     try {
-      // Сначала пробуем Firebase
       const { auth } = await import("../firebase/config");
-      const { createUserWithEmailAndPassword, updateProfile } = await import(
-        "firebase/auth"
-      );
+      const { createUserWithEmailAndPassword, updateProfile } =
+        await import("firebase/auth");
 
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
       const user = userCredential.user;
 
@@ -225,7 +204,6 @@ export const AuthProvider = ({ children }) => {
         await updateProfile(user, { displayName: name.trim() });
       }
 
-      // Сразу сохраняем локально для быстрого доступа
       const userData = {
         email: user.email,
         name: name?.trim() || user.email.split("@")[0],
@@ -241,7 +219,6 @@ export const AuthProvider = ({ children }) => {
 
       return userCredential;
     } catch (error) {
-      // Fallback для офлайн режима
       if (
         error.code === "auth/api-key-not-valid" ||
         error.code === "auth/network-request-failed"
@@ -271,10 +248,8 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  // Вход - ОПТИМИЗИРОВАННЫЙ
   const login = useCallback(
     async (email, password) => {
-      // Быстрая проверка для mock администратора
       if (email === "admin@motoshop.com" && password === "Admin123!") {
         const mockUser = {
           uid: "mock_admin_" + Date.now(),
@@ -295,7 +270,7 @@ export const AuthProvider = ({ children }) => {
         setUserData(mockData);
         localStorage.setItem(
           "kubstore_admin_session",
-          JSON.stringify(mockData)
+          JSON.stringify(mockData),
         );
         setLoading(false);
 
@@ -303,20 +278,17 @@ export const AuthProvider = ({ children }) => {
       }
 
       try {
-        // Для обычных пользователей - минимальная проверка
         const isOnline = navigator.onLine;
 
         if (!isOnline) {
           throw new Error("offline");
         }
 
-        // Быстрый вход с минимальной задержкой
         const { auth } = await import("../firebase/config");
         const { signInWithEmailAndPassword } = await import("firebase/auth");
 
         const result = await signInWithEmailAndPassword(auth, email, password);
 
-        // Сразу сохраняем базовые данные
         const userData = {
           email: result.user.email,
           name: result.user.displayName || email.split("@")[0],
@@ -330,14 +302,12 @@ export const AuthProvider = ({ children }) => {
         setCurrentUser(result.user);
         setUserData(userData);
 
-        // Полные данные загрузим в фоне
         setTimeout(() => {
           loadUserDataOptimized(result.user);
         }, 1000);
 
         return result;
       } catch (error) {
-        // Fallback
         const mockUser = {
           uid: "mock_user_" + Date.now(),
           email: email,
@@ -360,16 +330,14 @@ export const AuthProvider = ({ children }) => {
         return { user: mockUser };
       }
     },
-    [loadUserDataOptimized]
+    [loadUserDataOptimized],
   );
 
-  // Вход через Google
   const signInWithGoogle = useCallback(async () => {
     try {
       const { auth } = await import("../firebase/config");
-      const { GoogleAuthProvider, signInWithPopup } = await import(
-        "firebase/auth"
-      );
+      const { GoogleAuthProvider, signInWithPopup } =
+        await import("firebase/auth");
 
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
@@ -389,7 +357,6 @@ export const AuthProvider = ({ children }) => {
 
       return result;
     } catch (error) {
-      // Fallback
       const mockUser = {
         uid: "mock_google_" + Date.now(),
         email: "google.user@example.com",
@@ -413,7 +380,6 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  // Выход
   const logout = useCallback(async () => {
     try {
       if (
@@ -436,32 +402,26 @@ export const AuthProvider = ({ children }) => {
     setUserData(null);
   }, [currentUser, firebaseCache]);
 
-  // Проверка администратора
   const isAdmin = useCallback(() => {
     return userData?.role === "admin" || userData?.isAdmin === true;
   }, [userData]);
 
-  // Инициализация при монтировании - ОПТИМИЗИРОВАННАЯ
   useEffect(() => {
     if (initialized) return;
 
     IS_DEV && console.log("🚀 Начальная инициализация AuthContext");
 
-    // 1. Сначала быстро восстанавливаем сессию из localStorage
     const sessionRestored = quickRestoreSession();
 
-    // 2. Если сессия не восстановлена, показываем пустой интерфейс
     if (!sessionRestored) {
       setLoading(false);
       setInitialized(true);
     } else {
-      // 3. Если сессия восстановлена, загружаем страницу
       setLoading(false);
       setInitialized(true);
     }
   }, [initialized, quickRestoreSession]);
 
-  // Значение контекста
   const value = useMemo(
     () => ({
       currentUser,
@@ -484,7 +444,7 @@ export const AuthProvider = ({ children }) => {
       loading,
       isAdmin,
       initialized,
-    ]
+    ],
   );
 
   return (
@@ -494,7 +454,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Стили для спиннера загрузки
 const loadingContainerStyle = {
   display: "flex",
   justifyContent: "center",
@@ -523,7 +482,6 @@ const loadingTextStyle = {
   fontFamily: "Arial, sans-serif",
 };
 
-// Добавляем стили для анимации спиннера
 if (typeof document !== "undefined") {
   const style = document.createElement("style");
   style.textContent = `

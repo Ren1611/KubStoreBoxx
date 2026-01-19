@@ -1,23 +1,18 @@
-/* Header.module.scss */
-
-// --- Переменные (Настройки дизайна) ---
-$primary-color: #3b82f6; // Яркий, но приятный синий
-$secondary-color: #eff6ff; // Очень светлый голубой (фон для ховера)
-$text-main: #1e293b; // Темно-синий (почти черный) для текста
-$text-light: #64748b; // Серый для второстепенного текста
+$primary-color: #3b82f6;
+$secondary-color: #eff6ff;
+$text-main: #1e293b;
+$text-light: #64748b;
 $white: #ffffff;
-$accent-red: #ef4444; // Для "Акций" и бейджика корзины
-$shadow-soft: 0 10px 25px -5px rgba(59, 130, 246, 0.1); // Мягкая голубая тень
-$radius: 16px; // Радиус скругления
+$accent-red: #ef4444;
+$shadow-soft: 0 10px 25px -5px rgba(59, 130, 246, 0.1);
+$radius: 16px;
 
-// --- Глобальные настройки шрифта ---
 .wrapper {
   width: 100%;
-  font-family: "Inter", system-ui, sans-serif; // Рекомендую современный шрифт
+  font-family: "Inter", system-ui, sans-serif;
   color: $text-main;
 }
 
-// --- Верхняя контактная строка ---
 .topBar {
   background-color: $secondary-color;
   border-bottom: 1px solid rgba($primary-color, 0.1);
@@ -30,7 +25,7 @@ $radius: 16px; // Радиус скругления
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
-  justify-content: flex-end; // Контакты справа
+  justify-content: flex-end;
 }
 
 .contacts {
@@ -49,12 +44,11 @@ $radius: 16px; // Радиус скругления
   }
 }
 
-// --- Основной хедер ---
 .mainHeader {
   background-color: $white;
   padding: 15px 0;
   box-shadow: $shadow-soft;
-  position: sticky; // Хедер прилипает к верху
+  position: sticky;
   top: 0;
   z-index: 100;
 }
@@ -68,7 +62,6 @@ $radius: 16px; // Радиус скругления
   justify-content: space-between;
 }
 
-// --- Логотип ---
 .logo {
   text-decoration: none;
   display: flex;
@@ -91,10 +84,9 @@ $radius: 16px; // Радиус скругления
   }
 }
 
-// --- Навигация ---
 .mainNav {
   flex: 1;
-  margin-left: 60px; // Отступ от логотипа
+  margin-left: 60px;
 }
 
 .navItems {
@@ -103,7 +95,7 @@ $radius: 16px; // Радиус скругления
 }
 
 .navItemWrapper {
-  position: relative; // Для позиционирования выпадающего меню
+  position: relative;
 }
 
 .navItem {
@@ -118,7 +110,6 @@ $radius: 16px; // Радиус скругления
   font-size: 15px;
   transition: all 0.3s ease;
 
-  // Иконки внутри ссылок
   .navIcon {
     font-size: 18px;
   }
@@ -130,7 +121,6 @@ $radius: 16px; // Радиус скругления
     transition: transform 0.3s ease;
   }
 
-  // Состояние наведения
   &:hover,
   &.active {
     background-color: $secondary-color;
@@ -138,11 +128,10 @@ $radius: 16px; // Радиус скругления
 
     .arrow {
       color: $primary-color;
-      transform: rotate(180deg); // Поворот стрелки
+      transform: rotate(180deg);
     }
   }
 
-  // Спец. стиль для "Акций"
   &.hot {
     &:hover,
     &.active {
@@ -152,10 +141,9 @@ $radius: 16px; // Радиус скругления
   }
 }
 
-// --- Выпадающее меню (Каталог) ---
 .dropdownMenu {
   position: absolute;
-  top: calc(100% + 2px); // Чуть ниже кнопки
+  top: calc(100% + 2px);
   left: 0;
   background: $white;
   min-width: 240px;
@@ -165,7 +153,6 @@ $radius: 16px; // Радиус скругления
   z-index: 101;
   border: 1px solid $secondary-color;
 
-  // Анимация появления
   animation: slideUp 0.2s ease-out forwards;
 }
 
@@ -179,7 +166,7 @@ $radius: 16px; // Радиус скругления
   text-decoration: none;
   color: $text-main;
   padding: 10px 15px;
-  border-radius: 12px; // Вложенные элементы чуть меньше радиусом
+  border-radius: 12px;
   font-size: 14px;
   font-weight: 500;
   transition: all 0.2s;
@@ -187,11 +174,10 @@ $radius: 16px; // Радиус скругления
   &:hover {
     background-color: $secondary-color;
     color: $primary-color;
-    transform: translateX(5px); // Легкий сдвиг вправо
+    transform: translateX(5px);
   }
 }
 
-// --- Секция пользователя (Иконки) ---
 .userSection {
   display: flex;
   align-items: center;
@@ -205,7 +191,7 @@ $radius: 16px; // Радиус скругления
   transition: transform 0.2s;
 
   &:hover {
-    transform: translateY(-3px); // Подпрыгивание
+    transform: translateY(-3px);
 
     .iconLabel {
       color: $primary-color;
@@ -231,7 +217,6 @@ $radius: 16px; // Радиус скругления
   }
 }
 
-// --- Бейдж корзины ---
 .cartBadge {
   position: absolute;
   top: -5px;
@@ -246,10 +231,9 @@ $radius: 16px; // Радиус скругления
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 2px solid $white; // Белая обводка чтобы отделить от иконки
+  border: 2px solid $white;
 }
 
-// --- Анимации ---
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -261,12 +245,9 @@ $radius: 16px; // Радиус скругления
   }
 }
 
-// --- Адаптив (по желанию) ---
 @media (max-width: 1024px) {
   .logoSubtitle,
   .iconLabel,
   .navText {
-    // На планшетах можно скрывать текст, оставляя иконки
-    // или уменьшать шрифты
   }
 }

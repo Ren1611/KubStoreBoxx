@@ -8,7 +8,6 @@ import {
 import styles from "./Mototechnics.module.scss";
 import { useTranslation } from "react-i18next";
 
-// Иконки для UI
 import {
   FiFilter,
   FiSearch,
@@ -25,8 +24,6 @@ import {
   FiUsers,
   FiTool,
 } from "react-icons/fi";
-
-// Компонент уведомления
 const Notification = React.memo(({ message, type, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -83,7 +80,6 @@ const MotorcycleCatalog = () => {
   const [activeFiltersCount, setActiveFiltersCount] = useState(0);
   const [showAllBrands, setShowAllBrands] = useState(false);
 
-  // Уведомления
   const [notifications, setNotifications] = useState([]);
 
   const [filters, setFilters] = useState({
@@ -99,7 +95,6 @@ const MotorcycleCatalog = () => {
     discount: false,
   });
 
-  // Фильтруем только продукты категории "Мототехника"
   const mototechnicsProducts = useMemo(() => {
     return products.filter((product) => product.category === "Мототехника");
   }, [products]);
@@ -149,7 +144,6 @@ const MotorcycleCatalog = () => {
     },
   ];
 
-  // Используем useMemo для оптимизации вычисления брендов ТОЛЬКО для мототехники
   const brands = useMemo(() => {
     const uniqueBrands = [...new Set(mototechnicsProducts.map((p) => p.brand))]
       .filter(Boolean)
@@ -180,7 +174,6 @@ const MotorcycleCatalog = () => {
     readFavorit();
   }, []);
 
-  // Обработчики уведомлений
   const showNotification = (message, type = "success") => {
     const id = Date.now();
     setNotifications((prev) => [...prev, { id, message, type }]);
@@ -192,7 +185,6 @@ const MotorcycleCatalog = () => {
     );
   };
 
-  // Подсчет активных фильтров
   useEffect(() => {
     let count = 0;
     if (filters.brand) count++;
@@ -438,7 +430,6 @@ const MotorcycleCatalog = () => {
 
   return (
     <div className={styles.catalog}>
-      {/* Уведомления */}
       <div className={styles.notificationsContainer}>
         {notifications.map((notification) => (
           <Notification
@@ -450,7 +441,6 @@ const MotorcycleCatalog = () => {
         ))}
       </div>
 
-      {/* Hero Section */}
       <div className={styles.heroSection}>
         <div className={styles.heroGradient}></div>
         <div className="container">
@@ -495,7 +485,6 @@ const MotorcycleCatalog = () => {
       </div>
 
       <div className="container">
-        {/* Категории */}
         <div className={styles.categoriesSection}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
@@ -505,7 +494,6 @@ const MotorcycleCatalog = () => {
               {t("mototechnics_categories_subtitle")}
             </p>
           </div>
-          {/* Первый ряд из 4 категорий */}
           <div className={styles.categoriesGridTwoRows}>
             {categories.slice(0, 4).map((category) => (
               <button
@@ -520,7 +508,6 @@ const MotorcycleCatalog = () => {
             ))}
           </div>
 
-          {/* Второй ряд из 4 категорий */}
           <div className={styles.categoriesGridTwoRows}>
             {categories.slice(4, 8).map((category) => (
               <button
@@ -536,9 +523,7 @@ const MotorcycleCatalog = () => {
           </div>
         </div>
 
-        {/* Основной контент */}
         <div className={styles.mainContent}>
-          {/* Панель управления */}
           <div className={styles.controlPanel}>
             <div className={styles.panelLeft}>
               <div className={styles.resultsCount}>
@@ -602,7 +587,6 @@ const MotorcycleCatalog = () => {
             </div>
           </div>
 
-          {/* Панель фильтров */}
           {showFilterPanel && (
             <div className={styles.filtersPanel}>
               <div className={styles.filtersHeader}>
@@ -710,7 +694,6 @@ const MotorcycleCatalog = () => {
                     )}
                   </div>
                 </div>
-                {/* ЦЕНА */}
                 <div className={styles.filterSection}>
                   <div className={styles.filterSectionHeader}>
                     <span className={styles.sectionNumber}>02</span>
@@ -767,7 +750,6 @@ const MotorcycleCatalog = () => {
                     </div>
                   </div>
                 </div>
-                {/* СОСТОЯНИЕ */}
                 <div className={styles.filterSection}>
                   <div className={styles.filterSectionHeader}>
                     <span className={styles.sectionNumber}>03</span>
@@ -826,7 +808,6 @@ const MotorcycleCatalog = () => {
                     </div>
                   </div>
                 </div>
-                {/* ОБЪЁМ ДВИГАТЕЛЯ */}
                 <div className={styles.filterSection}>
                   <div className={styles.filterSectionHeader}>
                     <span className={styles.sectionNumber}>04</span>
@@ -877,7 +858,6 @@ const MotorcycleCatalog = () => {
                     </div>
                   </div>
                 </div>
-                {/* ГОД ВЫПУСКА */}
                 <div className={styles.filterSection}>
                   <div className={styles.filterSectionHeader}>
                     <span className={styles.sectionNumber}>05</span>
@@ -928,7 +908,6 @@ const MotorcycleCatalog = () => {
                     </div>
                   </div>
                 </div>
-                {/* КОРОБКА ПЕРЕДАЧ */}
                 {uniqueTransmissions.length > 0 && (
                   <div className={styles.filterSection}>
                     <div className={styles.filterSectionHeader}>
@@ -973,7 +952,6 @@ const MotorcycleCatalog = () => {
                 )}
               </div>
 
-              {/* Активные фильтры */}
               {activeFiltersCount > 0 && (
                 <div className={styles.activeFilters}>
                   <div className={styles.activeFiltersTitle}>
@@ -1073,7 +1051,6 @@ const MotorcycleCatalog = () => {
                 </div>
               )}
 
-              {/* Кнопки действий */}
               <div className={styles.filterActions}>
                 <button
                   onClick={() => setShowFilterPanel(false)}
@@ -1089,7 +1066,6 @@ const MotorcycleCatalog = () => {
             </div>
           )}
 
-          {/* Сетка товаров */}
           {filteredProducts.length === 0 ? (
             <div className={styles.noResults}>
               <div className={styles.noResultsContent}>
@@ -1295,7 +1271,6 @@ const MotorcycleCatalog = () => {
                 })}
               </div>
 
-              {/* Пагинация */}
               {totalPages > 1 && (
                 <div className={styles.pagination}>
                   <button
@@ -1361,7 +1336,6 @@ const MotorcycleCatalog = () => {
           )}
         </div>
 
-        {/* Преимущества */}
         <div className={styles.benefitsSection}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
@@ -1428,7 +1402,6 @@ const MotorcycleCatalog = () => {
           </div>
         </div>
 
-        {/* CTA Section */}
         <div className={styles.ctaSection}>
           <div className={styles.ctaContent}>
             <h2 className={styles.ctaTitle}>{t("mototechnics_cta_title")}</h2>

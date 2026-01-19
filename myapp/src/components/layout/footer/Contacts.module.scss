@@ -57,7 +57,6 @@
   gap: 48px;
 }
 
-// Контактные телефоны
 .contactPhones {
   h2 {
     font-size: 1.5rem;
@@ -77,7 +76,9 @@
   padding: 24px;
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 
   &:hover {
     transform: translateY(-2px);
@@ -104,7 +105,6 @@
   }
 }
 
-// Основной макет
 .mainLayout {
   display: grid;
   grid-template-columns: 1fr 400px;
@@ -115,7 +115,6 @@
   }
 }
 
-// Левая колонка
 .leftColumn {
   display: flex;
   flex-direction: column;
@@ -267,7 +266,6 @@
   }
 }
 
-// Социальные сети
 .socialSection {
   background: white;
   border-radius: 12px;
@@ -321,14 +319,12 @@
   font-weight: 500;
 }
 
-// Правая колонка
 .rightColumn {
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 
-// Табы локаций
 .locationsTabs {
   background: white;
   border-radius: 12px;
@@ -511,7 +507,6 @@
   }
 }
 
-// Контактные лица
 .contactPersons {
   background: white;
   border-radius: 12px;
@@ -621,10 +616,6 @@
   }
 }
 
-// Карта
-// ... (предыдущие стили до mapSection остаются без изменений)
-
-// Карта
 .mapSection {
   h2 {
     font-size: 1.5rem;
@@ -716,9 +707,6 @@
   }
 }
 
-// ... (остальные стили после mapSection остаются без изменений)
-
-// FAQ предпросмотр
 .faqPreview {
   background: linear-gradient(135deg, #3b82f6, #1d4ed8);
   border-radius: 12px;

@@ -1,14 +1,9 @@
-// Темная тема для главной страницы
-// Переопределяем только специфичные стили для темной темы
-
 body.dark-theme {
-  // Уведомление в темной теме
   .notification {
     background: var(--success-color);
     box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
   }
 
-  // Герой секция в темной теме
   .heroSection {
     .heroSlide {
       background-blend-mode: overlay;
@@ -54,7 +49,6 @@ body.dark-theme {
     }
   }
 
-  // Категории в темной теме
   .categoriesSection {
     .categoryCard {
       background: var(--bg-surface);
@@ -74,7 +68,9 @@ body.dark-theme {
       .categoryImage {
         img {
           filter: brightness(0.8);
-          transition: filter 0.3s ease, transform 0.5s ease;
+          transition:
+            filter 0.3s ease,
+            transform 0.5s ease;
         }
       }
 
@@ -100,7 +96,6 @@ body.dark-theme {
     }
   }
 
-  // Продукты в темной теме
   .featuredSection,
   .newArrivalsSection {
     background-color: var(--bg-secondary);
@@ -122,7 +117,9 @@ body.dark-theme {
 
       .productImage {
         filter: brightness(0.9);
-        transition: filter 0.3s ease, transform 0.5s ease;
+        transition:
+          filter 0.3s ease,
+          transform 0.5s ease;
       }
 
       &.new {
@@ -199,7 +196,6 @@ body.dark-theme {
     }
   }
 
-  // Промо баннеры в темной теме
   .promoSection {
     .promoBanner {
       .promoContent {
@@ -222,7 +218,6 @@ body.dark-theme {
     }
   }
 
-  // Преимущества в темной теме
   .benefitsSection {
     background: linear-gradient(
       135deg,
@@ -252,7 +247,6 @@ body.dark-theme {
     }
   }
 
-  // Секция скидок в темной теме
   .discountSection {
     background: linear-gradient(
       135deg,
@@ -305,7 +299,6 @@ body.dark-theme {
     }
   }
 
-  // Рассылка в темной теме
   .newsletterSection {
     background: linear-gradient(
       135deg,
@@ -363,7 +356,6 @@ body.dark-theme {
     }
   }
 
-  // Специальные эффекты для темной темы
   .sectionTitle {
     &::after {
       background: linear-gradient(
@@ -380,7 +372,6 @@ body.dark-theme {
     }
   }
 
-  // Эффект стекла для карточек
   .glass-effect {
     background: rgba(36, 36, 36, 0.7);
     backdrop-filter: blur(10px);
@@ -388,7 +379,6 @@ body.dark-theme {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   }
 
-  // Улучшенные тени
   .categoryCard,
   .productCard,
   .benefitCard {
@@ -397,7 +387,6 @@ body.dark-theme {
     }
   }
 
-  // Градиентные тексты
   .gradient-text {
     background: linear-gradient(
       135deg,
@@ -409,7 +398,6 @@ body.dark-theme {
     background-clip: text;
   }
 
-  // Анимации
   @keyframes float {
     0%,
     100% {
@@ -425,7 +413,6 @@ body.dark-theme {
   }
 }
 
-// Медиа-запросы для темной темы
 @media (max-width: 768px) {
   body.dark-theme {
     .heroSection {

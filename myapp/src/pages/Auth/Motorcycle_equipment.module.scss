@@ -17,7 +17,6 @@
   }
 }
 
-// Мобильная кнопка фильтров
 .mobileFilterBtn {
   display: none;
   align-items: center;
@@ -25,11 +24,7 @@
   gap: 0.5rem;
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(
-    135deg,
-    #d32f2f 0%,
-    #b71c1c 100%
-  ); // Красный градиент
+  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
   color: white;
   border: none;
   border-radius: 12px;
@@ -54,19 +49,13 @@
   }
 }
 
-// Сайдбар с фильтрами
 .sidebar {
-  background: linear-gradient(
-    135deg,
-    #ffebee 0%,
-    #ffcdd2 100%
-  ); // Красный градиент
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
   border-radius: 16px;
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   height: fit-content;
-  border: 1px solid #ef9a9a; // Красная рамка
-  // position: sticky;
+  border: 1px solid #ef9a9a;
   top: 2rem;
 
   &.sidebarOpen {
@@ -99,12 +88,12 @@
     align-items: center;
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
-    border-bottom: 2px solid #f44336; // Красный
+    border-bottom: 2px solid #f44336;
 
     h3 {
       margin: 0;
       font-weight: 700;
-      color: #c62828; // Тёмно-красный
+      color: #c62828;
       font-size: 1.3rem;
       display: flex;
       align-items: center;
@@ -118,11 +107,7 @@
     }
 
     .clearAll {
-      background: linear-gradient(
-        135deg,
-        #d32f2f 0%,
-        #b71c1c 100%
-      ); // Красный градиент
+      background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
       border: none;
       color: white;
       font-size: 0.9rem;
@@ -140,11 +125,7 @@
     }
 
     .clearFilter {
-      background: linear-gradient(
-        135deg,
-        #f44336 0%,
-        #d32f2f 100%
-      ); // Красный градиент
+      background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
       color: white;
       border: none;
       padding: 0.3rem 0.8rem;
@@ -164,7 +145,7 @@
       display: none;
       background: none;
       border: none;
-      color: #c62828; // Тёмно-красный
+      color: #c62828;
       font-size: 1.2rem;
       cursor: pointer;
       padding: 0.5rem;
@@ -187,7 +168,6 @@
   }
 }
 
-// Поиск
 .searchBox {
   position: relative;
   display: flex;
@@ -196,14 +176,14 @@
   .searchIcon {
     position: absolute;
     left: 1rem;
-    color: #e57373; // Красный
+    color: #e57373;
     font-size: 1.2rem;
   }
 
   .searchInput {
     width: 100%;
     padding: 0.75rem 1rem 0.75rem 3rem;
-    border: 2px solid #ffcdd2; // Светло-красный
+    border: 2px solid #ffcdd2;
     border-radius: 8px;
     font-size: 0.95rem;
     transition: all 0.3s;
@@ -211,7 +191,7 @@
 
     &:focus {
       outline: none;
-      border-color: #f44336; // Красный
+      border-color: #f44336;
       box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1);
     }
   }
@@ -229,14 +209,14 @@
     transition: all 0.2s;
 
     &:hover {
-      color: #f44336; // Красный
+      color: #f44336;
       background: rgba(244, 67, 54, 0.1);
     }
   }
 }
 
 .filterSection {
-  border-top: 1px solid #ffcdd2; // Светло-красный
+  border-top: 1px solid #ffcdd2;
   padding-top: 1.5rem;
 
   &:first-child {
@@ -246,7 +226,7 @@
 
   h4 {
     font-weight: 600;
-    color: #c62828; // Тёмно-красный
+    color: #c62828;
     margin-bottom: 1rem;
     font-size: 1.1rem;
     display: flex;
@@ -256,7 +236,7 @@
     transition: color 0.2s;
 
     &:hover {
-      color: #b71c1c; // Очень тёмный красный
+      color: #b71c1c;
     }
 
     .expandIcon {
@@ -268,7 +248,7 @@
 
     &::before {
       content: "🛡️";
-      color: #f44336; // Красный
+      color: #f44336;
     }
   }
 
@@ -290,7 +270,7 @@
     margin-top: 0.5rem;
     background: none;
     border: none;
-    color: #f44336; // Красный
+    color: #f44336;
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
@@ -302,12 +282,12 @@
 
     &:hover {
       background: rgba(244, 67, 54, 0.1);
-      color: #d32f2f; // Красный
+      color: #d32f2f;
     }
   }
 }
 .filterSection {
-  border-top: 1px solid #f8bbd9; // Светло-розовый
+  border-top: 1px solid #f8bbd9;
   padding-top: 1.5rem;
 
   &:first-child {
@@ -317,7 +297,7 @@
 
   h4 {
     font-weight: 600;
-    color: #ad1457; // Тёмно-розовый
+    color: #ad1457;
     margin-bottom: 1rem;
     font-size: 1.1rem;
     display: flex;
@@ -326,7 +306,7 @@
 
     &::before {
       content: "🛡️";
-      color: #e91e63; // Розовый
+      color: #e91e63;
     }
   }
 }
@@ -344,7 +324,7 @@
     .priceInput {
       flex: 1;
       padding: 0.5rem;
-      border: 2px solid #ffcdd2; // Светло-красный
+      border: 2px solid #ffcdd2;
       border-radius: 6px;
       text-align: center;
       font-weight: 500;
@@ -353,12 +333,12 @@
 
       &:focus {
         outline: none;
-        border-color: #f44336; // Красный
+        border-color: #f44336;
       }
     }
 
     .priceSeparator {
-      color: #f44336; // Красный
+      color: #f44336;
       font-weight: 600;
       padding: 0 0.5rem;
     }
@@ -374,7 +354,7 @@
   .rangeSlider {
     width: 100%;
     height: 6px;
-    background: #f48fb1; // Розовый
+    background: #f48fb1;
     border-radius: 3px;
     outline: none;
     -webkit-appearance: none;
@@ -384,11 +364,7 @@
       -webkit-appearance: none;
       width: 22px;
       height: 22px;
-      background: linear-gradient(
-        135deg,
-        #e91e63 0%,
-        #c2185b 100%
-      ); // Розовый градиент
+      background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
       border-radius: 50%;
       cursor: pointer;
       border: 3px solid white;
@@ -403,11 +379,7 @@
     &::-moz-range-thumb {
       width: 22px;
       height: 22px;
-      background: linear-gradient(
-        135deg,
-        #e91e63 0%,
-        #c2185b 100%
-      ); // Розовый градиент
+      background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
       border-radius: 50%;
       cursor: pointer;
       border: 3px solid white;
@@ -424,7 +396,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 0.85rem;
-    color: #f44336; // Красный
+    color: #f44336;
     font-weight: 500;
   }
 }
@@ -442,17 +414,17 @@
   }
 
   &::-webkit-scrollbar-track {
-    background: #ffebee; // Очень светлый красный
+    background: #ffebee;
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #ef9a9a; // Красный
+    background: #ef9a9a;
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: #e57373; // Красный
+    background: #e57373;
   }
 }
 
@@ -472,12 +444,8 @@
     display: none;
 
     &:checked + .checkboxText::before {
-      background: linear-gradient(
-        135deg,
-        #f44336 0%,
-        #c62828 100%
-      ); // Красный градиент
-      border-color: #f44336; // Красный
+      background: linear-gradient(135deg, #f44336 0%, #c62828 100%);
+      border-color: #f44336;
     }
 
     &:checked + .checkboxText::after {
@@ -497,7 +465,7 @@
     position: relative;
     padding-left: 32px;
     font-size: 0.95rem;
-    color: #c62828; // Тёмно-красный
+    color: #c62828;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -511,7 +479,7 @@
       transform: translateY(-50%);
       width: 20px;
       height: 20px;
-      border: 2px solid #ef9a9a; // Красный
+      border: 2px solid #ef9a9a;
       border-radius: 5px;
       background: white;
       transition: all 0.2s;
@@ -537,11 +505,10 @@
   }
 
   &:hover .checkboxText::before {
-    border-color: #f44336; // Красный
+    border-color: #f44336;
   }
 }
 
-// Основной контент
 .main {
   display: flex;
   flex-direction: column;
@@ -556,7 +523,7 @@
   padding: 1.25rem 1.75rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: 1px solid #ffcdd2; // Светло-красный
+  border: 1px solid #ffcdd2;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -575,7 +542,7 @@
     line-height: 1.7;
     strong {
       font-size: 1.3rem;
-      color: #c62828; // Тёмно-красный
+      color: #c62828;
       font-weight: 700;
     }
   }
@@ -586,7 +553,7 @@
     gap: 0.5rem;
 
     .activeFiltersLabel {
-      color: #f44336; // Красный
+      color: #f44336;
       font-weight: 600;
       font-size: 0.9rem;
     }
@@ -600,20 +567,16 @@
 }
 
 .activeFilter {
-  background: linear-gradient(
-    135deg,
-    #ffebee 0%,
-    #ffcdd2 100%
-  ); // Красный градиент
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
   padding: 0.4rem 0.8rem 0.4rem 1rem;
   border-radius: 25px;
   font-size: 0.85rem;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  color: #b71c1c; // Очень тёмный красный
+  color: #b71c1c;
   font-weight: 500;
-  border: 1px solid #ef9a9a; // Красный
+  border: 1px solid #ef9a9a;
   transition: all 0.2s;
   max-width: 250px;
 
@@ -655,7 +618,7 @@
     align-items: center;
     gap: 0.75rem;
     font-weight: 600;
-    color: #c62828; // Тёмно-красный
+    color: #c62828;
     font-size: 0.95rem;
     white-space: nowrap;
   }
@@ -665,7 +628,7 @@
 
     .sortSelect {
       padding: 0.6rem 2.5rem 0.6rem 1rem;
-      border: 2px solid #ffcdd2; // Светло-красный
+      border: 2px solid #ffcdd2;
       border-radius: 8px;
       background: white;
       font-size: 0.95rem;
@@ -677,7 +640,7 @@
 
       &:focus {
         outline: none;
-        border-color: #f44336; // Красный
+        border-color: #f44336;
         box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1);
       }
     }
@@ -687,7 +650,7 @@
       right: 1rem;
       top: 50%;
       transform: translateY(-50%);
-      color: #ef9a9a; // Красный
+      color: #ef9a9a;
       pointer-events: none;
     }
   }
@@ -713,13 +676,13 @@
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid #ffcdd2; // Светло-красный
+  border: 1px solid #ffcdd2;
   position: relative;
 
   &:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-    border-color: #f44336; // Красный
+    border-color: #f44336;
 
     .cardImage {
       img {
@@ -735,7 +698,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #f44336, #ef9a9a); // Красный градиент
+    background: linear-gradient(90deg, #f44336, #ef9a9a);
     z-index: 1;
   }
 }
@@ -743,11 +706,7 @@
 .cardImage {
   position: relative;
   padding: 1.5rem;
-  background: linear-gradient(
-    135deg,
-    #ffebee 0%,
-    #ffcdd2 100%
-  ); // Красный градиент
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -781,7 +740,7 @@
   .iconBtn {
     position: absolute;
     background: white;
-    border: 2px solid #ffcdd2; // Светло-красный
+    border: 2px solid #ffcdd2;
     width: 42px;
     height: 42px;
     border-radius: 50%;
@@ -801,11 +760,11 @@
   .favoriteBtn {
     top: 1rem;
     right: 1rem;
-    color: #d32f2f; // Красный
+    color: #d32f2f;
     z-index: 2;
 
     &:hover {
-      background: #d32f2f; // Красный
+      background: #d32f2f;
       border-color: #d32f2f;
       color: white;
     }
@@ -815,11 +774,7 @@
     position: absolute;
     top: 1rem;
     left: 1rem;
-    background: linear-gradient(
-      135deg,
-      #d32f2f 0%,
-      #b71c1c 100%
-    ); // Красный градиент
+    background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
     color: white;
     padding: 0.4rem 0.8rem;
     border-radius: 20px;
@@ -852,7 +807,7 @@
     background: linear-gradient(
       135deg,
       rgba(183, 28, 28, 0.9) 0%,
-      rgba(136, 14, 79, 0.9) 100% // Тёмный красный/фиолетовый
+      rgba(136, 14, 79, 0.9) 100% / фиолетовый
     );
     color: white;
     text-align: center;
@@ -880,9 +835,9 @@
 
   .brand {
     font-weight: 700;
-    color: #c62828; // Тёмно-красный
+    color: #c62828;
     font-size: 1rem;
-    background: #ffebee; // Очень светлый красный
+    background: #ffebee;
     padding: 0.3rem 0.8rem;
     border-radius: 15px;
   }
@@ -893,11 +848,7 @@
     flex-wrap: wrap;
 
     .certificationBadge {
-      background: linear-gradient(
-        135deg,
-        #f44336 0%,
-        #d32f2f 100%
-      ); // Красный градиент
+      background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
       color: white;
       padding: 0.3rem 0.8rem;
       border-radius: 15px;
@@ -915,7 +866,7 @@
 .title {
   font-size: 1.15rem;
   font-weight: 600;
-  color: #c62828; // Тёмно-красный
+  color: #c62828;
   margin: 0;
   line-height: 1.4;
   height: 2.8em;
@@ -930,7 +881,7 @@
     transition: color 0.2s;
 
     &:hover {
-      color: #b71c1c; // Очень тёмный красный
+      color: #b71c1c;
     }
   }
 }
@@ -943,7 +894,7 @@
 
 .detailItem {
   font-size: 0.9rem;
-  color: #f44336; // Красный
+  color: #f44336;
   padding: 0.2rem 0;
   display: flex;
   align-items: center;
@@ -964,7 +915,7 @@
   .currentPrice {
     font-size: 1.4rem;
     font-weight: 700;
-    color: #c62828; // Тёмно-красный
+    color: #c62828;
     letter-spacing: 0.5px;
   }
 
@@ -1005,11 +956,7 @@
   }
 
   .addToCart {
-    background: linear-gradient(
-      135deg,
-      #f44336 0%,
-      #c62828 100%
-    ); // Красный градиент
+    background: linear-gradient(135deg, #f44336 0%, #c62828 100%);
     color: white;
 
     &:hover:not(:disabled) {
@@ -1024,13 +971,8 @@
 
   a {
     .detailsBtn {
-      background: linear-gradient(
-        135deg,
-        #d32f2f 0%,
-        #b71c1c 100%
-      ); // Тёмный красный градиент
+      background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
       color: white;
-      // text-decoration: none;
 
       &:hover {
         transform: translateY(-2px);
@@ -1048,14 +990,10 @@
 .stockWarning {
   margin-top: 0.5rem;
   padding: 0.5rem;
-  background: linear-gradient(
-    135deg,
-    #ffebee 0%,
-    #ffcdd2 100%
-  ); // Красный градиент
-  border: 1px solid #f44336; // Красный
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+  border: 1px solid #f44336;
   border-radius: 8px;
-  color: #b71c1c; // Очень тёмный красный
+  color: #b71c1c;
   font-size: 0.85rem;
   text-align: center;
   font-weight: 500;
@@ -1065,14 +1003,10 @@
   grid-column: 1 / -1;
   text-align: center;
   padding: 4rem 2rem;
-  background: linear-gradient(
-    135deg,
-    #ffebee 0%,
-    #ffcdd2 100%
-  ); // Красный градиент
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
   border-radius: 16px;
   font-size: 1.2rem;
-  color: #c62828; // Тёмно-красный
+  color: #c62828;
   font-weight: 500;
   display: flex;
   flex-direction: column;
@@ -1082,7 +1016,7 @@
   .spinner {
     width: 50px;
     height: 50px;
-    border: 3px solid #f44336; // Красный
+    border: 3px solid #f44336;
     border-top-color: transparent;
     border-radius: 50%;
     animation: spin 1s linear infinite;
@@ -1094,7 +1028,7 @@
     width: 20px;
     height: 20px;
     margin-left: 10px;
-    border: 3px solid #f44336; // Красный
+    border: 3px solid #f44336;
     border-top-color: transparent;
     border-radius: 50%;
     animation: spin 1s linear infinite;
@@ -1111,44 +1045,36 @@
   grid-column: 1 / -1;
   text-align: center;
   padding: 5rem 2rem;
-  background: linear-gradient(
-    135deg,
-    #ffffff 0%,
-    #ffebee 100%
-  ); // Красный градиент
+  background: linear-gradient(135deg, #ffffff 0%, #ffebee 100%);
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: 2px dashed #ffcdd2; // Светло-красный
+  border: 2px dashed #ffcdd2;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
 
   .noResultsIcon {
-    color: #ef9a9a; // Красный
+    color: #ef9a9a;
     opacity: 0.7;
   }
 
   h3 {
     margin-bottom: 0;
-    color: #c62828; // Тёмно-красный
+    color: #c62828;
     font-size: 1.5rem;
     font-weight: 600;
   }
 
   p {
     margin-bottom: 0;
-    color: #f44336; // Красный
+    color: #f44336;
     max-width: 400px;
   }
 
   .resetFiltersBtn {
     padding: 0.9rem 2.5rem;
-    background: linear-gradient(
-      135deg,
-      #f44336 0%,
-      #c62828 100%
-    ); // Красный градиент
+    background: linear-gradient(135deg, #f44336 0%, #c62828 100%);
     color: white;
     border: none;
     border-radius: 25px;
@@ -1169,7 +1095,6 @@
   }
 }
 
-// Пагинация
 .pagination {
   display: flex;
   justify-content: center;
@@ -1177,7 +1102,7 @@
   gap: 15px;
   margin-top: 40px;
   padding-top: 25px;
-  border-top: 1px solid #ffcdd2; // Светло-красный
+  border-top: 1px solid #ffcdd2;
 
   @media (max-width: 768px) {
     flex-wrap: wrap;
@@ -1188,11 +1113,11 @@
 .paginationBtn {
   padding: 0.8rem 1.5rem;
   background: white;
-  border: 2px solid #ffcdd2; // Светло-красный
+  border: 2px solid #ffcdd2;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
-  color: #c62828; // Тёмно-красный
+  color: #c62828;
   transition: all 0.3s;
   display: flex;
   align-items: center;
@@ -1205,7 +1130,7 @@
   }
 
   &:hover:not(:disabled) {
-    background: #f44336; // Красный
+    background: #f44336;
     color: white;
     border-color: #f44336;
     transform: translateY(-2px);
@@ -1230,28 +1155,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #ffcdd2; // Светло-красный
+  border: 2px solid #ffcdd2;
   border-radius: 8px;
   background: white;
   cursor: pointer;
   font-weight: 600;
-  color: #c62828; // Тёмно-красный
+  color: #c62828;
   transition: all 0.3s;
 
   &:hover {
-    border-color: #f44336; // Красный
+    border-color: #f44336;
     color: #f44336;
     transform: translateY(-2px);
   }
 
   &.active {
-    background: linear-gradient(
-      135deg,
-      #f44336 0%,
-      #c62828 100%
-    ); // Красный градиент
+    background: linear-gradient(135deg, #f44336 0%, #c62828 100%);
     color: white;
-    border-color: #f44336; // Красный
+    border-color: #f44336;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
   }
@@ -1262,11 +1183,10 @@
   align-items: center;
   justify-content: center;
   width: 30px;
-  color: #ef9a9a; // Красный
+  color: #ef9a9a;
   font-weight: bold;
 }
 
-// Адаптивность
 @media (max-width: 1024px) {
   .chemistryInner,
   .equipmentInner {
@@ -1334,7 +1254,6 @@
   }
 }
 
-// Специфичные стили для страницы экипировки
 .categoryPage {
   padding: 2rem 0;
 
@@ -1379,9 +1298,7 @@
     }
   }
 }
-// Добавьте в конец файла Motorcycle_equipment.module.scss
 
-// Уведомления
 .notificationsContainer {
   position: fixed;
   top: 20px;
@@ -1404,7 +1321,9 @@
   animation: slideIn 0.3s ease-out;
   border-left: 4px solid;
   gap: 12px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 @keyframes slideIn {
@@ -1470,7 +1389,6 @@
   }
 }
 
-// Обновленные стили для кнопок
 .favoriteBtn {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(4px);
@@ -1542,7 +1460,6 @@
   justify-content: center;
 }
 
-// Для иконки в избранном, если не загрузится картинка
 .favoriteBtn:has(img[style*="display: none"]) {
   background: rgba(255, 107, 107, 0.1);
 
@@ -1566,7 +1483,6 @@
   }
 }
 
-// Адаптивность для уведомлений
 @media (max-width: 768px) {
   .notificationsContainer {
     left: 20px;

@@ -9,12 +9,10 @@ const QuickViewSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sliderRef = useRef(null);
 
-  // Загрузка продуктов при монтировании компонента
   useEffect(() => {
     const loadProducts = async () => {
       setLoading(true);
       try {
-        // Используем метод из вашего контекста
         await getProducts();
       } catch (error) {
         console.error("Ошибка при загрузке товаров:", error);
@@ -26,11 +24,9 @@ const QuickViewSlider = () => {
     loadProducts();
   }, [getProducts]);
 
-  // Получаем популярные товары для слайдера
   const getQuickViewProducts = () => {
     if (!products || products.length === 0) return [];
 
-    // Берем первые 6 товаров или фильтруем по популярности
     return products.map((product) => ({
       id: product._id || product.id,
       originalPrice: product.price || 0,
@@ -43,7 +39,6 @@ const QuickViewSlider = () => {
     }));
   };
 
-  // Навигация по слайдеру
   const nextSlide = () => {
     const quickViewProducts = getQuickViewProducts();
     if (currentIndex < quickViewProducts.length - 4) {
@@ -57,7 +52,6 @@ const QuickViewSlider = () => {
     }
   };
 
-  // Добавление товара в корзину
   const handleAddToCart = (product) => {
     try {
       const cartProduct = {
@@ -77,7 +71,6 @@ const QuickViewSlider = () => {
     }
   };
 
-  // Добавление/удаление из избранного
   const handleToggleFavorite = (product) => {
     const favoriteProduct = {
       id: product.id,
@@ -94,7 +87,6 @@ const QuickViewSlider = () => {
     }
   };
 
-  // Форматирование цены
   const formatPrice = (price) => {
     return new Intl.NumberFormat("ru-RU").format(price) + " сом";
   };

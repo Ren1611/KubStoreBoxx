@@ -8,7 +8,6 @@ const FAQ = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [openQuestions, setOpenQuestions] = useState(new Set());
 
-  // Категории FAQ
   const categories = [
     { id: "all", name: t("faq_category_all"), count: 25 },
     { id: "delivery", name: t("faq_category_delivery"), count: 8 },
@@ -18,9 +17,7 @@ const FAQ = () => {
     { id: "other", name: t("faq_category_other"), count: 2 },
   ];
 
-  // Вопросы и ответы
   const faqItems = [
-    // Доставка и оплата
     {
       id: 1,
       category: "delivery",
@@ -78,7 +75,6 @@ const FAQ = () => {
       popular: true,
     },
 
-    // Возврат и гарантия
     {
       id: 9,
       category: "returns",
@@ -115,7 +111,6 @@ const FAQ = () => {
       popular: false,
     },
 
-    // Товары и аксессуары
     {
       id: 14,
       category: "products",
@@ -159,7 +154,6 @@ const FAQ = () => {
       popular: false,
     },
 
-    // Обслуживание и ремонт
     {
       id: 20,
       category: "service",
@@ -189,7 +183,6 @@ const FAQ = () => {
       popular: false,
     },
 
-    // Другие вопросы
     {
       id: 24,
       category: "other",
@@ -206,19 +199,16 @@ const FAQ = () => {
     },
   ];
 
-  // Фильтрация вопросов по категории
   const filteredItems =
     activeCategory === "all"
       ? faqItems
       : faqItems.filter((item) => item.category === activeCategory);
 
-  // Переключение категории
   const handleCategoryChange = (categoryId) => {
     setActiveCategory(categoryId);
-    setOpenQuestions(new Set()); // Закрываем все вопросы при смене категории
+    setOpenQuestions(new Set());
   };
 
-  // Открытие/закрытие вопроса
   const toggleQuestion = (questionId) => {
     const newOpenQuestions = new Set(openQuestions);
     if (newOpenQuestions.has(questionId)) {
@@ -229,31 +219,26 @@ const FAQ = () => {
     setOpenQuestions(newOpenQuestions);
   };
 
-  // Открыть все вопросы
   const openAllQuestions = () => {
     const allIds = filteredItems.map((item) => item.id);
     setOpenQuestions(new Set(allIds));
   };
 
-  // Закрыть все вопросы
   const closeAllQuestions = () => {
     setOpenQuestions(new Set());
   };
 
-  // Получить популярные вопросы
   const popularQuestions = faqItems.filter((item) => item.popular);
 
   return (
     <div className={scss.faqPage}>
       <div className="container">
-        {/* Хлебные крошки */}
         <div className={scss.breadcrumbs}>
           <Link to="/">{t("header_home")}</Link>
           <span> / </span>
           <span className={scss.current}>{t("faq_page_title")}</span>
         </div>
 
-        {/* Заголовок страницы */}
         <div className={scss.pageHeader}>
           <h1>{t("faq_page_title")}</h1>
           <p className={scss.subtitle}>{t("faq_page_subtitle")}</p>
@@ -282,7 +267,6 @@ const FAQ = () => {
               </ul>
             </div>
 
-            {/* Популярные вопросы */}
             <div className={scss.popularQuestions}>
               <h3>{t("faq_popular_questions")}</h3>
               <ul>
@@ -302,7 +286,6 @@ const FAQ = () => {
               </ul>
             </div>
 
-            {/* Контакты поддержки */}
             <div className={scss.supportCard}>
               <h3>{t("faq_support_title")}</h3>
               <p>{t("faq_support_description")}</p>
@@ -346,7 +329,6 @@ const FAQ = () => {
           </aside>
 
           <main className={scss.main}>
-            {/* Управление вопросами */}
             <div className={scss.controls}>
               <div className={scss.results}>
                 <span className={scss.count}>{filteredItems.length}</span>{" "}
@@ -380,7 +362,6 @@ const FAQ = () => {
               </div>
             </div>
 
-            {/* Список вопросов */}
             <div className={scss.questionsList}>
               {filteredItems.length === 0 ? (
                 <div className={scss.noResults}>
@@ -535,7 +516,6 @@ const FAQ = () => {
               )}
             </div>
 
-            {/* Форма для нового вопроса */}
             <div className={scss.askQuestion}>
               <h2>{t("faq_ask_question_title")}</h2>
               <p>{t("faq_ask_question_description")}</p>
@@ -609,7 +589,6 @@ const FAQ = () => {
           </main>
         </div>
 
-        {/* Баннер помощи */}
         <div className={scss.helpBanner}>
           <div className={scss.helpContent}>
             <h2>{t("faq_emergency_title")}</h2>

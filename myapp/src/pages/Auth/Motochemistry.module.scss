@@ -1,22 +1,20 @@
-// Motochemistry.module.scss
-
 .categoryPage {
   padding: 2rem 0;
 
   &.chemistryPage {
     .pageHeader {
       h1 {
-        color: #00bcd4; // Аква-голубой
+        color: #00bcd4;
         text-shadow: 1px 1px 3px rgba(0, 188, 212, 0.3);
       }
     }
 
     .detailItem {
-      padding-left: 0; // Убрано для смайликов
+      padding-left: 0;
     }
 
     .filterSection h4 {
-      padding-left: 0; // Убрано для эмодзи
+      padding-left: 0;
     }
   }
 
@@ -70,7 +68,6 @@
   }
 }
 
-// Мобильная кнопка фильтров
 .mobileFilterBtn {
   display: none;
   align-items: center;
@@ -103,7 +100,6 @@
   }
 }
 
-// Сайдбар с фильтрами
 .sidebar {
   background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
   border-radius: 16px;
@@ -218,7 +214,6 @@
   }
 }
 
-// Поиск
 .searchBox {
   position: relative;
   display: flex;
@@ -1080,7 +1075,9 @@
   animation: slideIn 0.3s ease-out;
   border-left: 4px solid;
   gap: 12px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 @keyframes slideIn {

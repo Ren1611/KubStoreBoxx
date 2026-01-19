@@ -6,7 +6,6 @@ const Service = () => {
 
   return (
     <div className={scss.servicePage}>
-      {/* Hero Section */}
       <div className={scss.hero}>
         <div className="container">
           <div className={scss.heroContent}>
@@ -30,7 +29,6 @@ const Service = () => {
       <div id={scss.service}>
         <div className="container">
           <div className={scss.service}>
-            {/* Main Service Content */}
             <div className={scss.nomer1}>
               <div className={scss.card}>
                 <div className={scss.cardHeader}>
@@ -84,7 +82,6 @@ const Service = () => {
               </div>
             </div>
 
-            {/* Services List */}
             <div className={scss.nomer2}>
               <div className={`${scss.card} ${scss.servicesCard}`}>
                 <div className={scss.cardHeader}>
@@ -194,7 +191,6 @@ const Service = () => {
         </div>
       </div>
 
-      {/* Locations Section */}
       <div id={scss.HomeSer}>
         <div className="container">
           <div className={scss.HomeSer}>
@@ -208,7 +204,6 @@ const Service = () => {
             </div>
 
             <div className={scss.locationsGrid}>
-              {/* Location Card 2 */}
               <div className={scss.locationCard}>
                 <h3 className={scss.locationTitle}>
                   {t("service_location_prospekt_mira_title")}
@@ -257,7 +252,6 @@ const Service = () => {
                 </button>
               </div>
 
-              {/* Location Card 3 */}
               <div className={scss.locationCard}>
                 <h3 className={scss.locationTitle}>
                   {t("service_location_saint_petersburg_title")}
@@ -306,7 +300,6 @@ const Service = () => {
                 </button>
               </div>
 
-              {/* Location Card 4 */}
               <div className={scss.locationCard}>
                 <h3 className={scss.locationTitle}>
                   {t("service_location_krasnodar_title")}
@@ -356,7 +349,6 @@ const Service = () => {
               </div>
             </div>
 
-            {/* Contact Banner */}
             <div className={scss.contactBanner}>
               <div className={scss.bannerContent}>
                 <div className={scss.bannerText}>

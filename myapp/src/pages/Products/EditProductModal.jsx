@@ -21,7 +21,6 @@ const EditProductModal = ({ product, onClose, onSuccess }) => {
 
   const [errors, setErrors] = useState({});
 
-  // Fill form with product data when opened
   useEffect(() => {
     if (product) {
       setFormData({
@@ -45,7 +44,6 @@ const EditProductModal = ({ product, onClose, onSuccess }) => {
       [name]: type === "checkbox" ? checked : value,
     }));
 
-    // Clear error on change
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }

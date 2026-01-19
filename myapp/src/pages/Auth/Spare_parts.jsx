@@ -16,7 +16,6 @@ import {
 } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
-// Компонент уведомления
 const Notification = React.memo(({ message, type, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -63,12 +62,10 @@ const Spare_parts = () => {
     readFavorit,
   } = useProduct();
 
-  // Основные фильтры
   const [query, setQuery] = useState("");
   const [inStock, setInStock] = useState(false);
   const [discountOnly, setDiscountOnly] = useState(false);
 
-  // Фильтры для запчастей
   const [selectedCategories, setSelectedCategories] = useState(new Set());
   const [selectedCompatibility, setSelectedCompatibility] = useState(new Set());
   const [selectedBrands, setSelectedBrands] = useState(new Set());
@@ -77,14 +74,12 @@ const Spare_parts = () => {
   const [selectedConditions, setSelectedConditions] = useState(new Set());
   const [selectedQualities, setSelectedQualities] = useState(new Set());
 
-  // Ценовой диапазон
   const [priceRange, setPriceRange] = useState({ min: 0, max: 100000 });
   const [currentPriceRange, setCurrentPriceRange] = useState({
     min: 0,
     max: 100000,
   });
 
-  // Динамические данные из продуктов
   const [availableBrands, setAvailableBrands] = useState([]);
   const [availableCategories, setAvailableCategories] = useState([]);
   const [availablePartTypes, setAvailablePartTypes] = useState([]);
@@ -93,38 +88,30 @@ const Spare_parts = () => {
   const [availableQualities, setAvailableQualities] = useState([]);
   const [availableCompatibility, setAvailableCompatibility] = useState([]);
 
-  // Фильтрованные продукты
   const [filtered, setFiltered] = useState([]);
 
-  // Пагинация
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
 
-  // Сортировка
   const [sortBy, setSortBy] = useState("default");
 
-  // Уведомления
   const [notifications, setNotifications] = useState([]);
   const [favorites, setFavorites] = useState(new Set());
 
-  // Получение продуктов
   useEffect(() => {
     getProducts();
     readFavorit();
   }, []);
 
-  // Загрузка избранного из localStorage
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem("favorit")) || [];
     const favoriteSet = new Set(storedFavorites.map((item) => item.id));
     setFavorites(favoriteSet);
   }, [favorit]);
 
-  // Извлечение данных из продуктов для фильтров
   useEffect(() => {
     if (!products) return;
 
-    // Находим товары категории "Моторасходники и З/Ч"
     const sparePartsProducts = products.filter(
       (p) => p.category === "Моторасходники и З/Ч",
     );
@@ -132,7 +119,6 @@ const Spare_parts = () => {
     console.log("Всего запчастей:", sparePartsProducts.length);
 
     if (sparePartsProducts.length > 0) {
-      // Находим цены только для запчастей
       const prices = sparePartsProducts
         .map((p) => parseFloat(p.price) || 0)
         .filter((p) => p > 0);
@@ -144,7 +130,6 @@ const Spare_parts = () => {
         setCurrentPriceRange({ min: minPrice, max: maxPrice });
       }
 
-      // Извлекаем уникальные значения для фильтров
       const uniqueBrands = new Set();
       const uniqueCategories = new Set();
       const uniquePartTypes = new Set();
@@ -154,29 +139,22 @@ const Spare_parts = () => {
       const uniqueCompatibility = new Set();
 
       sparePartsProducts.forEach((product) => {
-        // Бренды
         if (product.brand) uniqueBrands.add(product.brand);
 
-        // Категории (используем sparePartCategory)
         if (product.sparePartCategory) {
           uniqueCategories.add(product.sparePartCategory);
         }
 
-        // Типы запчастей (используем partType)
         if (product.partType) {
           uniquePartTypes.add(product.partType);
         }
 
-        // Материалы
         if (product.material) uniqueMaterials.add(product.material);
 
-        // Состояние
         if (product.condition) uniqueConditions.add(product.condition);
 
-        // Качество
         if (product.quality) uniqueQualities.add(product.quality);
 
-        // Совместимость
         if (product.compatibility)
           uniqueCompatibility.add(product.compatibility);
       });
@@ -186,7 +164,6 @@ const Spare_parts = () => {
       console.log("Найденные типы запчастей:", Array.from(uniquePartTypes));
       console.log("Найденные состояния:", Array.from(uniqueConditions));
 
-      // Сортируем и устанавливаем значения
       setAvailableBrands(Array.from(uniqueBrands).sort());
       setAvailableCategories(Array.from(uniqueCategories).sort());
       setAvailablePartTypes(Array.from(uniquePartTypes).sort());
@@ -197,7 +174,6 @@ const Spare_parts = () => {
     }
   }, [products]);
 
-  // Обработчики уведомлений
   const showNotification = (message, type = "success") => {
     const id = Date.now();
     setNotifications((prev) => [...prev, { id, message, type }]);
@@ -209,7 +185,6 @@ const Spare_parts = () => {
     );
   };
 
-  // Функции для переключения фильтров
   const toggleCategory = (category) => {
     const copy = new Set(selectedCategories);
     if (copy.has(category)) copy.delete(category);
@@ -259,7 +234,6 @@ const Spare_parts = () => {
     setSelectedQualities(copy);
   };
 
-  // Очистка всех фильтров
   const clearAllFilters = () => {
     setQuery("");
     setInStock(false);
@@ -276,7 +250,6 @@ const Spare_parts = () => {
     showNotification(t("spare_parts_notifications_filters_cleared"), "info");
   };
 
-  // Очистка конкретного фильтра
   const clearFilter = (filterName) => {
     switch (filterName) {
       case "categories":
@@ -306,22 +279,18 @@ const Spare_parts = () => {
     setCurrentPage(1);
   };
 
-  // Проверка, находится ли товар в избранном
   const isInFavorites = (productId) => {
     return favorites.has(productId);
   };
 
-  // Применение фильтрации
   useEffect(() => {
     if (!products) return;
 
     let filteredProducts = products.filter((product) => {
-      // Проверяем, относится ли продукт к запчастям
       const isSparePart = product.category === "Моторасходники и З/Ч";
 
       if (!isSparePart) return false;
 
-      // Фильтр по поиску
       const searchQuery = query.trim().toLowerCase();
       if (searchQuery) {
         const title = (product.name || product.title || "").toLowerCase();
@@ -339,20 +308,16 @@ const Spare_parts = () => {
         }
       }
 
-      // Фильтр по наличию
       if (inStock && !product.inStock) return false;
 
-      // Фильтр по скидке
       if (discountOnly && (!product.discount || product.discount <= 0))
         return false;
 
-      // Фильтр по цене
       const price = parseFloat(product.price) || 0;
       if (price < currentPriceRange.min || price > currentPriceRange.max) {
         return false;
       }
 
-      // Фильтр по категориям (используем sparePartCategory)
       if (selectedCategories.size > 0) {
         const productCategory = product.sparePartCategory || "";
         if (
@@ -362,8 +327,6 @@ const Spare_parts = () => {
           return false;
         }
       }
-
-      // Фильтр по типам запчастей (используем partType)
       if (selectedPartTypes.size > 0) {
         const partType = product.partType || "";
         if (partType === "" || !selectedPartTypes.has(partType)) {
@@ -371,7 +334,6 @@ const Spare_parts = () => {
         }
       }
 
-      // Фильтр по совместимости
       if (selectedCompatibility.size > 0) {
         const compatibility = product.compatibility || "";
         if (compatibility === "" || !selectedCompatibility.has(compatibility)) {
@@ -379,7 +341,6 @@ const Spare_parts = () => {
         }
       }
 
-      // Фильтр по брендам
       if (selectedBrands.size > 0) {
         const brand = product.brand || "";
         if (brand === "" || !selectedBrands.has(brand)) {
@@ -387,7 +348,6 @@ const Spare_parts = () => {
         }
       }
 
-      // Фильтр по материалам
       if (selectedMaterials.size > 0) {
         const material = product.material || "";
         if (material === "" || !selectedMaterials.has(material)) {
@@ -395,7 +355,6 @@ const Spare_parts = () => {
         }
       }
 
-      // Фильтр по состоянию
       if (selectedConditions.size > 0) {
         const condition = product.condition || "";
         if (condition === "" || !selectedConditions.has(condition)) {
@@ -403,7 +362,6 @@ const Spare_parts = () => {
         }
       }
 
-      // Фильтр по качеству
       if (selectedQualities.size > 0) {
         const quality = product.quality || "";
         if (quality === "" || !selectedQualities.has(quality)) {
@@ -454,13 +412,11 @@ const Spare_parts = () => {
     sortBy,
   ]);
 
-  // Пагинация
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filtered.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
 
-  // Обработчики для действий
   const handleAddToCart = (product) => {
     const productToAdd = {
       ...product,
@@ -478,7 +434,6 @@ const Spare_parts = () => {
 
   const handleAddToFavorites = (product) => {
     if (isInFavorites(product.id)) {
-      // Если товар уже в избранном, удаляем его
       const favorites = JSON.parse(localStorage.getItem("favorit")) || [];
       const updatedFavorites = favorites.filter(
         (item) => item.id !== product.id,
@@ -508,7 +463,6 @@ const Spare_parts = () => {
     }
   };
 
-  // Генерация номеров страниц
   const generatePageNumbers = () => {
     const pageNumbers = [];
     const maxVisiblePages = 5;
@@ -537,7 +491,6 @@ const Spare_parts = () => {
     return pageNumbers;
   };
 
-  // Рендер активных фильтров
   const renderActiveFilters = () => {
     const activeFilters = [];
 
@@ -648,7 +601,6 @@ const Spare_parts = () => {
 
   return (
     <div className={`${scss.categoryPage} ${scss.sparePartsPage}`}>
-      {/* Уведомления */}
       <div className={scss.notificationsContainer}>
         {notifications.map((notification) => (
           <Notification
@@ -676,7 +628,6 @@ const Spare_parts = () => {
                 </button>
               </div>
 
-              {/* Поиск */}
               <div className={scss.filterSection}>
                 <label className={scss.filterLabel}>
                   <span>{t("spare_parts_search_by_name")}</span>
@@ -689,7 +640,6 @@ const Spare_parts = () => {
                 </label>
               </div>
 
-              {/* Базовые фильтры */}
               <div className={scss.filterSection}>
                 <h4>{t("spare_parts_basic_filters")}</h4>
                 <div className={scss.checkboxGroup}>
@@ -712,7 +662,6 @@ const Spare_parts = () => {
                 </div>
               </div>
 
-              {/* Ценовой диапазон */}
               <div className={scss.filterSection}>
                 <h4>
                   {t("spare_parts_active_filters_price")}:{" "}
@@ -762,7 +711,6 @@ const Spare_parts = () => {
                 </div>
               </div>
 
-              {/* Категории */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("spare_parts_active_filters_categories")}</h4>
@@ -791,7 +739,6 @@ const Spare_parts = () => {
                 </div>
               </div>
 
-              {/* Типы запчастей */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("spare_parts_part_types")}</h4>
@@ -820,7 +767,6 @@ const Spare_parts = () => {
                 </div>
               </div>
 
-              {/* Совместимость */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("spare_parts_compatibility")}</h4>
@@ -849,7 +795,6 @@ const Spare_parts = () => {
                 </div>
               </div>
 
-              {/* Бренды */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("spare_parts_active_filters_brands")}</h4>
@@ -878,7 +823,6 @@ const Spare_parts = () => {
                 </div>
               </div>
 
-              {/* Материалы */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("spare_parts_materials")}</h4>
@@ -907,7 +851,6 @@ const Spare_parts = () => {
                 </div>
               </div>
 
-              {/* Состояние */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("spare_parts_condition")}</h4>
@@ -936,7 +879,6 @@ const Spare_parts = () => {
                 </div>
               </div>
 
-              {/* Качество */}
               <div className={scss.filterSection}>
                 <div className={scss.filterHeader}>
                   <h4>{t("spare_parts_quality")}</h4>
@@ -1166,7 +1108,6 @@ const Spare_parts = () => {
               )}
             </div>
 
-            {/* Пагинация */}
             {totalPages > 1 && (
               <div className={scss.pagination}>
                 <button
