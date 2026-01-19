@@ -1,0 +1,886 @@
+.contactsPage {
+  padding: 40px 0 80px;
+  background: #f8fafc;
+  min-height: 100vh;
+  // margin-top: -300px;
+  margin-bottom: -100px;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+}
+
+.breadcrumbs {
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: #64748b;
+
+  a {
+    color: #3b82f6;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #1d4ed8;
+      text-decoration: underline;
+    }
+  }
+
+  .current {
+    color: #475569;
+  }
+}
+
+.pageHeader {
+  margin-bottom: 48px;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 16px;
+  }
+
+  .subtitle {
+    font-size: 1.125rem;
+    color: #64748b;
+    max-width: 800px;
+    line-height: 1.6;
+  }
+}
+
+.contactsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+// Контактные телефоны
+.contactPhones {
+  h2 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin-bottom: 24px;
+  }
+}
+
+.phonesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.phoneCard {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.phoneLabel {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.phoneNumber {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #3b82f6;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #1d4ed8;
+  }
+}
+
+// Основной макет
+.mainLayout {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 32px;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Левая колонка
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.contactFormSection {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin-bottom: 8px;
+  }
+
+  > p {
+    color: #64748b;
+    margin-bottom: 24px;
+  }
+}
+
+.successMessage {
+  text-align: center;
+  padding: 40px 20px;
+
+  svg {
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    color: #10b981;
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: #64748b;
+  }
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formGroup {
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #475569;
+    margin-bottom: 8px;
+
+    &[for="agreement"] {
+      font-weight: normal;
+      cursor: pointer;
+    }
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1e293b;
+    background: white;
+    transition: border-color 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    &::placeholder {
+      color: #94a3b8;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+}
+
+.formFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.agreement {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+
+  label {
+    font-size: 14px;
+    color: #64748b;
+    cursor: pointer;
+  }
+}
+
+.submitBtn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: #1d4ed8;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+// Социальные сети
+.socialSection {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin-bottom: 8px;
+  }
+
+  > p {
+    color: #64748b;
+    margin-bottom: 24px;
+  }
+}
+
+.socialLinks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.socialLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #475569;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+  }
+}
+
+.socialIcon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.socialName {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+// Правая колонка
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+// Табы локаций
+.locationsTabs {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tabsHeader {
+  display: flex;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
+}
+
+.tabBtn {
+  flex: 1;
+  padding: 16px 24px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+
+  &:hover {
+    background: #f1f5f9;
+    color: #475569;
+  }
+
+  &.active {
+    background: white;
+    color: #3b82f6;
+    border-bottom: 2px solid #3b82f6;
+  }
+
+  @media (max-width: 576px) {
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+
+    &.active {
+      border-bottom: 2px solid #3b82f6;
+    }
+  }
+}
+
+.tabContent {
+  padding: 32px;
+}
+
+.locationCard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.locationHeader {
+  h3 {
+    font-size: 1.25rem;
+    color: #1e293b;
+    margin-bottom: 8px;
+  }
+}
+
+.locationAddress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 14px;
+
+  svg {
+    flex-shrink: 0;
+    color: #94a3b8;
+  }
+}
+
+.locationDescription {
+  color: #475569;
+  line-height: 1.6;
+}
+
+.locationDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.workingHours,
+.locationFeatures {
+  h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 12px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #475569;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.locationFeatures {
+  li {
+    align-items: flex-start;
+    gap: 8px;
+    justify-content: flex-start;
+
+    svg {
+      flex-shrink: 0;
+      color: #10b981;
+      margin-top: 2px;
+    }
+  }
+}
+
+.day {
+  color: #64748b;
+}
+
+.time {
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.locationActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
+}
+
+.locationBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+// Контактные лица
+.contactPersons {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin-bottom: 8px;
+  }
+
+  > p {
+    color: #64748b;
+    margin-bottom: 24px;
+  }
+}
+
+.personsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.personCard {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+  }
+}
+
+.personImage {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.personInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.personInfo h3 {
+  font-size: 1rem;
+  color: #1e293b;
+  margin: 0;
+}
+
+.personPosition {
+  font-size: 14px;
+  font-weight: 600;
+  color: #3b82f6;
+}
+
+.personDepartment {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.personContacts {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.personPhone,
+.personEmail {
+  font-size: 12px;
+  color: #475569;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #3b82f6;
+  }
+}
+
+.personHours {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #94a3b8;
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+// Карта
+// ... (предыдущие стили до mapSection остаются без изменений)
+
+// Карта
+.mapSection {
+  h2 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin-bottom: 24px;
+  }
+}
+
+.mapContainer {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.mapWrapper {
+  height: 400px;
+  width: 100%;
+  position: relative;
+}
+
+.mapIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.mapLocations {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0;
+  border-top: 1px solid #e2e8f0;
+  background: white;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mapLocation {
+  padding: 24px;
+  border-right: 1px solid #e2e8f0;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: #f8fafc;
+  }
+
+  &:last-child {
+    border-right: none;
+  }
+
+  @media (max-width: 768px) {
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  h4 {
+    font-size: 1rem;
+    color: #1e293b;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+}
+
+.mapBtn {
+  padding: 8px 16px;
+  background: #3b82f6;
+  border: 1px solid #3b82f6;
+  border-radius: 6px;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+  }
+}
+
+// ... (остальные стили после mapSection остаются без изменений)
+
+// FAQ предпросмотр
+.faqPreview {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  border-radius: 12px;
+  padding: 48px;
+  color: white;
+}
+
+.faqContent {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+
+  h2 {
+    color: white;
+    margin-bottom: 12px;
+  }
+
+  > p {
+    opacity: 0.9;
+    margin-bottom: 32px;
+  }
+}
+
+.faqQuestions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.faqQuestion {
+  text-align: left;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 24px;
+  border-radius: 8px;
+
+  h3 {
+    font-size: 1rem;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 14px;
+    opacity: 0.9;
+    line-height: 1.5;
+  }
+}
+
+.faqLink {
+  display: inline-block;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+.tabsHeader {
+  display: flex;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.tabBtn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 12px;
+  background: none;
+  border: none;
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 70px;
+
+  &:hover {
+    background: #f1f5f9;
+    color: #475569;
+  }
+
+  &.active {
+    background: white;
+    color: #3b82f6;
+    border-bottom: 2px solid #3b82f6;
+
+    .tabIcon {
+      color: #3b82f6;
+    }
+  }
+
+  @media (min-width: 769px) {
+    flex-direction: row;
+    gap: 8px;
+    font-size: 14px;
+    padding: 16px 20px;
+    min-height: auto;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    text-align: left;
+    min-height: 60px;
+  }
+}
+
+.tabIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: #94a3b8;
+  flex-shrink: 0;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (min-width: 769px) {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.tabText {
+  font-size: 12px;
+  line-height: 1.2;
+
+  @media (min-width: 769px) {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+.tabContent {
+  padding: 24px;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+}

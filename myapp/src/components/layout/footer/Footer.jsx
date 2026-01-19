@@ -1,87 +1,127 @@
-import scss from "./Footer.module.scss";
+import styles from "./Footer.module.scss";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaTelegram,
+  FaWhatsapp,
+} from "react-icons/fa";
+import { SiMastercard, SiVisa, SiPaypal } from "react-icons/si";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <div>
-      <div id={scss.footer}>
+      <footer className={styles.homeFooter}>
         <div className="container">
-          <div className={scss.footer}>
-            <div className={scss.FooterInp}>
-              <h1>Exclusive</h1>
-              <h2>
-                <a href="https://github.com/Ren1611" target="blank">
-                  Subscribe
-                </a>
-              </h2>
-              <p>Get 10% off your first order</p>
-              <input type="text" placeholder="Enter your email" />
-              <button>
-                <img src="../src/assets/icons/icon-send.svg" alt="" />
-              </button>
-            </div>
-            <div className={scss.FooterSup}>
-              <h1>Support</h1>
-
-              <p>becbolsunofmurzakubat@gmail.com</p>
-              <p>+88015-88888-9999</p>
-            </div>
-            <div className={scss.FooterAcc}>
-              <h1>Account</h1>
-              <p>My Account</p>
-              <p>
-                <a href="/login">Login</a> / <a href="/register">Register</a>
+          <div className={styles.footerContent}>
+            <div className={styles.footerSection}>
+              <h3 className={styles.footerTitle}>{t("footer_title")}</h3>
+              <p className={styles.footerDescription}>
+                {t("footer_description")}
               </p>
-              <p>
-                <a href="/card">Card</a>
-              </p>
-              <p></p>
-            </div>
-            <div className={scss.FooterQui}>
-              <h1>Quick Link</h1>
-              <p>Privacy Policy</p>
-
-              <p>Contact</p>
-            </div>
-            <div className={scss.FooterDow}>
-              <h1>Download App</h1>
-              <div className={scss.Quar}>
-                <img src="../src/assets/images/Qr Code (1).svg" alt="" />
-                <div className={scss.App}>
-                  <img src="../src/assets/images/GooglePlay.svg" alt="" />
-                  <br />
-                  <img src="../src/assets/images/AppStore (1).svg" alt="" />
-                </div>
-              </div>
-              <div className={scss.contacts}>
+              <div className={styles.socialLinks}>
                 <a
+                  target="blank"
                   href="https://www.facebook.com/profile.php?id=61560514741224&mibextid=ZbWKwL"
-                  target="blank"
+                  className={styles.socialLink}
+                  aria-label={t("footer_social_facebook")}
                 >
-                  <img src="../src/assets/icons/Icon-Facebook (1).svg" alt="" />
-                </a>
-                <a href="https://x.com/Kioshi_Kubat " target="blank">
-                  <img src="../src/assets/icons/Icon-Twitter (1).svg" alt="" />
+                  <FaFacebookF />
                 </a>
                 <a
+                  target="blank"
                   href="https://www.instagram.com/ku.bat2398?igsh=MXFhZDJ1Y3I0dGpteg=="
-                  target="blank"
+                  className={styles.socialLink}
+                  aria-label={t("footer_social_instagram")}
                 >
-                  <img
-                    src="../src/assets/icons/Icon-instagram (1).svg"
-                    alt=""
-                  />
+                  <FaInstagram />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/jfuviviv-eyicyccceru-3638ba39b"
                   target="blank"
+                  href="t.me/Kioshi_A15"
+                  className={styles.socialLink}
+                  aria-label={t("footer_social_telegram")}
                 >
-                  <img src="../src/assets/icons/Icon-Linkedin (1).svg" alt="" />
+                  <FaTelegram />
+                </a>
+                <a
+                  target="blank"
+                  href="https://wa.me/qr/NCXYMJDEIVNGP1"
+                  className={styles.socialLink}
+                  aria-label={t("footer_social_whatsapp")}
+                >
+                  <FaWhatsapp />
                 </a>
               </div>
+            </div>
+
+            <div className={styles.footerSection}>
+              <h4 className={styles.footerSubtitle}>{t("footer_catalog")}</h4>
+              <ul className={styles.footerLinks}>
+                <li>
+                  <Link to="/Motorcycle_helmets">
+                    {t("footer_motorcycle_helmets")}
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/Motorcycle_equipment">
+                    {t("footer_motorcycle_equipment")}
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/spare_parts">{t("footer_spare_parts")}</Link>
+                </li>
+                <li>
+                  <Link to="/Tuning">{t("footer_accessories")}</Link>
+                </li>
+              </ul>
+            </div>
+
+            <div className={styles.footerSection}>
+              <h4 className={styles.footerSubtitle}>{t("footer_help")}</h4>
+              <ul className={styles.footerLinks}>
+                <li>
+                  <Link to="/register">{t("footer_register")}</Link>
+                </li>
+                <li>
+                  <Link to="/login">{t("footer_login")}</Link>
+                </li>
+                <li>
+                  <Link to="/contacts">{t("footer_contacts")}</Link>
+                </li>
+                <li>
+                  <Link to="/faq">{t("footer_faq")}</Link>
+                </li>
+              </ul>
+            </div>
+
+            <div className={styles.footerSection}>
+              <h4 className={styles.footerSubtitle}>
+                {t("footer_payment_methods")}
+              </h4>
+              <div className={styles.paymentMethods}>
+                <SiVisa className={styles.paymentIcon} />
+                <SiMastercard className={styles.paymentIcon} />
+                <SiPaypal className={styles.paymentIcon} />
+              </div>
+              <p className={styles.contactInfo}>
+                {t("footer_phone")}
+                <br />
+                {t("footer_email")}
+              </p>
             </div>
           </div>
+
+          <div className={styles.footerBottom}>
+            <p className={styles.copyright}>
+              {t("footer_copyright", { year: new Date().getFullYear() })}
+            </p>
+          </div>
         </div>
-      </div>
+      </footer>
     </div>
   );
 };

@@ -1,238 +1,612 @@
-#service {
-  .service {
-    margin-top: -220px;
-    .nomer1 {
-      h1 {
-        color: rgb(0, 0, 0);
-        margin-bottom: 25px;
-      }
-      h2 {
-        color: rgb(0, 0, 0);
-        margin-bottom: 15px;
-        font-weight: 400;
-      }
-      p {
-        color: rgb(0, 0, 0);
-        margin-bottom: 35px;
-        font-weight: 300;
-        line-height: 1.6;
-      }
-      .serviceImg {
-        display: flex;
-        gap: 10px;
-        img {
-          width: 635px;
-          height: 500px;
-          object-fit: cover;
-        }
-      }
-    }
-    .nomer2 {
-      margin-top: 50px;
-      ul {
-        margin-top: 20px;
-        li {
-          color: rgb(0, 0, 0);
-          font-weight: 300;
-          line-height: 1.6;
-          margin-left: 18px;
-        }
-      }
-      .rux {
-        width: 190px;
-        height: 50px;
-        border-radius: 8px;
-        padding-top: 12px;
-        padding-left: 17px;
+// Service.module.scss
 
-        border: none;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        h1 {
-          font-size: 24px;
-          color: rgb(0, 0, 0);
-        }
-      }
+.servicePage {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  margin-bottom: -100px;
+}
+
+// Hero Section
+.hero {
+  background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 40px 40px;
+
+  &Content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  &Text {
+    flex: 1;
+  }
+
+  &Title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 20px;
+    line-height: 1.2;
+
+    .titleHighlight {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0 15px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+    }
+  }
+
+  &Subtitle {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+  }
+
+  &Decoration {
+    display: flex;
+    gap: 20px;
+  }
+
+  .circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    animation: float 3s ease-in-out infinite;
+
+    &:nth-child(2) {
+      animation-delay: 0.5s;
+      width: 100px;
+      height: 100px;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 1s;
+      width: 60px;
+      height: 60px;
     }
   }
 }
-#HomeSer {
-  .HomeSer {
-    margin-top: 80px;
-    margin-bottom: 170px;
 
-    .room {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      height: 60px;
-      align-items: center;
-      padding: 30px;
+// Service Section
+.service {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin: 80px 0;
 
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-      h2 {
-        font-size: 16px;
-      }
-      .Ho {
-        color: rgb(97, 97, 97);
-      }
-      .Oo {
-        color: rgb(97, 97, 97);
-        margin-left: 400px;
-      }
-      .Po {
-        margin-right: 130px;
-        color: rgb(97, 97, 97);
-      }
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Cards
+.card {
+  background: white;
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(255, 126, 95, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 126, 95, 0.1);
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 80px rgba(255, 126, 95, 0.2);
+  }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.iconWrapper {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .icon {
+    width: 32px;
+    height: 32px;
+    fill: white;
+  }
+}
+
+.sectionTitle {
+  font-size: 1.8rem;
+  color: #333;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.description {
+  color: #666;
+  line-height: 1.8;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  &Icon {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+  }
+
+  span {
+    color: #555;
+    font-size: 1rem;
+  }
+}
+
+.serviceImg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.imgContainer {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      rgba(255, 126, 95, 0.2),
+      rgba(254, 180, 123, 0.2)
+    );
+    z-index: 1;
+  }
+
+  .img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  &:hover .img {
+    transform: scale(1.05);
+  }
+}
+
+// Services Card
+.servicesCard {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+
+  .servicesTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+
+    .titleAccent {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 5px 20px;
+      border-radius: 25px;
     }
-    .line {
-      padding: 30px;
-      display: flex;
-      justify-content: space-between;
-      .blog {
-        h3 {
-          font-size: 20px;
-          font-weight: 500;
-          margin-top: -10px;
-          color: rgb(0, 0, 0);
-        }
-        .top {
-          font-size: 16px;
-          font-weight: 300;
-          color: rgb(77, 77, 77);
-          margin-top: 10px;
-        }
-        .botton {
-          font-size: 14px;
-          font-weight: 300;
-          color: rgb(77, 77, 77);
-          margin-top: 20px;
-        }
-      }
-      .Phon {
-        h4 {
-          font-size: 16px;
-          font-weight: 300;
-          color: rgb(77, 77, 77);
-          margin-bottom: 10px;
-          margin-left: 200px;
-        }
-      }
-      .pop {
-        h4 {
-          font-size: 16px;
-          font-weight: 300;
-          color: rgb(77, 77, 77);
-          margin-bottom: 10px;
-          margin-left: 248px;
-        }
-      }
-      .poop {
-        h4 {
-          font-size: 16px;
-          font-weight: 300;
-          color: rgb(77, 77, 77);
-          margin-bottom: 10px;
-          margin-left: 220px;
-        }
-      }
-      .lox {
-        h4 {
-          font-size: 16px;
-          font-weight: 300;
-          color: rgb(77, 77, 77);
-          margin-bottom: 10px;
-          margin-left: 290px;
-        }
-      }
+  }
 
-      .email {
-        a {
-          font-size: 16px;
-          font-weight: 300;
-          color: rgb(162, 0, 255);
-          margin-right: 70px;
-        }
-        a:hover {
-          cursor: pointer;
-          text-decoration: none;
-        }
-      }
+  .servicesSubtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+  }
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  margin: 40px 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.serviceItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(10px);
+  }
+
+  .serviceIcon {
+    font-size: 2rem;
+  }
+
+  .serviceContent {
+    h3 {
+      margin: 0 0 5px 0;
+      font-size: 1.2rem;
+      font-weight: 600;
     }
-    .line2 {
-      padding: 30px;
-      display: flex;
-      justify-content: space-between;
-      background-color: rgb(245, 245, 245);
 
-      .blog {
-        h3 {
-          font-size: 20px;
-          font-weight: 500;
-          margin-top: -10px;
-          color: rgb(0, 0, 0);
-        }
-        .top {
-          font-size: 16px;
-          font-weight: 300;
-          color: rgb(77, 77, 77);
-          margin-top: 10px;
-        }
-        .botton {
-          font-size: 14px;
-          font-weight: 300;
-          color: rgb(77, 77, 77);
-          margin-top: 20px;
-        }
-      }
-      .Phon {
-        h4 {
-          font-size: 16px;
-          font-weight: 300;
-          color: rgb(77, 77, 77);
-          margin-bottom: 10px;
-          margin-left: 200px;
-        }
-      }
-      .pop {
-        h4 {
-          font-size: 16px;
-          font-weight: 300;
-          color: rgb(77, 77, 77);
-          margin-bottom: 10px;
-          margin-left: 248px;
-        }
-      }
-      .poop {
-        h4 {
-          font-size: 16px;
-          font-weight: 300;
-          color: rgb(77, 77, 77);
-          margin-bottom: 10px;
-          margin-left: 220px;
-        }
-      }
-      .lox {
-        h4 {
-          font-size: 16px;
-          font-weight: 300;
-          color: rgb(77, 77, 77);
-          margin-bottom: 10px;
-          margin-left: 290px;
-        }
-      }
+    p {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+  }
+}
 
-      .email {
-        a {
-          font-size: 16px;
-          font-weight: 300;
-          color: rgb(162, 0, 255);
-          margin-right: 70px;
-        }
-        a:hover {
-          cursor: pointer;
-          text-decoration: none;
-        }
-      }
+.ctaButton {
+  width: 100%;
+  padding: 20px;
+  background: white;
+  border: none;
+  border-radius: 20px;
+  color: #764ba2;
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 30px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .arrowIcon {
+    width: 24px;
+    height: 24px;
+    fill: #764ba2;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover .arrowIcon {
+    transform: translateX(5px);
+  }
+}
+
+// Locations Section
+.HomeSer {
+  padding: 80px 0;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.locationsTitle {
+  font-size: 2.8rem;
+  color: #333;
+  font-weight: 700;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, #ff7e5f 0%, #667eea 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.locationsSubtitle {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.locationsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.locationCard {
+  background: white;
+  border-radius: 25px;
+  padding: 30px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 126, 95, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+  }
+
+  &.highlighted {
+    border: 2px solid #ff7e5f;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+    }
+  }
+}
+
+.locationHeader {
+  margin-bottom: 25px;
+}
+
+.locationBadge {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+  color: white;
+  padding: 6px 15px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.locationTitle {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 600;
+  margin: 0;
+}
+
+.locationInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-grow: 1;
+}
+
+.infoItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+
+  .infoIcon {
+    font-size: 1.5rem;
+    opacity: 0.7;
+  }
+
+  .infoContent {
+    flex: 1;
+
+    h4 {
+      margin: 0 0 5px 0;
+      font-size: 0.9rem;
+      color: #666;
+      font-weight: 500;
+    }
+
+    p {
+      margin: 0;
+      color: #333;
+      font-size: 1rem;
+    }
+
+    .top {
+      font-weight: 500;
+    }
+
+    .bottom {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 5px;
+    }
+  }
+}
+
+.Phon,
+.pop,
+.poop,
+.lox {
+  p {
+    margin: 0;
+    color: #333;
+    font-weight: 500;
+  }
+
+  .extension {
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: normal;
+    margin-top: 2px;
+  }
+}
+
+.emailLink {
+  color: #ff7e5f;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #feb47b;
+    text-decoration: underline;
+  }
+}
+
+.locationButton {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 15px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: auto;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+  }
+}
+
+// Contact Banner
+.contactBanner {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 30px;
+  padding: 50px;
+  margin-top: 60px;
+
+  .bannerContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+      gap: 30px;
+    }
+  }
+
+  .bannerText {
+    flex: 1;
+
+    h3 {
+      font-size: 2rem;
+      color: white;
+      margin: 0 0 10px 0;
+      font-weight: 700;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.1rem;
+      margin: 0;
+      max-width: 500px;
+    }
+  }
+
+  .bannerButton {
+    padding: 18px 40px;
+    background: white;
+    border: none;
+    border-radius: 20px;
+    color: #764ba2;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    a {
+      text-decoration: none;
+    }
+    &:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+// Animations
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .hero {
+    padding: 60px 0;
+    border-radius: 0 0 30px 30px;
+
+    &Content {
+      flex-direction: column;
+      text-align: center;
+      gap: 40px;
+    }
+
+    &Title {
+      font-size: 2.5rem;
+    }
+
+    &Subtitle {
+      font-size: 1.1rem;
+    }
+  }
+
+  .card {
+    padding: 25px;
+    border-radius: 25px;
+  }
+
+  .serviceImg {
+    grid-template-columns: 1fr;
+  }
+
+  .servicesTitle {
+    font-size: 2rem;
+  }
+
+  .locationsTitle {
+    font-size: 2.2rem;
+  }
+
+  .contactBanner {
+    padding: 30px;
+    border-radius: 25px;
+
+    .bannerText h3 {
+      font-size: 1.6rem;
     }
   }
 }

@@ -1,0 +1,465 @@
+// Темная тема для главной страницы
+// Переопределяем только специфичные стили для темной темы
+
+body.dark-theme {
+  // Уведомление в темной теме
+  .notification {
+    background: var(--success-color);
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+  }
+
+  // Герой секция в темной теме
+  .heroSection {
+    .heroSlide {
+      background-blend-mode: overlay;
+      background-color: rgba(0, 0, 0, 0.5);
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+      }
+
+      .heroContent {
+        position: relative;
+        z-index: 2;
+      }
+    }
+
+    .heroDot {
+      border-color: rgba(255, 255, 255, 0.8);
+
+      &.active {
+        background: white;
+      }
+
+      &:hover:not(.active) {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    .heroNav {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+
+  // Категории в темной теме
+  .categoriesSection {
+    .categoryCard {
+      background: var(--bg-surface);
+      border-color: var(--border-color);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+      &:hover {
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        border-color: var(--primary-color);
+
+        .categoryImage img {
+          transform: scale(1.1);
+          filter: brightness(0.7);
+        }
+      }
+
+      .categoryImage {
+        img {
+          filter: brightness(0.8);
+          transition: filter 0.3s ease, transform 0.5s ease;
+        }
+      }
+
+      .categoryOverlay {
+        background: linear-gradient(
+          to bottom,
+          transparent 30%,
+          rgba(0, 0, 0, 0.9) 100%
+        );
+      }
+
+      .categoryContent {
+        background: var(--bg-surface);
+      }
+
+      .categoryName {
+        color: var(--text-primary);
+      }
+
+      .categoryCount {
+        color: var(--text-secondary);
+      }
+    }
+  }
+
+  // Продукты в темной теме
+  .featuredSection,
+  .newArrivalsSection {
+    background-color: var(--bg-secondary);
+
+    .productCard {
+      background: var(--bg-surface);
+      border-color: var(--border-color);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+      &:hover {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        border-color: var(--primary-color);
+
+        .productImage {
+          transform: scale(1.05);
+          filter: brightness(1.1);
+        }
+      }
+
+      .productImage {
+        filter: brightness(0.9);
+        transition: filter 0.3s ease, transform 0.5s ease;
+      }
+
+      &.new {
+        border-top-color: var(--success-color);
+      }
+
+      &.hot {
+        border-top-color: var(--warning-color);
+        animation: glow 3s ease-in-out infinite;
+
+        @keyframes glow {
+          0%,
+          100% {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+          }
+          50% {
+            box-shadow: 0 5px 20px rgba(245, 158, 11, 0.4);
+          }
+        }
+      }
+
+      .favoriteButton,
+      .quickViewButton {
+        background: var(--bg-surface-hover);
+        color: var(--text-primary);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+
+        &:hover {
+          background: var(--primary-color);
+          color: white;
+        }
+
+        &.active {
+          background: var(--error-color);
+          color: white;
+        }
+      }
+
+      .cardContent {
+        .productBrand {
+          color: var(--text-secondary);
+        }
+
+        .productName {
+          color: var(--text-primary);
+        }
+
+        .productCategory {
+          color: var(--text-tertiary);
+        }
+
+        .priceSection {
+          .currentPrice {
+            color: var(--text-primary);
+          }
+
+          .originalPrice {
+            color: var(--text-tertiary);
+          }
+        }
+      }
+
+      .addToCartButton {
+        background: var(--primary-color);
+
+        &:hover {
+          background: var(--primary-hover);
+        }
+
+        &:disabled {
+          background: var(--text-tertiary);
+        }
+      }
+    }
+  }
+
+  // Промо баннеры в темной теме
+  .promoSection {
+    .promoBanner {
+      .promoContent {
+        background: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.9) 0%,
+          rgba(0, 0, 0, 0.7) 50%,
+          transparent 100%
+        );
+        backdrop-filter: blur(5px);
+      }
+
+      .promoButton {
+        background: var(--primary-color);
+
+        &:hover {
+          background: var(--primary-hover);
+        }
+      }
+    }
+  }
+
+  // Преимущества в темной теме
+  .benefitsSection {
+    background: linear-gradient(
+      135deg,
+      var(--bg-secondary) 0%,
+      var(--bg-primary) 100%
+    );
+    border: 1px solid var(--border-color);
+
+    .benefitCard {
+      background: var(--bg-surface);
+      border-color: var(--border-color);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+      &:hover {
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        transform: translateY(-8px);
+        border-top-color: var(--primary-color);
+      }
+
+      .benefitTitle {
+        color: var(--text-primary);
+      }
+
+      .benefitDescription {
+        color: var(--text-secondary);
+      }
+    }
+  }
+
+  // Секция скидок в темной теме
+  .discountSection {
+    background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.9) 0%,
+      rgba(118, 75, 162, 0.9) 100%
+    );
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .productCard {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .productImage {
+        filter: brightness(1);
+      }
+
+      .cardContent {
+        .productName,
+        .currentPrice {
+          color: white;
+        }
+
+        .productCategory,
+        .productBrand,
+        .originalPrice {
+          color: rgba(255, 255, 255, 0.8);
+        }
+      }
+    }
+  }
+
+  // Рассылка в темной теме
+  .newsletterSection {
+    background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.9) 0%,
+      rgba(118, 75, 162, 0.9) 100%
+    );
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+    }
+
+    .newsletterContent {
+      position: relative;
+      z-index: 2;
+    }
+
+    .formGroup {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+
+      .formIcon {
+        color: white;
+      }
+
+      .formInput {
+        color: white;
+        background: transparent;
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+
+      .formButton {
+        background: white;
+        color: var(--primary-color);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.9);
+        }
+      }
+    }
+
+    .formNote {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  // Специальные эффекты для темной темы
+  .sectionTitle {
+    &::after {
+      background: linear-gradient(
+        90deg,
+        var(--primary-color),
+        var(--secondary-color)
+      );
+    }
+  }
+
+  .viewAllLink {
+    &:hover {
+      color: var(--primary-hover);
+    }
+  }
+
+  // Эффект стекла для карточек
+  .glass-effect {
+    background: rgba(36, 36, 36, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  // Улучшенные тени
+  .categoryCard,
+  .productCard,
+  .benefitCard {
+    &:hover {
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  // Градиентные тексты
+  .gradient-text {
+    background: linear-gradient(
+      135deg,
+      var(--primary-color),
+      var(--secondary-color)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  // Анимации
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .floating {
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+// Медиа-запросы для темной темы
+@media (max-width: 768px) {
+  body.dark-theme {
+    .heroSection {
+      .heroTitle {
+        font-size: 2.2rem;
+      }
+
+      .heroSubtitle {
+        font-size: 1.3rem;
+      }
+    }
+
+    .promoBanner {
+      .promoContent {
+        background: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.9) 0%,
+          rgba(0, 0, 0, 0.7) 70%,
+          transparent 100%
+        );
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  body.dark-theme {
+    .categoryCard,
+    .productCard {
+      border: 1px solid var(--border-color);
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+    }
+  }
+}

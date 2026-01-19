@@ -3,7 +3,7 @@ import { useProduct } from "../../MainContext/MainContext";
 import scss from "./Sisi.module.scss";
 
 const QuickViewSlider = () => {
-  const { products, getProduts, addCard, favorit, addFavorit, deleteFavorit } =
+  const { products, getProducts, addCard, favorit, addFavorit, deleteFavorit } =
     useProduct();
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -15,7 +15,7 @@ const QuickViewSlider = () => {
       setLoading(true);
       try {
         // Используем метод из вашего контекста
-        await getProduts();
+        await getProducts();
       } catch (error) {
         console.error("Ошибка при загрузке товаров:", error);
       } finally {
@@ -24,7 +24,7 @@ const QuickViewSlider = () => {
     };
 
     loadProducts();
-  }, [getProduts]);
+  }, [getProducts]);
 
   // Получаем популярные товары для слайдера
   const getQuickViewProducts = () => {
@@ -37,8 +37,6 @@ const QuickViewSlider = () => {
 
       brand: product.brand || "бренда нет",
       name: product.name || product.title || "Без названия",
-      // Рандомный рейтинг для демо
-      // Рандомные отзывы
       image: product.image || product.imageUrl || "/placeholder-image.jpg",
       description: product.description || "",
       isInFavorites: favorit?.some((item) => item.id === product._id),

@@ -1,169 +1,272 @@
-#header {
-  .headerHeader {
-    background-color: #444444;
-    align-items: center;
+/* Header.module.scss */
+
+// --- Переменные (Настройки дизайна) ---
+$primary-color: #3b82f6; // Яркий, но приятный синий
+$secondary-color: #eff6ff; // Очень светлый голубой (фон для ховера)
+$text-main: #1e293b; // Темно-синий (почти черный) для текста
+$text-light: #64748b; // Серый для второстепенного текста
+$white: #ffffff;
+$accent-red: #ef4444; // Для "Акций" и бейджика корзины
+$shadow-soft: 0 10px 25px -5px rgba(59, 130, 246, 0.1); // Мягкая голубая тень
+$radius: 16px; // Радиус скругления
+
+// --- Глобальные настройки шрифта ---
+.wrapper {
+  width: 100%;
+  font-family: "Inter", system-ui, sans-serif; // Рекомендую современный шрифт
+  color: $text-main;
+}
+
+// --- Верхняя контактная строка ---
+.topBar {
+  background-color: $secondary-color;
+  border-bottom: 1px solid rgba($primary-color, 0.1);
+  font-size: 13px;
+  padding: 8px 0;
+}
+
+.topBarContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: flex-end; // Контакты справа
+}
+
+.contacts {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: $text-light;
+  font-weight: 500;
+
+  .phoneIcon {
+    margin-right: 6px;
+  }
+
+  .separator {
+    color: rgba($text-light, 0.3);
+  }
+}
+
+// --- Основной хедер ---
+.mainHeader {
+  background-color: $white;
+  padding: 15px 0;
+  box-shadow: $shadow-soft;
+  position: sticky; // Хедер прилипает к верху
+  top: 0;
+  z-index: 100;
+}
+
+.headerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// --- Логотип ---
+.logo {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+
+  .logoText {
+    font-size: 26px;
+    font-weight: 900;
+    color: $primary-color;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+  }
+
+  .logoSubtitle {
+    font-size: 11px;
+    color: $text-light;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+}
+
+// --- Навигация ---
+.mainNav {
+  flex: 1;
+  margin-left: 60px; // Отступ от логотипа
+}
+
+.navItems {
+  display: flex;
+  gap: 10px;
+}
+
+.navItemWrapper {
+  position: relative; // Для позиционирования выпадающего меню
+}
+
+.navItem {
+  text-decoration: none;
+  color: $text-main;
+  padding: 10px 18px;
+  border-radius: $radius;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+
+  // Иконки внутри ссылок
+  .navIcon {
+    font-size: 18px;
+  }
+
+  .arrow {
+    font-size: 10px;
+    margin-left: 4px;
+    color: $text-light;
+    transition: transform 0.3s ease;
+  }
+
+  // Состояние наведения
+  &:hover,
+  &.active {
+    background-color: $secondary-color;
+    color: $primary-color;
+
+    .arrow {
+      color: $primary-color;
+      transform: rotate(180deg); // Поворот стрелки
+    }
+  }
+
+  // Спец. стиль для "Акций"
+  &.hot {
+    &:hover,
+    &.active {
+      background-color: rgba($accent-red, 0.1);
+      color: $accent-red;
+    }
+  }
+}
+
+// --- Выпадающее меню (Каталог) ---
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 2px); // Чуть ниже кнопки
+  left: 0;
+  background: $white;
+  min-width: 240px;
+  border-radius: $radius;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  padding: 10px;
+  z-index: 101;
+  border: 1px solid $secondary-color;
+
+  // Анимация появления
+  animation: slideUp 0.2s ease-out forwards;
+}
+
+.dropdownContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dropdownItem {
+  text-decoration: none;
+  color: $text-main;
+  padding: 10px 15px;
+  border-radius: 12px; // Вложенные элементы чуть меньше радиусом
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: $secondary-color;
+    color: $primary-color;
+    transform: translateX(5px); // Легкий сдвиг вправо
+  }
+}
+
+// --- Секция пользователя (Иконки) ---
+.userSection {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.userIcon {
+  text-decoration: none;
+  color: $text-main;
+  position: relative;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-3px); // Подпрыгивание
+
+    .iconLabel {
+      color: $primary-color;
+    }
+  }
+
+  .iconContainer {
     display: flex;
-    gap: 1.5px;
-    justify-content: space-between;
-    color: rgb(255, 255, 255);
-    height: 48px;
-
-    #Diler {
-      color: white;
-      font-weight: 600;
-      border-left: 3px solid rgb(162, 0, 255);
-      padding-left: 10px;
-    }
-
-    h2 {
-      font-size: 14px;
-      font-weight: 400;
-    }
-    input {
-      width: 24px;
-      height: 24px;
-      text-decoration: none;
-      margin-top: -5px;
-    }
-    .apple {
-      display: flex;
-
-      width: 1280px;
-      justify-content: space-between;
-      margin: 0 auto;
-      h2 {
-        font-size: 14px;
-        font-weight: 400;
-        color: #a1a1a1;
-      }
-      span {
-        color: white;
-        font-weight: 600;
-      }
-    }
-  }
-  hr {
-    border: 1px solid rgb(162, 0, 255);
-  }
-
-  .HeaderLogo {
-    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 180px;
-    background-color: rgb(0, 0, 0);
-
-    .d {
-      justify-content: space-between;
-      align-items: center;
-      display: flex;
-      width: 1208px;
-      #logo {
-        width: 170px;
-        height: 120px;
-        // object-fit: cover;
-      }
-      input {
-        width: 643px;
-        height: 38px;
-        border: none;
-        padding-left: 20px;
-        border-radius: 4px;
-        color: white;
-        background-color: rgb(162, 0, 255);
-        margin-left: 90px;
-        transition: all 0.3s ease-in-out;
-        &::placeholder {
-          color: white;
-          font-size: 14px;
-        }
-      }
-      input:focus {
-        outline: none;
-        box-shadow: 0 0 30px rgba(162, 0, 255, 0.7);
-        transition: all 0.3s ease-in-out;
-      }
-
-      button {
-        background: none;
-        border: none;
-        position: relative;
-        left: -65px;
-        img {
-          filter: invert(1);
-        }
-        img:active {
-          transform: scale(0.9);
-          transition: 0.1s;
-        }
-      }
-
-      .HeaderImg {
-        display: flex;
-        gap: -10px;
-
-        a {
-          img {
-            width: 70px;
-            height: 32px;
-            filter: invert(1);
-            transition: all 0.3s;
-          }
-          img:hover {
-            transform: scale(1.06);
-            transition: all 0.3s;
-          }
-        }
-      }
-    }
-  }
-  .HeaderMenu {
-    display: flex;
-    gap: 40px;
-    text-decoration: none;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(0, 0, 0);
-    margin-bottom: 300px;
-    height: 60px;
-    a {
-      text-decoration: none;
-    }
-
-    p {
-      font-weight: 500;
-      font-size: 14px;
-      cursor: pointer;
-      margin-top: -30px;
-      color: white;
-
-      img {
-        width: 13px;
-        height: 10px;
-        margin-right: 3px;
-      }
-    }
-  }
-  .navLink {
-    p {
-      font-weight: 500;
-      font-size: 14px;
-      cursor: pointer;
-      margin-top: -30px;
-      color: white;
-      transition: 0.3s;
-    }
-
-    &:hover p {
-      color: rgb(162, 0, 255);
-      border-bottom: 1px solid rgb(162, 0, 255);
-    }
+    gap: 4px;
   }
 
-  .active {
-    p {
-      color: rgb(162, 0, 255);
-      border-bottom: 1px solid rgb(162, 0, 255);
-    }
+  .icon {
+    font-size: 22px;
+  }
+
+  .iconLabel {
+    font-size: 11px;
+    font-weight: 600;
+    color: $text-light;
+    transition: color 0.2s;
+  }
+}
+
+// --- Бейдж корзины ---
+.cartBadge {
+  position: absolute;
+  top: -5px;
+  right: 5px;
+  background-color: $accent-red;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  height: 18px;
+  width: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid $white; // Белая обводка чтобы отделить от иконки
+}
+
+// --- Анимации ---
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// --- Адаптив (по желанию) ---
+@media (max-width: 1024px) {
+  .logoSubtitle,
+  .iconLabel,
+  .navText {
+    // На планшетах можно скрывать текст, оставляя иконки
+    // или уменьшать шрифты
   }
 }

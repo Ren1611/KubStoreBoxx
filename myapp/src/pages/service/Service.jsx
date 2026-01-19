@@ -1,117 +1,373 @@
 import scss from "./Service.module.scss";
+import { useTranslation } from "react-i18next";
 
 const Service = () => {
+  const { t } = useTranslation();
+
   return (
-    <div>
-      <div id={scss.service}>
+    <div className={scss.servicePage}>
+      {/* Hero Section */}
+      <div className={scss.hero}>
         <div className="container">
-          <div className={scss.service}>
-            <div className={scss.nomer1}>
-              <h1>Мотосервис</h1>
-              <h2>
-                Сервисные центры "KubStore" в Бишкеке, Первомайская область,
-                Иссык-куле и Нарыне:
-              </h2>
-              <p>
-                Мотосервис «KubStore» предлагает полный спектр услуг по
-                обслуживанию и ремонту мотоциклов. Мы работаем как с
-                повседневной техникой, так и с мотоциклами для дальних поездок,
-                спорта и активной эксплуатации. Наша основная задача —
-                обеспечить надёжную, безопасную и стабильную работу мотоцикла в
-                любых условиях. Сервис «KubStore» оснащён современным
-                диагностическим и ремонтным оборудованием, что позволяет точно
-                определять неисправности и выполнять работы в соответствии с
-                техническими стандартами производителей. Все процессы
-                обслуживания выстроены таким образом, чтобы клиент получал
-                понятный результат, прозрачную стоимость и соблюдение
-                оговорённых сроков.
-              </p>
-              <div className={scss.serviceImg}>
-                <img src="./src/assets/images/ServicesImg.webp" alt="" />
-                <img src="./src/assets/images/ServicesImg (1).webp" alt="" />
-              </div>
+          <div className={scss.heroContent}>
+            <div className={scss.heroText}>
+              <h1 className={scss.heroTitle}>
+                <span className={scss.titleHighlight}>
+                  {t("service_title")}
+                </span>
+              </h1>
+              <p className={scss.heroSubtitle}>{t("service_subtitle")}</p>
             </div>
-            <div className={scss.nomer2}>
-              <div className={scss.rux}>
-                <h1>Наши услуги</h1>
-              </div>
-              <ul>
-                <li>Плановое техническое обслуживание</li>
-                <li>Комплексная диагностика</li>
-                <li>Ремонт и обслуживание двигателя</li>
-                <li>Ремонт трансмиссии</li>
-                <li>Обслуживание и настройка подвески</li>
-                <li>Тормозные системы</li>
-                <li>Электрооборудование и проводка</li>
-                <li>Шиномонтаж и балансировка</li>
-                <li>Подготовка мотоцикла к сезону</li>
-                <li>Установка дополнительного оборудования и аксессуаров</li>
-              </ul>
+            <div className={scss.heroDecoration}>
+              <div className={scss.circle}></div>
+              <div className={scss.circle}></div>
+              <div className={scss.circle}></div>
             </div>
           </div>
         </div>
       </div>
+
+      <div id={scss.service}>
+        <div className="container">
+          <div className={scss.service}>
+            {/* Main Service Content */}
+            <div className={scss.nomer1}>
+              <div className={scss.card}>
+                <div className={scss.cardHeader}>
+                  <div className={scss.iconWrapper}>
+                    <svg className={scss.icon} viewBox="0 0 24 24">
+                      <path d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z" />
+                    </svg>
+                  </div>
+                  <h2 className={scss.sectionTitle}>
+                    {t("service_centers_title")}
+                  </h2>
+                </div>
+
+                <p className={scss.description}>
+                  {t("service_centers_description")}
+                </p>
+
+                <div className={scss.features}>
+                  <div className={scss.feature}>
+                    <div className={scss.featureIcon}>✓</div>
+                    <span>{t("service_centers_feature1")}</span>
+                  </div>
+                  <div className={scss.feature}>
+                    <div className={scss.featureIcon}>✓</div>
+                    <span>{t("service_centers_feature2")}</span>
+                  </div>
+                  <div className={scss.feature}>
+                    <div className={scss.featureIcon}>✓</div>
+                    <span>{t("service_centers_feature3")}</span>
+                  </div>
+                </div>
+
+                <div className={scss.serviceImg}>
+                  <div className={scss.imgContainer}>
+                    <img
+                      src="./src/assets/images/ServicesImg.webp"
+                      alt={t("service_image_alt1")}
+                      className={scss.img}
+                    />
+                    <div className={scss.imgOverlay}></div>
+                  </div>
+                  <div className={scss.imgContainer}>
+                    <img
+                      src="./src/assets/images/ServicesImg (1).webp"
+                      alt={t("service_image_alt2")}
+                      className={scss.img}
+                    />
+                    <div className={scss.imgOverlay}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Services List */}
+            <div className={scss.nomer2}>
+              <div className={`${scss.card} ${scss.servicesCard}`}>
+                <div className={scss.cardHeader}>
+                  <div className={scss.rux}>
+                    <h1 className={scss.servicesTitle}>
+                      <span className={scss.titleAccent}>
+                        {t("service_our_services_title")}
+                      </span>
+                    </h1>
+                    <p className={scss.servicesSubtitle}>
+                      {t("service_our_services_subtitle")}
+                    </p>
+                  </div>
+                </div>
+
+                <div className={scss.servicesGrid}>
+                  <div className={scss.serviceItem}>
+                    <div className={scss.serviceIcon}>🛠️</div>
+                    <div className={scss.serviceContent}>
+                      <h3>{t("service_maintenance")}</h3>
+                      <p>{t("service_maintenance_desc")}</p>
+                    </div>
+                  </div>
+
+                  <div className={scss.serviceItem}>
+                    <div className={scss.serviceIcon}>🔍</div>
+                    <div className={scss.serviceContent}>
+                      <h3>{t("service_diagnostics")}</h3>
+                      <p>{t("service_diagnostics_desc")}</p>
+                    </div>
+                  </div>
+
+                  <div className={scss.serviceItem}>
+                    <div className={scss.serviceIcon}>⚙️</div>
+                    <div className={scss.serviceContent}>
+                      <h3>{t("service_engine")}</h3>
+                      <p>{t("service_engine_desc")}</p>
+                    </div>
+                  </div>
+
+                  <div className={scss.serviceItem}>
+                    <div className={scss.serviceIcon}>🔄</div>
+                    <div className={scss.serviceContent}>
+                      <h3>{t("service_transmission")}</h3>
+                      <p>{t("service_transmission_desc")}</p>
+                    </div>
+                  </div>
+
+                  <div className={scss.serviceItem}>
+                    <div className={scss.serviceIcon}>🧩</div>
+                    <div className={scss.serviceContent}>
+                      <h3>{t("service_suspension")}</h3>
+                      <p>{t("service_suspension_desc")}</p>
+                    </div>
+                  </div>
+
+                  <div className={scss.serviceItem}>
+                    <div className={scss.serviceIcon}>🛑</div>
+                    <div className={scss.serviceContent}>
+                      <h3>{t("service_brakes")}</h3>
+                      <p>{t("service_brakes_desc")}</p>
+                    </div>
+                  </div>
+
+                  <div className={scss.serviceItem}>
+                    <div className={scss.serviceIcon}>🔌</div>
+                    <div className={scss.serviceContent}>
+                      <h3>{t("service_electrical")}</h3>
+                      <p>{t("service_electrical_desc")}</p>
+                    </div>
+                  </div>
+
+                  <div className={scss.serviceItem}>
+                    <div className={scss.serviceIcon}>🛞</div>
+                    <div className={scss.serviceContent}>
+                      <h3>{t("service_tire_service")}</h3>
+                      <p>{t("service_tire_service_desc")}</p>
+                    </div>
+                  </div>
+
+                  <div className={scss.serviceItem}>
+                    <div className={scss.serviceIcon}>📅</div>
+                    <div className={scss.serviceContent}>
+                      <h3>{t("service_seasonal")}</h3>
+                      <p>{t("service_seasonal_desc")}</p>
+                    </div>
+                  </div>
+
+                  <div className={scss.serviceItem}>
+                    <div className={scss.serviceIcon}>➕</div>
+                    <div className={scss.serviceContent}>
+                      <h3>{t("service_accessories")}</h3>
+                      <p>{t("service_accessories_desc")}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <button className={scss.ctaButton}>
+                  <span>{t("service_book_service")}</span>
+                  <svg className={scss.arrowIcon} viewBox="0 0 24 24">
+                    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Locations Section */}
       <div id={scss.HomeSer}>
         <div className="container">
           <div className={scss.HomeSer}>
-            <div className={scss.room}>
-              <h2 className={scss.Ho}>Адрес</h2>
-              <h2 className={scss.Oo}>Телефон</h2>
-              <h2 className={scss.Po}>email</h2>
+            <div className={scss.sectionHeader}>
+              <h2 className={scss.locationsTitle}>
+                {t("service_locations_title")}
+              </h2>
+              <p className={scss.locationsSubtitle}>
+                {t("service_locations_subtitle")}
+              </p>
             </div>
-            <div className={scss.line}>
-              <div className={scss.blog}>
-                <h3>Мотосервис Можайское шоссе</h3>
-                <h4 className={scss.top}>г. Бишкек, ул. Токтоналиева 123/1 </h4>
-                <h4 className={scss.botton}>
-                  Ремонт: Husqvarna, мотоциклы, квадроциклы
-                </h4>
+
+            <div className={scss.locationsGrid}>
+              {/* Location Card 2 */}
+              <div className={scss.locationCard}>
+                <h3 className={scss.locationTitle}>
+                  {t("service_location_prospekt_mira_title")}
+                </h3>
+
+                <div className={scss.locationInfo}>
+                  <div className={scss.infoItem}>
+                    <div className={scss.infoIcon}>📍</div>
+                    <div className={scss.infoContent}>
+                      <h4>{t("service_address")}</h4>
+                      <p className={scss.top}>
+                        {t("service_prospekt_mira_address")}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className={scss.infoItem}>
+                    <div className={scss.infoIcon}>📞</div>
+                    <div className={scss.infoContent}>
+                      <h4>{t("service_phone")}</h4>
+                      <div className={scss.pop}>
+                        <p>{t("service_prospekt_mira_phone")}</p>
+                        <p className={scss.extension}>
+                          {t("service_extension", { number: "1119" })}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className={scss.infoItem}>
+                    <div className={scss.infoIcon}>✉️</div>
+                    <div className={scss.infoContent}>
+                      <h4>{t("service_email")}</h4>
+                      <a
+                        href="mailto:murza@gmail.com"
+                        className={scss.emailLink}
+                      >
+                        {t("service_prospekt_mira_email")}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <button className={scss.locationButton}>
+                  {t("service_build_route")}
+                </button>
               </div>
-              <div className={scss.Phon}>
-                <h4>+996 555 123 456</h4>
-                <h4>доб. 1029</h4>
+
+              {/* Location Card 3 */}
+              <div className={scss.locationCard}>
+                <h3 className={scss.locationTitle}>
+                  {t("service_location_saint_petersburg_title")}
+                </h3>
+
+                <div className={scss.locationInfo}>
+                  <div className={scss.infoItem}>
+                    <div className={scss.infoIcon}>📍</div>
+                    <div className={scss.infoContent}>
+                      <h4>{t("service_address")}</h4>
+                      <p className={scss.top}>
+                        {t("service_saint_petersburg_address")}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className={scss.infoItem}>
+                    <div className={scss.infoIcon}>📞</div>
+                    <div className={scss.infoContent}>
+                      <h4>{t("service_phone")}</h4>
+                      <div className={scss.poop}>
+                        <p>{t("service_saint_petersburg_phone")}</p>
+                        <p className={scss.extension}>
+                          {t("service_extension", { number: "2106" })}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className={scss.infoItem}>
+                    <div className={scss.infoIcon}>✉️</div>
+                    <div className={scss.infoContent}>
+                      <h4>{t("service_email")}</h4>
+                      <a
+                        href="mailto:Kuba@gmail.com"
+                        className={scss.emailLink}
+                      >
+                        {t("service_saint_petersburg_email")}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <button className={scss.locationButton}>
+                  {t("service_build_route")}
+                </button>
               </div>
-              <div className={scss.email}>
-                <a href="#">becbo@gmail.com</a>
+
+              {/* Location Card 4 */}
+              <div className={scss.locationCard}>
+                <h3 className={scss.locationTitle}>
+                  {t("service_location_krasnodar_title")}
+                </h3>
+
+                <div className={scss.locationInfo}>
+                  <div className={scss.infoItem}>
+                    <div className={scss.infoIcon}>📍</div>
+                    <div className={scss.infoContent}>
+                      <h4>{t("service_address")}</h4>
+                      <p className={scss.top}>
+                        {t("service_krasnodar_address")}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className={scss.infoItem}>
+                    <div className={scss.infoIcon}>📞</div>
+                    <div className={scss.infoContent}>
+                      <h4>{t("service_phone")}</h4>
+                      <div className={scss.lox}>
+                        <p>{t("service_krasnodar_phone")}</p>
+                        <p className={scss.extension}>
+                          {t("service_extension", { number: "1205" })}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className={scss.infoItem}>
+                    <div className={scss.infoIcon}>✉️</div>
+                    <div className={scss.infoContent}>
+                      <h4>{t("service_email")}</h4>
+                      <a
+                        href="mailto:murmur@gmail.com"
+                        className={scss.emailLink}
+                      >
+                        {t("service_krasnodar_email")}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <button className={scss.locationButton}>
+                  {t("service_build_route")}
+                </button>
               </div>
             </div>
-            <div className={scss.line2}>
-              <div className={scss.blog}>
-                <h3>Мотосервис Проспект Мира</h3>
-                <h4 className={scss.top}>Проспект Мира, д. 163 </h4>
-              </div>
-              <div className={scss.pop}>
-                <h4>+7 (495) 926-52-01</h4>
-                <h4>доб. 1119</h4>
-              </div>
-              <div className={scss.email}>
-                <a href="#">murza@gmail.com</a>
-              </div>
-            </div>
-            <div className={scss.line}>
-              <div className={scss.blog}>
-                <h3>Мотосервис Санкт-Петербург</h3>
-                <h4 className={scss.top}>Кушелевская дорога, 12 </h4>
-              </div>
-              <div className={scss.poop}>
-                <h4>+7 (812) 633-07-77</h4>
-                <h4>доб. 2106</h4>
-              </div>
-              <div className={scss.email}>
-                <a href="#">Kuba@gmail.com</a>
-              </div>
-            </div>
-            <div className={scss.line2}>
-              <div className={scss.blog}>
-                <h3>Мотосервис Краснодар</h3>
-                <h4 className={scss.top}>ул. Дзержинского, 199 </h4>
-              </div>
-              <div className={scss.lox}>
-                <h4>+7 (861) 205-75-52</h4>
-                <h4>доб. 1205</h4>
-              </div>
-              <div className={scss.email}>
-                <a href="#">murmur@gmail.com</a>
+
+            {/* Contact Banner */}
+            <div className={scss.contactBanner}>
+              <div className={scss.bannerContent}>
+                <div className={scss.bannerText}>
+                  <h3>{t("service_consultation_title")}</h3>
+                  <p>{t("service_consultation_description")}</p>
+                </div>
+                <button className={scss.bannerButton}>
+                  <a target="blank" href="https://wa.me/qr/NCXYMJDEIVNGP1">
+                    {t("service_contact_us")}
+                  </a>
+                </button>
               </div>
             </div>
           </div>

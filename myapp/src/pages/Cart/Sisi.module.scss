@@ -4,6 +4,8 @@
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  width: 1280px;
+  margin: 0 auto;
 }
 
 .header {
@@ -40,13 +42,14 @@
   transition: all 0.2s;
 
   &:hover:not(:disabled) {
-    background-color: #f5f5f5;
-    border-color: #999;
+    border: 1px solid #9b00d3;
+    background-color: rgba(234, 0, 255, 0.387);
   }
-
   &:disabled {
     opacity: 0.3;
     cursor: not-allowed;
+  }
+  &:active {
   }
 }
 
